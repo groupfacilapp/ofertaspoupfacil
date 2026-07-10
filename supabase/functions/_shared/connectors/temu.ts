@@ -1,0 +1,176 @@
+import * as cheerio from 'npm:cheerio';
+import type { MarketplaceConnector, DecryptedCredentials, NormalizedOffer, FetchConfig, ValidationResult } from './types.ts';
+import { registerConnector } from './registry.ts';
+
+const TEMU_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+  Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'Accept-Language': 'pt-BR,pt;q=0.9',
+  'sec-fetch-dest': 'document',
+  'sec-fetch-mode': 'navigate',
+};
+
+const TEMU_CATEGORY_PAGES = [
+  'https://www.temu.com/br/flash-sale.html',
+  'https://www.temu.com/br/best-sellers.html',
+  'https://www.temu.com/br/channel/beauty-health.html',
+  'https://www.temu.com/br/channel/home.html',
+  'https://www.temu.com/br/channel/electronics.html',
+  'https://www.temu.com/br/channel/clothing.html',
+  'https://www.temu.com/br/channel/sports.html',
+];
+
+function buildTemuUrl(keyword: string | null, page: number): string {
+  if (keyword) {
+    return `https://www.temu.com/br/search_result.html?search_key=${encodeURIComponent(keyword)}&sort_type=7&page_sn=${page}`;
+  }
+  return TEMU_CATEGORY_PAGES[(page - 1) % TEMU_CATEGORY_PAGES.length];
+}
+
+interface TemuGoodsRaw {
+  goods_id?: string | number;
+  goods_name?: string;
+  goods_cover?: string;
+  price?: number | string | { amount?: number; price?: number };
+  origin_price?: number | string;
+  original_price?: number | string;
+  originPrice?: number | string;
+  discount?: number | string;
+  discount_percent?: number | string;
+  discountPercent?: number | string;
+  goods_url_name?: string;
+}
+
+function findTemuGoodsArrays(obj: unknown, depth = 0): TemuGoodsRaw[][] {
+  if (depth > 12 || obj === null || typeof obj !== 'object') return [];
+  const found: TemuGoodsRaw[][] = [];
+  if (Array.isArray(obj)) {
+    const looksLikeGoods = obj.some((item) => item !== null && typeof item === 'object' && !Array.isArray(item) && 'goods_id' in item);
+    if (looksLikeGoods && obj.length > 0) found.push(obj as TemuGoodsRaw[]);
+    for (const item of obj) found.push(...findTemuGoodsArrays(item, depth + 1));
+  } else {
+    for (const val of Object.values(obj as Record<string, unknown>)) found.push(...findTemuGoodsArrays(val, depth + 1));
+  }
+  return found;
+}
+
+export function parseTemuNextData(html: string): TemuGoodsRaw[] {
+  const $ = cheerio.load(html);
+  const scriptText = $('script#__NEXT_DATA__').html();
+  if (!scriptText) return [];
+  try {
+    const data = JSON.parse(scriptText) as unknown;
+    const arrays = findTemuGoodsArrays(data);
+    if (arrays.length === 0) return [];
+    const best = arrays.reduce((a, b) => (a.length >= b.length ? a : b), []);
+    const seen = new Set<string>();
+    return best.filter((g) => {
+      const id = String(g.goods_id ?? '');
+      if (!id || seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+  } catch { return []; }
+}
+
+function parseTemuPrice(raw: number | string | undefined | null | object): number {
+  if (raw === undefined || raw === null) return 0;
+  if (typeof raw === 'object' && !Array.isArray(raw)) {
+    const obj = raw as Record<string, unknown>;
+    const inner = obj.amount ?? obj.price;
+    return parseTemuPrice(inner as number | string);
+  }
+  const n = typeof raw === 'number' ? raw : parseFloat(String(raw).replace(/[^\d.]/g, ''));
+  if (isNaN(n) || n <= 0) return 0;
+  return n > 10000 ? n / 100 : n;
+}
+
+export function generateTemuAffiliateLink(productUrl: string, shareId: string): string {
+  try {
+    const url = new URL(productUrl);
+    url.searchParams.set('refer_page_name', 'goods');
+    url.searchParams.set('refer_share_channel', 'copy_link');
+    url.searchParams.set('refer_share_id', shareId);
+    return url.toString();
+  } catch {
+    const sep = productUrl.includes('?') ? '&' : '?';
+    return `${productUrl}${sep}refer_page_name=goods&refer_share_channel=copy_link&refer_share_id=${encodeURIComponent(shareId)}`;
+  }
+}
+
+export class TemuConnector implements MarketplaceConnector {
+  readonly marketplace = 'temu' as const;
+
+  async fetchOffers(config: FetchConfig): Promise<NormalizedOffer[]> {
+    const { credentials, page, keywords, maxPrice, minDiscount } = config;
+    const { temu_share_id } = credentials;
+    if (!temu_share_id) throw new Error('Temu: temu_share_id é obrigatório');
+
+    const keyword = keywords.length > 0 ? keywords[0] : null;
+    const url = buildTemuUrl(keyword, page);
+    const response = await fetch(url, { headers: TEMU_HEADERS });
+    if (!response.ok) throw new Error(`Temu fetch failed: ${response.status}`);
+    const html = await response.text();
+
+    const rawGoods = parseTemuNextData(html);
+    const offers: NormalizedOffer[] = [];
+
+    for (const g of rawGoods) {
+      const goodsId = String(g.goods_id ?? '').trim();
+      if (!goodsId) continue;
+      const title = String(g.goods_name ?? '').trim();
+      if (!title) continue;
+      const currentPriceDecimal = parseTemuPrice(g.price);
+      if (currentPriceDecimal <= 0) continue;
+      const originalPriceDecimal = parseTemuPrice(g.origin_price ?? g.original_price ?? g.originPrice);
+      const currentPrice = Math.round(currentPriceDecimal * 100);
+      const originalPrice = originalPriceDecimal > currentPriceDecimal ? Math.round(originalPriceDecimal * 100) : null;
+      if (maxPrice != null && currentPrice > maxPrice) continue;
+
+      const rawDiscount = g.discount_percent ?? g.discountPercent ?? g.discount;
+      let discountPercent: number | null = null;
+      if (rawDiscount !== undefined && rawDiscount !== null) {
+        const d = parseFloat(String(rawDiscount));
+        if (!isNaN(d) && d > 0) discountPercent = d < 1 ? Math.round(d * 100) : Math.round(d);
+      }
+      if (discountPercent === null && originalPrice && originalPrice > currentPrice) {
+        discountPercent = Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
+      }
+      if (minDiscount > 0 && (discountPercent ?? 0) < minDiscount) continue;
+
+      const imageUrl = String(g.goods_cover ?? '');
+      const slugRaw = String(g.goods_url_name ?? 'product').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').slice(0, 80);
+      const slug = slugRaw || 'product';
+      const productUrl = `https://www.temu.com/br/${slug}-g-${goodsId}.html`;
+      const affiliateLink = generateTemuAffiliateLink(productUrl, temu_share_id);
+
+      offers.push({ externalId: goodsId, marketplace: 'temu', title, currentPrice, originalPrice, discountPercent, imageUrl, productUrl, affiliateLink, condition: 'Novo', installments: null, category: null, sales: null, couponCode: null });
+    }
+    return offers;
+  }
+
+  async generateAffiliateLink(productUrl: string, credentials: DecryptedCredentials): Promise<string> {
+    const { temu_share_id } = credentials;
+    if (!temu_share_id) return productUrl;
+    return generateTemuAffiliateLink(productUrl, temu_share_id);
+  }
+
+  async validateCredentials(credentials: DecryptedCredentials): Promise<ValidationResult> {
+    const { temu_share_id } = credentials;
+    if (!temu_share_id || temu_share_id.trim().length < 4) {
+      return { valid: false, error: 'Share ID da Temu é obrigatório' };
+    }
+    try {
+      const response = await fetch('https://www.temu.com/br/flash-sale.html', { headers: TEMU_HEADERS });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const html = await response.text();
+      const goods = parseTemuNextData(html);
+      if (goods.length === 0) return { valid: false, error: 'Não foi possível carregar produtos da Temu.' };
+      return { valid: true };
+    } catch (e) {
+      return { valid: false, error: `Erro de conexão com a Temu: ${e instanceof Error ? e.message : String(e)}` };
+    }
+  }
+}
+
+registerConnector(new TemuConnector());

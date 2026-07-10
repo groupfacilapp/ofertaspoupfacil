@@ -1,0 +1,21 @@
+import { createClient } from '@/lib/supabase/server';
+import { NextResponse } from 'next/server';
+
+export async function GET(request: Request) {
+  const { searchParams, origin } = new URL(request.url);
+  const code = searchParams.get('code');
+  const nextRaw = searchParams.get('next') ?? '/';
+  // Only allow relative paths starting with / to prevent open redirect
+  const next = nextRaw.startsWith('/') && !nextRaw.startsWith('//') ? nextRaw : '/';
+
+  if (code) {
+    const supabase = await createClient();
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (!error) {
+      return NextResponse.redirect(`${origin}${next}`);
+    }
+  }
+
+  // Redirect to login with error if code exchange fails
+  return NextResponse.redirect(`${origin}/login?error=auth_callback_failed`);
+}

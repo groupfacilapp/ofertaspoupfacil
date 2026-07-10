@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 48" fill="none">
+  <!-- Fundo zinc-950 -->
+  <rect width="168" height="48" rx="10" fill="#09090b"/>
+  <!-- Ícone: fundo indigo-600 -->
+  <rect x="8" y="8" width="32" height="32" rx="8" fill="#4f46e5"/>
+  <!-- Raio (Lucide Zap polygon, escalado de 24x24 para 20x20, offset +8 no X e Y) -->
+  <polygon
+    points="24.8,15.7 16.5,25.7 24,25.7 23.2,32.3 31.5,22.3 24,22.3"
+    fill="white"
+  />
+  <!-- Texto "Dispara" em indigo-400 -->
+  <text
+    x="50" y="31"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-weight="700"
+    font-size="19"
+    letter-spacing="-0.3"
+    fill="#818cf8"
+  >Dispara</text>
+  <!-- Texto "Zap" em branco -->
+  <text
+    x="126" y="31"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-weight="700"
+    font-size="19"
+    letter-spacing="-0.3"
+    fill="#ffffff"
+  >Zap</text>
+</svg>

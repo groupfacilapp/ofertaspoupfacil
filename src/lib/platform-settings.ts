@@ -1,0 +1,116 @@
+import { randomBytes } from 'crypto';
+import { supabaseAdmin } from './supabase/admin';
+import { EvolutionClient } from './evolution';
+import { UazapiClient } from './uazapi';
+import { EvolutionGoClient } from './evolutiongo';
+import type { WhatsAppClient } from './whatsapp-client';
+import { encrypt, decrypt } from './crypto';
+
+// Keys that contain sensitive data and should be stored encrypted
+const SENSITIVE_KEYS = new Set([
+  'evolution_api_key',
+  'evolution_webhook_secret',
+  'uazapi_admin_token',
+  'evolutiongo_api_key',
+]);
+
+// In-memory cache: platform_settings rarely change, no need to hit the DB on every dispatch.
+// TTL of 5 minutes — changes propagate within 1 cron cycle.
+const _cache = new Map<string, { value: string | null; expiresAt: number }>();
+const CACHE_TTL_MS = 5 * 60 * 1000;
+
+export async function getPlatformSetting(key: string): Promise<string | null> {
+  const cached = _cache.get(key);
+  if (cached && Date.now() < cached.expiresAt) return cached.value;
+
+  const { data } = await supabaseAdmin
+    .from('platform_settings')
+    .select('value')
+    .eq('key', key)
+    .single();
+
+  let result: string | null = null;
+
+  if (data?.value) {
+    if (SENSITIVE_KEYS.has(key) && data.value.includes(':')) {
+      try {
+        result = decrypt(data.value);
+      } catch {
+        result = data.value;
+      }
+    } else {
+      result = data.value;
+    }
+  }
+
+  _cache.set(key, { value: result, expiresAt: Date.now() + CACHE_TTL_MS });
+  return result;
+}
+
+export async function setPlatformSetting(key: string, value: string): Promise<void> {
+  const storedValue = SENSITIVE_KEYS.has(key) && value ? encrypt(value) : value;
+
+  await supabaseAdmin
+    .from('platform_settings')
+    .upsert({ key, value: storedValue, updated_at: new Date().toISOString() });
+
+  // Invalidate cache so next read picks up the new value
+  _cache.delete(key);
+}
+
+export async function getOrCreateWebhookSecret(): Promise<string> {
+  let secret = await getPlatformSetting('evolution_webhook_secret');
+  if (!secret) {
+    secret = randomBytes(32).toString('hex');
+    await setPlatformSetting('evolution_webhook_secret', secret);
+  }
+  return secret;
+}
+
+/**
+ * Returns the configured WhatsApp client (Evolution or UAZAPI) based on
+ * the `whatsapp_provider` platform setting. Defaults to Evolution.
+ */
+export async function getWhatsAppClient(): Promise<WhatsAppClient> {
+  const provider = (await getPlatformSetting('whatsapp_provider')) ?? 'evolution';
+
+  if (provider === 'uazapi') {
+    const baseUrl = (await getPlatformSetting('uazapi_api_url')) || process.env.UAZAPI_API_URL;
+    const adminToken = (await getPlatformSetting('uazapi_admin_token')) || process.env.UAZAPI_ADMIN_TOKEN;
+
+    if (!baseUrl || !adminToken) {
+      throw new Error('UAZAPI não configurada. Configure URL e Admin Token no painel admin em /admin/settings.');
+    }
+    return new UazapiClient(baseUrl, adminToken);
+  }
+
+  if (provider === 'evolutiongo') {
+    const baseUrl = (await getPlatformSetting('evolutiongo_api_url')) || process.env.EVOLUTIONGO_API_URL;
+    const apiKey = (await getPlatformSetting('evolutiongo_api_key')) || process.env.EVOLUTIONGO_API_KEY;
+
+    if (!baseUrl || !apiKey) {
+      throw new Error('Evolution GO não configurada. Configure URL e Global API Key no painel admin em /admin/settings.');
+    }
+    return new EvolutionGoClient(baseUrl, apiKey);
+  }
+
+  // Default: Evolution
+  const baseUrl = (await getPlatformSetting('evolution_api_url')) || process.env.EVOLUTION_API_URL;
+  const apiKey = (await getPlatformSetting('evolution_api_key')) || process.env.EVOLUTION_API_KEY;
+
+  if (!baseUrl || !apiKey) {
+    throw new Error('Evolution API não configurada. Configure no painel admin em /admin/settings.');
+  }
+  return new EvolutionClient(baseUrl, apiKey);
+}
+
+/** @deprecated Use getWhatsAppClient() */
+export const getEvolutionClient = getWhatsAppClient;
+
+export async function makeInstanceName(userId: string): Promise<string> {
+  const prefix =
+    (await getPlatformSetting('instance_prefix')) ||
+    process.env.EVOLUTION_INSTANCE_PREFIX ||
+    'dz';
+  return `${prefix}-${userId.replace(/-/g, '').slice(0, 8)}`;
+}

@@ -51,7 +51,7 @@ export function LogoText({
   return (
     <span className={cn('font-bold tracking-tight leading-none', s.text, className)}>
       <span className="text-brand-400">{BRAND.namePart1}</span>
-      <span className="text-white">{BRAND.namePart2}</span>
+      <span className="text-foreground">{BRAND.namePart2}</span>
     </span>
   );
 }

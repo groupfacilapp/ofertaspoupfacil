@@ -31,7 +31,7 @@ export function SignupForm() {
           </div>
         </div>
         <div>
-          <h2 className="text-xl font-bold text-white">Verifique seu email</h2>
+          <h2 className="text-xl font-bold text-zinc-900 dark:text-white">Verifique seu email</h2>
           <p className="text-sm text-zinc-500 mt-2 leading-relaxed">{success}</p>
         </div>
         <Link
@@ -47,7 +47,7 @@ export function SignupForm() {
   return (
     <div>
       <div className="mb-7">
-        <h1 className="text-2xl font-bold text-white">Criar conta grátis</h1>
+        <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Criar conta grátis</h1>
         <p className="text-sm text-zinc-500 mt-1">Comece a usar o {BRAND.name} hoje</p>
       </div>
 
@@ -68,7 +68,7 @@ export function SignupForm() {
             type="text"
             placeholder="Como quer ser chamado?"
             disabled={isPending}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-600 outline-none focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/10 transition-all disabled:opacity-50"
+            className="w-full rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-brand-500/60 focus:ring-2 focus:ring-brand-500/10 transition-all disabled:opacity-50"
           />
         </div>
 
@@ -83,7 +83,7 @@ export function SignupForm() {
             placeholder="seu@email.com"
             required
             disabled={isPending}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-600 outline-none focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/10 transition-all disabled:opacity-50"
+            className="w-full rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-brand-500/60 focus:ring-2 focus:ring-brand-500/10 transition-all disabled:opacity-50"
           />
         </div>
 
@@ -100,7 +100,7 @@ export function SignupForm() {
               required
               minLength={6}
               disabled={isPending}
-              className="w-full rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-2.5 pr-10 text-sm text-zinc-100 placeholder:text-zinc-600 outline-none focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/10 transition-all disabled:opacity-50"
+              className="w-full rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 px-4 py-2.5 pr-10 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-brand-500/60 focus:ring-2 focus:ring-brand-500/10 transition-all disabled:opacity-50"
             />
             <button
               type="button"
@@ -116,7 +116,7 @@ export function SignupForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full flex items-center justify-center gap-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 px-4 py-2.5 text-sm font-semibold text-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+          className="w-full flex items-center justify-center gap-2 rounded-lg bg-brand-500 hover:bg-brand-600 active:bg-brand-700 px-4 py-2.5 text-sm font-semibold text-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed mt-2"
         >
           {isPending ? <><Loader2 className="h-4 w-4 animate-spin" />Criando conta...</> : 'Criar conta grátis'}
         </button>

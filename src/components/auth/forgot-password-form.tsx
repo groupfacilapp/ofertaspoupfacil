@@ -35,12 +35,12 @@ export function ForgotPasswordForm() {
   }
 
   return (
-    <Card className="border-zinc-800 bg-zinc-900">
+    <Card className="border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-xl text-white">
+        <CardTitle className="text-xl text-zinc-900 dark:text-white">
           Redefinir senha
         </CardTitle>
-        <CardDescription className="text-zinc-400">
+        <CardDescription className="text-zinc-500 dark:text-zinc-400">
           Informe seu email para receber o link de redefinicao
         </CardDescription>
       </CardHeader>
@@ -67,14 +67,14 @@ export function ForgotPasswordForm() {
               placeholder="seu@email.com"
               required
               disabled={isPending}
-              className="border-zinc-700 bg-zinc-800 text-white placeholder:text-zinc-500"
+              className="border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-850 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
             />
           </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
           <Button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white"
+            className="w-full bg-brand-500 hover:bg-brand-600 text-white"
             disabled={isPending}
           >
             {isPending ? (

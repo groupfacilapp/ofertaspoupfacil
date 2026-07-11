@@ -22,6 +22,8 @@ import {
   AlertTriangle,
   Clock,
   Send,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { Logo } from '@/components/brand/Logo';
 import { BRAND } from '@/config/brand';
@@ -34,6 +36,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
+import { useTheme } from 'next-themes';
 
 const navItems = [
   { label: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -82,14 +85,14 @@ function NavLinks({
             className={cn(
               'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-150',
               isActive
-                ? 'bg-indigo-600/15 text-indigo-300 border border-indigo-500/20'
-                : 'text-zinc-400 hover:bg-zinc-800/60 hover:text-zinc-200 border border-transparent'
+                ? 'bg-indigo-600/10 dark:bg-indigo-600/15 text-indigo-600 dark:text-indigo-300 border border-indigo-250 dark:border-indigo-500/20'
+                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 hover:text-zinc-900 dark:hover:text-zinc-200 border border-transparent'
             )}
           >
             <Icon
               className={cn(
                 'h-4 w-4 shrink-0',
-                isActive ? 'text-indigo-400' : 'text-zinc-500'
+                isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-zinc-450 dark:text-zinc-500'
               )}
             />
             {item.label}
@@ -103,14 +106,14 @@ function NavLinks({
           className={cn(
             'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-150 border mt-1',
             pathname.startsWith('/admin')
-              ? 'bg-red-600/15 text-red-400 border-red-500/20'
-              : 'text-zinc-600 hover:bg-zinc-800/60 hover:text-zinc-300 border-transparent'
+              ? 'bg-red-600/10 dark:bg-red-600/15 text-red-650 dark:text-red-400 border-red-200 dark:border-red-500/20'
+              : 'text-zinc-500 dark:text-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 hover:text-zinc-900 dark:hover:text-zinc-300 border-transparent'
           )}
         >
           <ShieldAlert
             className={cn(
               'h-4 w-4 shrink-0',
-              pathname.startsWith('/admin') ? 'text-red-400' : 'text-zinc-700'
+              pathname.startsWith('/admin') ? 'text-red-600 dark:text-red-400' : 'text-zinc-450 dark:text-zinc-700'
             )}
           />
           Admin
@@ -133,6 +136,12 @@ export function DashboardShell({
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -169,7 +178,7 @@ export function DashboardShell({
   // Shared sidebar bottom section
   function SidebarBottom() {
     return (
-      <div className="px-3 py-3 border-t border-zinc-800/60 space-y-2">
+      <div className="px-3 py-3 border-t border-zinc-200 dark:border-zinc-800/60 space-y-2">
         {/* Plan badge */}
         {isExpired ? (
           <Link
@@ -205,12 +214,12 @@ export function DashboardShell({
           <Link
             href="/planos"
             onClick={closeMobile}
-            className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-zinc-800/40 border border-zinc-800/60 hover:border-indigo-500/30 hover:bg-indigo-500/5 transition-all group"
+            className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800/60 hover:border-indigo-400 dark:hover:border-indigo-500/30 hover:bg-indigo-50/20 dark:hover:bg-indigo-500/5 transition-all group"
           >
-            <span className="text-[11px] text-zinc-500 group-hover:text-zinc-400">
+            <span className="text-[11px] text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
               {planLabel}
             </span>
-            <span className="text-[10px] font-semibold text-indigo-400 group-hover:text-indigo-300">
+            <span className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-700 dark:group-hover:text-indigo-350">
               {isTrial ? 'Escolher plano →' : 'Upgrade →'}
             </span>
           </Link>
@@ -222,12 +231,12 @@ export function DashboardShell({
             {initials}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-medium text-zinc-200 truncate">{displayName}</p>
-            {userEmail && <p className="text-[10px] text-zinc-600 truncate">{userEmail}</p>}
+            <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-200 truncate">{displayName}</p>
+            {userEmail && <p className="text-[10px] text-zinc-500 dark:text-zinc-650 truncate">{userEmail}</p>}
           </div>
           <button
             onClick={handleLogout}
-            className="text-zinc-700 hover:text-zinc-400 transition-colors p-1 rounded"
+            className="text-zinc-400 dark:text-zinc-700 hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors p-1 rounded"
             title="Sair"
           >
             <LogOut className="h-3.5 w-3.5" />
@@ -238,9 +247,9 @@ export function DashboardShell({
   }
 
   return (
-    <div className="flex h-screen bg-[#0a0a0c] p-3 md:p-4 gap-4">
+    <div className="flex h-screen bg-zinc-50 dark:bg-[#0a0a0c] p-3 md:p-4 gap-4 transition-colors duration-300">
       {/* Desktop sidebar - Floating Glassmorphic */}
-      <aside className="hidden md:flex w-[260px] flex-col rounded-2xl bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/60 h-full shrink-0 shadow-2xl relative overflow-hidden">
+      <aside className="hidden md:flex w-[260px] flex-col rounded-2xl bg-white/70 dark:bg-zinc-900/40 backdrop-blur-xl border border-zinc-200/80 dark:border-zinc-800/60 h-full shrink-0 shadow-2xl relative overflow-hidden transition-all duration-300">
         {/* Subtle top glow */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
         
@@ -265,7 +274,7 @@ export function DashboardShell({
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={closeMobile}
           />
-          <aside className="absolute left-3 top-3 bottom-3 w-64 bg-zinc-900/90 backdrop-blur-xl rounded-2xl border border-zinc-800/60 flex flex-col overflow-hidden shadow-2xl">
+          <aside className="absolute left-3 top-3 bottom-3 w-64 bg-white/95 dark:bg-zinc-900/90 backdrop-blur-xl rounded-2xl border border-zinc-200/80 dark:border-zinc-800/60 flex flex-col overflow-hidden shadow-2xl transition-all duration-300">
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
             
             {/* Logo + close */}
@@ -273,7 +282,7 @@ export function DashboardShell({
               <Logo size="sm" />
               <button
                 onClick={closeMobile}
-                className="text-zinc-500 hover:text-zinc-200 transition-colors"
+                className="text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -289,12 +298,12 @@ export function DashboardShell({
       {/* Main content wrapper */}
       <div className="flex flex-col flex-1 overflow-hidden min-w-0 gap-4">
         {/* Floating Topbar */}
-        <header className="flex h-16 rounded-2xl border border-zinc-800/60 bg-zinc-900/30 backdrop-blur-xl items-center justify-between px-5 shrink-0 shadow-lg">
+        <header className="flex h-16 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/60 bg-white/60 dark:bg-zinc-900/30 backdrop-blur-xl items-center justify-between px-5 shrink-0 shadow-lg transition-all duration-300">
           {/* Mobile: hamburger + logo */}
           <div className="flex items-center gap-4 md:hidden">
             <button
               onClick={() => setMobileOpen(true)}
-              className="text-zinc-400 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-zinc-800/60"
+              className="text-zinc-400 hover:text-zinc-650 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
             >
               <Menu className="h-5 w-5" />
             </button>
@@ -305,40 +314,55 @@ export function DashboardShell({
             {/* Optional search or title area could go here, left blank as per design */}
           </div>
 
+          {/* Theme switcher */}
+          {mounted && (
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="mr-2 flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-white/60 dark:bg-zinc-900/30 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all active:scale-95 outline-none"
+              title="Alternar tema"
+            >
+              {theme === 'dark' ? (
+                <Sun className="h-4 w-4 text-orange-400" />
+              ) : (
+                <Moon className="h-4 w-4 text-indigo-600" />
+              )}
+            </button>
+          )}
+
           {/* User dropdown */}
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-2.5 rounded-xl px-2.5 py-1.5 text-sm text-zinc-300 hover:bg-zinc-800/60 hover:text-zinc-100 transition-colors outline-none border border-transparent hover:border-zinc-800 focus:bg-zinc-800/40">
+            <DropdownMenuTrigger className="flex items-center gap-2.5 rounded-xl px-2.5 py-1.5 text-sm text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 hover:text-zinc-950 dark:hover:text-zinc-100 transition-colors outline-none border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800 focus:bg-zinc-100 dark:focus:bg-zinc-800/40">
               <span className="hidden sm:block max-w-[140px] truncate font-medium">
                 {displayName}
               </span>
-              <Avatar className="h-7 w-7 ring-1 ring-zinc-800">
+              <Avatar className="h-7 w-7 ring-1 ring-zinc-200 dark:ring-zinc-800">
                 <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-[10px] font-bold">
                   {initials}
                 </AvatarFallback>
               </Avatar>
               <ChevronDown className="h-3.5 w-3.5 text-zinc-500" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-52 border-zinc-800 bg-zinc-900 shadow-xl rounded-xl">
+            <DropdownMenuContent align="end" className="w-52 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl rounded-xl">
               <div className="px-3 py-2.5">
-                <p className="text-sm font-medium text-white truncate">
+                <p className="text-sm font-medium text-zinc-900 dark:text-white truncate">
                   {userDisplayName || displayName}
                 </p>
                 {userEmail && (
                   <p className="text-xs text-zinc-500 truncate mt-0.5">{userEmail}</p>
                 )}
-                <p className="text-[10px] text-zinc-500 mt-1.5 uppercase tracking-wider font-semibold">{planLabel}</p>
+                <p className="text-[10px] text-zinc-400 dark:text-zinc-500 mt-1.5 uppercase tracking-wider font-semibold">{planLabel}</p>
               </div>
-              <DropdownMenuSeparator className="bg-zinc-800" />
+              <DropdownMenuSeparator className="bg-zinc-200 dark:bg-zinc-800" />
               <DropdownMenuItem
                 onClick={() => router.push('/planos')}
-                className="cursor-pointer text-zinc-400 hover:text-white focus:bg-zinc-800/60 focus:text-white gap-2 py-2"
+                className="cursor-pointer text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white focus:bg-zinc-100 dark:focus:bg-zinc-800/60 focus:text-zinc-900 dark:focus:text-white gap-2 py-2"
               >
                 <Crown className="h-4 w-4" />
                 Meu plano
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={handleLogout}
-                className="cursor-pointer text-zinc-400 hover:text-white focus:bg-zinc-800/60 focus:text-white gap-2 py-2"
+                className="cursor-pointer text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white focus:bg-zinc-100 dark:focus:bg-zinc-800/60 focus:text-zinc-900 dark:focus:text-white gap-2 py-2"
               >
                 <LogOut className="h-4 w-4" />
                 Sair da conta

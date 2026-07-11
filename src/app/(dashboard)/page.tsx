@@ -150,14 +150,14 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         {/* Total Produtos */}
         <div
-          className="rounded-2xl border border-blue-200 dark:border-blue-500/80 bg-white/80 dark:bg-zinc-900/40 backdrop-blur-md p-4 shadow-[0_0_15px_-2px_rgba(59,130,246,0.15)] dark:shadow-[0_0_15px_-2px_rgba(59,130,246,0.3)] relative overflow-hidden group hover:shadow-[0_0_20px_1px_rgba(59,130,246,0.25)] dark:hover:shadow-[0_0_20px_1px_rgba(59,130,246,0.4)] transition-all duration-300"
+          className="rounded-2xl border border-blue-400 dark:border-blue-500/80 bg-card dark:bg-zinc-900/40 dark:backdrop-blur-md p-4 shadow-[0_0_15px_-2px_rgba(59,130,246,0.15)] dark:shadow-[0_0_15px_-2px_rgba(59,130,246,0.3)] relative overflow-hidden group hover:shadow-[0_0_20px_1px_rgba(59,130,246,0.25)] dark:hover:shadow-[0_0_20px_1px_rgba(59,130,246,0.4)] transition-all duration-300"
           title="Total de ofertas coletadas na sua fila."
         >
           <div className="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
             <Package className="h-20 w-20 transform translate-x-4 -translate-y-4 text-blue-500 dark:text-white" />
           </div>
           <div className="flex items-center gap-2 mb-3 relative z-10">
-            <div className="rounded-full p-1.5 bg-blue-500/10 ring-1 ring-blue-500/30 text-blue-550 dark:text-blue-400">
+            <div className="rounded-full p-1.5 bg-blue-500/10 ring-1 ring-blue-500/50 text-blue-600 dark:text-blue-400">
               <Package className="h-3.5 w-3.5" />
             </div>
             <p className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">
@@ -169,13 +169,13 @@ export default async function DashboardPage() {
 
         {/* Enviados hoje */}
         <div
-          className="rounded-2xl border border-emerald-200 dark:border-emerald-500/80 bg-white/80 dark:bg-zinc-900/40 backdrop-blur-md p-4 shadow-[0_0_15px_-2px_rgba(16,185,129,0.15)] dark:shadow-[0_0_15px_-2px_rgba(16,185,129,0.3)] relative overflow-hidden group hover:shadow-[0_0_20px_1px_rgba(16,185,129,0.25)] dark:hover:shadow-[0_0_20px_1px_rgba(16,185,129,0.4)] transition-all duration-300"
+          className="rounded-2xl border border-emerald-400 dark:border-emerald-500/80 bg-card dark:bg-zinc-900/40 dark:backdrop-blur-md p-4 shadow-[0_0_15px_-2px_rgba(16,185,129,0.15)] dark:shadow-[0_0_15px_-2px_rgba(16,185,129,0.3)] relative overflow-hidden group hover:shadow-[0_0_20px_1px_rgba(16,185,129,0.25)] dark:hover:shadow-[0_0_20px_1px_rgba(16,185,129,0.4)] transition-all duration-300"
         >
           <div className="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
             <Send className="h-20 w-20 transform translate-x-4 -translate-y-4 text-emerald-500 dark:text-white" />
           </div>
           <div className="flex items-center gap-2 mb-3 relative z-10">
-            <div className="rounded-full p-1.5 bg-emerald-500/10 ring-1 ring-emerald-500/30 text-emerald-600 dark:text-emerald-400">
+            <div className="rounded-full p-1.5 bg-emerald-500/10 ring-1 ring-emerald-500/50 text-emerald-600 dark:text-emerald-400">
               <Send className="h-3.5 w-3.5" />
             </div>
             <p className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">
@@ -187,13 +187,13 @@ export default async function DashboardPage() {
 
         {/* Pendentes */}
         <div
-          className="rounded-2xl border border-amber-200 dark:border-amber-500/80 bg-white/80 dark:bg-zinc-900/40 backdrop-blur-md p-4 shadow-[0_0_15px_-2px_rgba(245,158,11,0.15)] dark:shadow-[0_0_15px_-2px_rgba(245,158,11,0.3)] relative overflow-hidden group hover:shadow-[0_0_20px_1px_rgba(245,158,11,0.25)] dark:hover:shadow-[0_0_20px_1px_rgba(245,158,11,0.4)] transition-all duration-300"
+          className="rounded-2xl border border-amber-400 dark:border-amber-500/80 bg-card dark:bg-zinc-900/40 dark:backdrop-blur-md p-4 shadow-[0_0_15px_-2px_rgba(245,158,11,0.15)] dark:shadow-[0_0_15px_-2px_rgba(245,158,11,0.3)] relative overflow-hidden group hover:shadow-[0_0_20px_1px_rgba(245,158,11,0.25)] dark:hover:shadow-[0_0_20px_1px_rgba(245,158,11,0.4)] transition-all duration-300"
         >
           <div className="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
             <Clock className="h-20 w-20 transform translate-x-4 -translate-y-4 text-amber-500 dark:text-white" />
           </div>
           <div className="flex items-center gap-2 mb-3 relative z-10">
-            <div className="rounded-full p-1.5 bg-amber-500/10 ring-1 ring-amber-500/30 text-amber-600 dark:text-amber-400">
+            <div className="rounded-full p-1.5 bg-amber-500/10 ring-1 ring-amber-500/50 text-amber-600 dark:text-amber-400">
               <Clock className="h-3.5 w-3.5" />
             </div>
             <p className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">
@@ -205,13 +205,13 @@ export default async function DashboardPage() {
 
         {/* Esta semana */}
         <div
-          className="rounded-2xl border border-purple-200 dark:border-purple-500/80 bg-white/80 dark:bg-zinc-900/40 backdrop-blur-md p-4 shadow-[0_0_15px_-2px_rgba(168,85,247,0.15)] dark:shadow-[0_0_15px_-2px_rgba(168,85,247,0.3)] relative overflow-hidden group hover:shadow-[0_0_20px_1px_rgba(168,85,247,0.25)] dark:hover:shadow-[0_0_20px_1px_rgba(168,85,247,0.4)] transition-all duration-300"
+          className="rounded-2xl border border-purple-400 dark:border-purple-500/80 bg-card dark:bg-zinc-900/40 dark:backdrop-blur-md p-4 shadow-[0_0_15px_-2px_rgba(168,85,247,0.15)] dark:shadow-[0_0_15px_-2px_rgba(168,85,247,0.3)] relative overflow-hidden group hover:shadow-[0_0_20px_1px_rgba(168,85,247,0.25)] dark:hover:shadow-[0_0_20px_1px_rgba(168,85,247,0.4)] transition-all duration-300"
         >
           <div className="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
             <BarChart3 className="h-20 w-20 transform translate-x-4 -translate-y-4 text-purple-500 dark:text-white" />
           </div>
           <div className="flex items-center gap-2 mb-3 relative z-10">
-            <div className="rounded-full p-1.5 bg-purple-500/10 ring-1 ring-purple-500/30 text-purple-600 dark:text-purple-400">
+            <div className="rounded-full p-1.5 bg-purple-500/10 ring-1 ring-purple-500/50 text-purple-600 dark:text-purple-400">
               <BarChart3 className="h-3.5 w-3.5" />
             </div>
             <p className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">
@@ -223,14 +223,14 @@ export default async function DashboardPage() {
 
         {/* Falhas */ }
         <div
-          className="rounded-2xl border border-rose-200 dark:border-rose-500/50 bg-white/80 dark:bg-zinc-900/40 backdrop-blur-md p-4 shadow-[0_0_15px_-2px_rgba(244,63,94,0.05)] dark:shadow-[0_0_15px_-2px_rgba(244,63,94,0.1)] relative overflow-hidden group hover:shadow-[0_0_20px_1px_rgba(244,63,94,0.15)] dark:hover:shadow-[0_0_20px_1px_rgba(244,63,94,0.2)] transition-all duration-300"
+          className="rounded-2xl border border-rose-400 dark:border-rose-500/50 bg-card dark:bg-zinc-900/40 dark:backdrop-blur-md p-4 shadow-[0_0_15px_-2px_rgba(244,63,94,0.05)] dark:shadow-[0_0_15px_-2px_rgba(244,63,94,0.1)] relative overflow-hidden group hover:shadow-[0_0_20px_1px_rgba(244,63,94,0.15)] dark:hover:shadow-[0_0_20px_1px_rgba(244,63,94,0.2)] transition-all duration-300"
           title="Mensagens que falharam ao ser enviadas hoje."
         >
           <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
             <XCircle className="h-20 w-20 transform translate-x-4 -translate-y-4 text-red-500" />
           </div>
           <div className="flex items-center gap-2 mb-3 relative z-10">
-            <div className="rounded-full p-1.5 bg-rose-500/10 ring-1 ring-rose-500/30 text-rose-600 dark:text-rose-400">
+            <div className="rounded-full p-1.5 bg-rose-500/10 ring-1 ring-rose-500/50 text-rose-600 dark:text-rose-400">
               <XCircle className="h-3.5 w-3.5" />
             </div>
             <p className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">

@@ -42,7 +42,7 @@ export function TelegramConnect({ initialConnected, initialBotLabel }: TelegramC
   }
 
   return (
-    <div className="relative flex flex-col rounded-2xl border border-zinc-800/60 bg-zinc-900/40 backdrop-blur-xl p-6 transition-all duration-300 hover:border-zinc-700/60 hover:shadow-xl overflow-hidden">
+    <div className="relative flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50/80 dark:bg-zinc-900/40 backdrop-blur-xl p-6 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700/60 hover:shadow-xl overflow-hidden">
       {/* Subtle background glow based on status */}
       {connected ? (
         <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full blur-[80px] bg-gradient-to-tr from-sky-500/20 to-sky-600/20 opacity-30" />
@@ -57,7 +57,7 @@ export function TelegramConnect({ initialConnected, initialBotLabel }: TelegramC
             <Bot className="h-6 w-6" strokeWidth={1.5} />
           </div>
           <div className="flex flex-col gap-1 items-start justify-center">
-            <p className="text-lg font-bold text-white tracking-tight">Telegram</p>
+            <p className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight">Telegram</p>
             {connected ? (
               <span className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
@@ -108,7 +108,7 @@ export function TelegramConnect({ initialConnected, initialBotLabel }: TelegramC
               value={token}
               onChange={(e) => setToken(e.target.value)}
               placeholder="1234567890:ABCDEFghijklmnopqrstuvwxyz"
-              className="w-full rounded-lg border border-zinc-700/60 bg-zinc-800/60 px-3 py-2 text-xs text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-sky-500/60 transition-colors font-mono"
+              className="w-full rounded-lg border border-zinc-300 dark:border-zinc-700/60 bg-zinc-50 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-sky-500/60 transition-colors font-mono"
               required
             />
           </div>

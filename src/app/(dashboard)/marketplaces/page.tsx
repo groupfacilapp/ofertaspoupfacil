@@ -50,7 +50,7 @@ export default async function MarketplacesPage() {
     <div className="space-y-6 max-w-5xl md:px-2 md:py-2">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-white tracking-tight">Marketplaces</h1>
+          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-white tracking-tight">Marketplaces</h1>
           <p className="text-sm text-zinc-400 mt-2">
             Configure suas credenciais de afiliado.{' '}
             {connectedCount > 0 ? (

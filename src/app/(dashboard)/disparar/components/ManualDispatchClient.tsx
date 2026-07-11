@@ -42,10 +42,10 @@ function ProductPreview({ offer }: { offer: NormalizedOffer }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 overflow-hidden">
+    <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 overflow-hidden">
       <div className="flex gap-4 p-4">
         {/* Image */}
-        <div className="flex-shrink-0 h-24 w-24 rounded-lg overflow-hidden bg-zinc-800/60 border border-zinc-800 flex items-center justify-center">
+        <div className="flex-shrink-0 h-24 w-24 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
           {offer.imageUrl && !imgError ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -64,7 +64,7 @@ function ProductPreview({ offer }: { offer: NormalizedOffer }) {
           <p className="text-sm font-medium text-zinc-100 leading-snug line-clamp-2">{offer.title}</p>
 
           <div className="flex items-baseline gap-2 flex-wrap">
-            <span className="text-xl font-bold text-white">R$ {fmt(offer.currentPrice)}</span>
+            <span className="text-xl font-bold text-zinc-900 dark:text-white">R$ {fmt(offer.currentPrice)}</span>
             {offer.originalPrice && offer.originalPrice > offer.currentPrice && (
               <span className="text-xs text-zinc-500 line-through">R$ {fmt(offer.originalPrice)}</span>
             )}
@@ -101,7 +101,7 @@ function ProductPreview({ offer }: { offer: NormalizedOffer }) {
       </div>
 
       {offer.affiliateLink && offer.affiliateLink !== offer.productUrl && (
-        <div className="px-4 py-2 border-t border-zinc-800/60 flex items-center gap-1.5">
+        <div className="px-4 py-2 border-t border-zinc-200 dark:border-zinc-800/60 flex items-center gap-1.5">
           <Tag className="h-3 w-3 text-emerald-400" />
           <span className="text-[10px] text-emerald-400">Link de afiliado gerado</span>
         </div>
@@ -113,7 +113,7 @@ function ProductPreview({ offer }: { offer: NormalizedOffer }) {
 function MessagePreview({ message }: { message: string }) {
   if (!message.trim()) return null;
   return (
-    <div className="rounded-xl border border-zinc-700/40 bg-zinc-900/40 p-3 space-y-1.5">
+    <div className="rounded-xl border border-zinc-200 dark:border-zinc-700/40 bg-zinc-50 dark:bg-zinc-900/40 p-3 space-y-1.5">
       <div className="flex items-center gap-1.5 mb-2">
         <Eye className="h-3 w-3 text-zinc-500" />
         <p className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">Pré-visualização</p>
@@ -200,7 +200,7 @@ export function ManualDispatchClient({ groups }: { groups: Group[] }) {
     <div className="space-y-6 max-w-2xl">
       {/* Header */}
       <div>
-        <h1 className="text-xl font-semibold text-white">Disparo Manual</h1>
+        <h1 className="text-xl font-semibold text-zinc-900 dark:text-white">Disparo Manual</h1>
         <p className="text-sm text-zinc-500 mt-1">
           Cole a URL de um produto e dispare para seus grupos agora.
         </p>
@@ -214,7 +214,7 @@ export function ManualDispatchClient({ groups }: { groups: Group[] }) {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="https://shopee.com.br/produto-i.123.456"
-            className="flex-1 rounded-xl border border-zinc-700/60 bg-zinc-900/60 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-indigo-500/60 transition-colors"
+            className="flex-1 rounded-xl border border-zinc-300 dark:border-zinc-700/60 bg-zinc-50 dark:bg-zinc-900/60 px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-indigo-500/60 transition-colors"
             required
           />
           <button
@@ -255,7 +255,7 @@ export function ManualDispatchClient({ groups }: { groups: Group[] }) {
               value={customMessage}
               onChange={(e) => setCustomMessage(e.target.value)}
               rows={7}
-              className="w-full rounded-xl border border-zinc-700/60 bg-zinc-900/60 px-4 py-3 text-xs text-zinc-100 font-mono placeholder:text-zinc-600 focus:outline-none focus:border-indigo-500/60 transition-colors resize-y"
+              className="w-full rounded-xl border border-zinc-300 dark:border-zinc-700/60 bg-zinc-50 dark:bg-zinc-900/60 px-4 py-3 text-xs text-zinc-900 dark:text-zinc-100 font-mono placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-indigo-500/60 transition-colors resize-y"
               placeholder="Personalize a mensagem ou deixe em branco para usar o template do grupo..."
             />
             <p className="text-[10px] text-zinc-600">Suporta *negrito*, ~tachado~, _itálico_, emojis. Deixe em branco para usar o template de cada grupo.</p>
@@ -270,7 +270,7 @@ export function ManualDispatchClient({ groups }: { groups: Group[] }) {
           <div className="space-y-2">
             <p className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">Enviar para</p>
             {groups.length === 0 ? (
-              <p className="text-xs text-zinc-600 rounded-xl border border-zinc-800/60 bg-zinc-900/30 px-4 py-3">
+              <p className="text-xs text-zinc-600 rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/30 px-4 py-3">
                 Nenhum grupo ativo. <a href="/grupos" className="text-indigo-400 hover:text-indigo-300">Crie um grupo</a>.
               </p>
             ) : (
@@ -283,7 +283,7 @@ export function ManualDispatchClient({ groups }: { groups: Group[] }) {
                     className={`flex items-center justify-between rounded-xl border px-4 py-3 text-sm transition-all text-left ${
                       selectedGroups.has(g.id)
                         ? 'border-indigo-500/30 bg-indigo-500/10 text-indigo-300'
-                        : 'border-zinc-800/60 bg-zinc-900/40 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300'
+                        : 'border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700 hover:text-zinc-700 dark:hover:text-zinc-300'
                     }`}
                   >
                     <span className="font-medium truncate">{g.name}</span>

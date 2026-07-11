@@ -57,7 +57,7 @@ export default async function CanaisPage() {
     <div className="space-y-6 max-w-5xl md:px-2 md:py-2">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-white tracking-tight">Canais de Disparo</h1>
+          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-white tracking-tight">Canais de Disparo</h1>
           <p className="text-sm text-zinc-400 mt-2">
             Conecte seus canais de mensagem para receber os achadinhos automaticamente.
           </p>
@@ -129,7 +129,7 @@ export default async function CanaisPage() {
       </div>
 
       {/* Instance info */}
-      <div className="rounded-2xl border border-zinc-800/60 bg-zinc-900/40 backdrop-blur-md p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-zinc-900/60 hover:border-zinc-700/60 transition-colors">
+      <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 backdrop-blur-md p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-zinc-100 dark:hover:bg-zinc-900/60 hover:border-zinc-300 dark:hover:border-zinc-700/60 transition-colors">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <Info className="h-4 w-4 text-zinc-500 group-hover:text-indigo-400 transition-colors" />
@@ -139,7 +139,7 @@ export default async function CanaisPage() {
             Use este ID para identificar sua conexão no painel avançado se necessário.
           </p>
         </div>
-        <div className="bg-black/40 border border-zinc-800 rounded-lg px-4 py-3 flex items-center justify-center min-w-[200px]">
+        <div className="bg-zinc-100/80 dark:bg-black/40 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 flex items-center justify-center min-w-[200px]">
           <code className="text-indigo-400 font-mono text-sm tracking-wider font-bold">{instanceName}</code>
         </div>
       </div>

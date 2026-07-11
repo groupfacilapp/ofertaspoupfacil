@@ -35,21 +35,21 @@ export default async function ConfiguracoesPage() {
     <div className="max-w-2xl space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-xl font-semibold text-white">Configurações</h1>
+        <h1 className="text-xl font-semibold text-zinc-900 dark:text-white">Configurações</h1>
         <p className="text-sm text-zinc-500 mt-1">Gerencie seu perfil, plano e segurança.</p>
       </div>
 
       {/* Assinatura */}
-      <section className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 overflow-hidden">
-        <div className="px-5 py-4 border-b border-zinc-800/60 flex items-center justify-between">
+      <section className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 overflow-hidden">
+        <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800/60 flex items-center justify-between">
           <div>
-            <h2 className="text-sm font-semibold text-white">Assinatura</h2>
+            <h2 className="text-sm font-semibold text-zinc-900 dark:text-white">Assinatura</h2>
             <p className="text-xs text-zinc-500 mt-0.5">Seu plano atual e limites de uso</p>
           </div>
           <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full border ${
             plan !== 'trial'
               ? 'text-indigo-300 bg-indigo-500/15 border-indigo-500/25'
-              : 'text-zinc-500 bg-zinc-800/60 border-zinc-700/40'
+              : 'text-zinc-500 bg-zinc-100 dark:bg-zinc-800/60 border-zinc-300/40 dark:border-zinc-700/40'
           }`}>
             {plan !== 'trial' && <Crown className="h-3 w-3" />}
             {planLabel}
@@ -59,11 +59,11 @@ export default async function ConfiguracoesPage() {
         <div className="p-5 space-y-4">
           {(plan !== 'trial' || isExpired) && (
             <div className="grid grid-cols-2 gap-3 text-xs">
-              <div className="rounded-lg bg-zinc-800/40 px-3 py-2.5">
+              <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800/40 px-3 py-2.5">
                 <p className="text-zinc-600 mb-1">Ativação</p>
                 <p className="text-zinc-300 font-medium">{fmt(planStartedAt)}</p>
               </div>
-              <div className="rounded-lg bg-zinc-800/40 px-3 py-2.5">
+              <div className="rounded-lg bg-zinc-100 dark:bg-zinc-800/40 px-3 py-2.5">
                 <p className="text-zinc-600 mb-1">Expira em</p>
                 <p className={`font-medium ${isExpired ? 'text-amber-400' : 'text-zinc-300'}`}>
                   {planExpiresAt ? fmt(planExpiresAt) : 'Nunca'}
@@ -107,9 +107,9 @@ export default async function ConfiguracoesPage() {
       </section>
 
       {/* Perfil */}
-      <section className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 overflow-hidden">
-        <div className="px-5 py-4 border-b border-zinc-800/60">
-          <h2 className="text-sm font-semibold text-white">Perfil</h2>
+      <section className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 overflow-hidden">
+        <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800/60">
+          <h2 className="text-sm font-semibold text-zinc-900 dark:text-white">Perfil</h2>
           <p className="text-xs text-zinc-500 mt-0.5">Nome de exibição e email da conta</p>
         </div>
         <div className="p-5">
@@ -118,9 +118,9 @@ export default async function ConfiguracoesPage() {
       </section>
 
       {/* Segurança */}
-      <section className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 overflow-hidden">
-        <div className="px-5 py-4 border-b border-zinc-800/60">
-          <h2 className="text-sm font-semibold text-white">Segurança</h2>
+      <section className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 overflow-hidden">
+        <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800/60">
+          <h2 className="text-sm font-semibold text-zinc-900 dark:text-white">Segurança</h2>
           <p className="text-xs text-zinc-500 mt-0.5">Alterar senha da conta</p>
         </div>
         <div className="p-5">
@@ -129,14 +129,14 @@ export default async function ConfiguracoesPage() {
       </section>
 
       {/* Conta */}
-      <section className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 overflow-hidden">
-        <div className="px-5 py-4 border-b border-zinc-800/60">
-          <h2 className="text-sm font-semibold text-white">Informações da conta</h2>
+      <section className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 overflow-hidden">
+        <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800/60">
+          <h2 className="text-sm font-semibold text-zinc-900 dark:text-white">Informações da conta</h2>
         </div>
         <div className="p-5 space-y-2">
           <div className="flex items-center justify-between py-1.5">
             <span className="text-xs text-zinc-500">ID da conta</span>
-            <span className="text-xs font-mono text-zinc-400 bg-zinc-800/60 px-2 py-0.5 rounded">{user.id.slice(0, 8)}…</span>
+            <span className="text-xs font-mono text-zinc-400 bg-zinc-100 dark:bg-zinc-800/60 px-2 py-0.5 rounded">{user.id.slice(0, 8)}…</span>
           </div>
           <div className="flex items-center justify-between py-1.5">
             <span className="text-xs text-zinc-500">Cadastrado em</span>
@@ -179,7 +179,7 @@ function UsageBar({
         </span>
       </div>
       {!isUnlimited && (
-        <div className="h-1 rounded-full bg-zinc-800/80 overflow-hidden">
+        <div className="h-1 rounded-full bg-zinc-200/80 dark:bg-zinc-800/80 overflow-hidden">
           <div
             className={`h-full rounded-full transition-all ${isNearLimit ? 'bg-amber-500' : 'bg-indigo-500'}`}
             style={{ width: `${pct}%` }}

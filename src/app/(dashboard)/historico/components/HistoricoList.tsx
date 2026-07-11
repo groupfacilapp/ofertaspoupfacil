@@ -84,15 +84,15 @@ function LogRow({ log }: { log: LogEntry }) {
   const link = log.offer?.affiliate_link || log.offer?.product_url;
 
   return (
-    <div className="divide-y divide-zinc-800/40">
+    <div className="divide-y divide-zinc-200 dark:divide-zinc-800/40">
       {/* Main row */}
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
-        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-zinc-800/20 transition-colors text-left"
+        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/20 transition-colors text-left"
       >
         {/* Product image */}
-        <div className="h-12 w-12 shrink-0 rounded-lg bg-zinc-800/60 border border-zinc-700/40 overflow-hidden flex items-center justify-center">
+        <div className="h-12 w-12 shrink-0 rounded-lg bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/40 overflow-hidden flex items-center justify-center">
           {log.offer?.image_url ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -130,7 +130,7 @@ function LogRow({ log }: { log: LogEntry }) {
 
         {/* Marketplace badge */}
         <div className="shrink-0 hidden md:block">
-          <span className={`inline-flex text-[10px] font-medium px-2 py-0.5 rounded-full border ${MARKETPLACE_COLOR[mp] ?? 'bg-zinc-800 text-zinc-400 border-zinc-700'}`}>
+          <span className={`inline-flex text-[10px] font-medium px-2 py-0.5 rounded-full border ${MARKETPLACE_COLOR[mp] ?? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>
             {MARKETPLACE_LABEL[mp] ?? mp}
           </span>
         </div>
@@ -148,7 +148,7 @@ function LogRow({ log }: { log: LogEntry }) {
 
       {/* Expanded details */}
       {expanded && (
-        <div className="px-4 pb-4 pt-3 bg-zinc-900/40 space-y-3">
+        <div className="px-4 pb-4 pt-3 bg-zinc-50/80 dark:bg-zinc-900/40 space-y-3">
           {/* Actions */}
           <div className="flex items-center gap-2 flex-wrap">
             {link && (
@@ -157,7 +157,7 @@ function LogRow({ log }: { log: LogEntry }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-700/60 bg-zinc-800/60 px-3 py-1.5 text-xs text-zinc-300 hover:text-zinc-100 hover:bg-zinc-700/60 transition-all"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/60 bg-zinc-100 dark:bg-zinc-800/60 px-3 py-1.5 text-xs text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-700/60 transition-all"
               >
                 <ExternalLink className="h-3 w-3" />
                 Abrir produto
@@ -169,7 +169,7 @@ function LogRow({ log }: { log: LogEntry }) {
           </div>
 
           {/* Message preview */}
-          <div className="rounded-lg border border-zinc-800/60 bg-zinc-950/60 px-4 py-3">
+          <div className="rounded-lg border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-950/60 px-4 py-3">
             <pre className="text-xs text-zinc-300 whitespace-pre-wrap font-sans leading-relaxed">
               {log.message}
             </pre>
@@ -189,7 +189,7 @@ function LogRow({ log }: { log: LogEntry }) {
 
 export function HistoricoList({ logs }: { logs: LogEntry[] }) {
   return (
-    <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 overflow-hidden divide-y divide-zinc-800/40">
+    <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 overflow-hidden divide-y divide-zinc-200 dark:divide-zinc-800/40">
       {logs.map((log) => (
         <LogRow key={log.id} log={log} />
       ))}

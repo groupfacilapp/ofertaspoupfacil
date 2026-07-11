@@ -15,7 +15,7 @@ export function ProfileForm({ defaultName, email }: { defaultName: string; email
           name="display_name"
           defaultValue={defaultName}
           placeholder="Seu nome"
-          className="w-full rounded-lg border border-zinc-800 bg-zinc-800/60 px-4 py-2.5 text-sm text-zinc-100 placeholder:text-zinc-600 outline-none focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+          className="w-full rounded-lg border border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/60 px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/10 transition-all"
         />
       </div>
       <div className="space-y-1.5">
@@ -23,7 +23,7 @@ export function ProfileForm({ defaultName, email }: { defaultName: string; email
         <input
           value={email}
           disabled
-          className="w-full rounded-lg border border-zinc-800/40 bg-zinc-800/20 px-4 py-2.5 text-sm text-zinc-500 cursor-not-allowed"
+          className="w-full rounded-lg border border-zinc-300/40 dark:border-zinc-800/40 bg-zinc-100/20 dark:bg-zinc-800/20 px-4 py-2.5 text-sm text-zinc-500 cursor-not-allowed"
         />
         <p className="text-[10px] text-zinc-700">O email não pode ser alterado por aqui.</p>
       </div>

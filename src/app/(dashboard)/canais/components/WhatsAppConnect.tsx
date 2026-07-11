@@ -156,7 +156,7 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
   }, []);
 
   return (
-    <div className="relative flex flex-col rounded-2xl border border-zinc-800/60 bg-zinc-900/40 backdrop-blur-xl p-6 transition-all duration-300 hover:border-zinc-700/60 hover:shadow-xl overflow-hidden">
+    <div className="relative flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50/80 dark:bg-zinc-900/40 backdrop-blur-xl p-6 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700/60 hover:shadow-xl overflow-hidden">
       {/* Subtle background glow based on status */}
       {status === 'connected' && (
         <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full blur-[80px] bg-gradient-to-tr from-emerald-500/20 to-emerald-600/20 opacity-30" />
@@ -172,7 +172,7 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
             <Smartphone className="h-6 w-6" strokeWidth={1.5} />
           </div>
           <div className="flex flex-col gap-1 items-start justify-center">
-            <p className="text-lg font-bold text-white tracking-tight">WhatsApp</p>
+            <p className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight">WhatsApp</p>
             <StatusLabel status={status} />
           </div>
         </div>
@@ -186,12 +186,12 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
       {/* IDLE — method selector */}
       {status === 'idle' && (
         <>
-          <div className="flex rounded-lg border border-zinc-800/60 bg-zinc-950/60 p-0.5 mb-4">
+          <div className="flex rounded-lg border border-zinc-200 dark:border-zinc-800/60 bg-zinc-100/60 dark:bg-zinc-950/60 p-0.5 mb-4">
             <button
               type="button"
               onClick={() => setMethod('qr')}
               className={`flex-1 flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
-                method === 'qr' ? 'bg-zinc-800 text-zinc-100 shadow-sm' : 'text-zinc-500 hover:text-zinc-300'
+                method === 'qr' ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-sm' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
               }`}
             >
               <QrCode className="h-3.5 w-3.5" /> QR Code
@@ -200,7 +200,7 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
               type="button"
               onClick={() => setMethod('phone')}
               className={`flex-1 flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all ${
-                method === 'phone' ? 'bg-zinc-800 text-zinc-100 shadow-sm' : 'text-zinc-500 hover:text-zinc-300'
+                method === 'phone' ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-sm' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
               }`}
             >
               <Hash className="h-3.5 w-3.5" /> Código por número
@@ -215,7 +215,7 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
               </p>
               <Button
                 variant="outline" size="sm"
-                className="w-full border-zinc-700/60 bg-zinc-800/40 text-zinc-300 hover:bg-zinc-700/60 hover:text-zinc-100"
+                className="w-full border-zinc-300 dark:border-zinc-700/60 bg-zinc-100 dark:bg-zinc-800/40 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/60 hover:text-zinc-900 dark:hover:text-zinc-100"
                 onClick={handleConnectQR} disabled={isPending}
               >
                 <Wifi className="h-3.5 w-3.5 mr-2" /> Gerar QR Code
@@ -233,11 +233,11 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
                   value={phone}
                   onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
                   maxLength={15}
-                  className="bg-zinc-800/60 border-zinc-700/60 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-zinc-500 font-mono text-sm"
+                  className="bg-zinc-50 dark:bg-zinc-800/60 border-zinc-300 dark:border-zinc-700/60 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-zinc-500 font-mono text-sm"
                 />
                 <Button
                   variant="outline" size="sm"
-                  className="shrink-0 border-zinc-700/60 bg-zinc-800/40 text-zinc-300 hover:bg-zinc-700/60 hover:text-zinc-100"
+                  className="shrink-0 border-zinc-300 dark:border-zinc-700/60 bg-zinc-100 dark:bg-zinc-800/40 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/60 hover:text-zinc-900 dark:hover:text-zinc-100"
                   onClick={handleConnectPhone}
                   disabled={isPending || phone.length < 10}
                 >
@@ -248,7 +248,7 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
           )}
           <Button
             variant="outline" size="sm"
-            className="mt-3 w-full border-zinc-800/60 bg-transparent text-zinc-500 hover:bg-rose-500/10 hover:border-rose-500/20 hover:text-rose-400 transition-all"
+            className="mt-3 w-full border-zinc-200 dark:border-zinc-800/60 bg-transparent text-zinc-500 hover:bg-rose-500/10 hover:border-rose-500/20 hover:text-rose-400 transition-all"
             onClick={handleDeleteInstance} disabled={isPending}
           >
             <Trash2 className="h-3.5 w-3.5 mr-2" /> Recriar instância
@@ -308,7 +308,7 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
       {/* PAIRING CODE */}
       {status === 'pairing' && pairingCode && (
         <div className="flex flex-col items-center gap-4 py-2">
-          <div className="rounded-xl border border-zinc-700/60 bg-zinc-950/80 px-8 py-5 text-center">
+          <div className="rounded-xl border border-zinc-300 dark:border-zinc-700/60 bg-zinc-100/80 dark:bg-zinc-950/80 px-8 py-5 text-center">
             <p className="text-[10px] text-zinc-500 mb-2 uppercase tracking-widest">Código de pareamento</p>
             <p className="text-3xl font-mono font-bold tracking-[0.3em] text-zinc-100">
               {pairingCode.replace(/[^a-zA-Z0-9]/g, '').slice(0, 4)}-{pairingCode.replace(/[^a-zA-Z0-9]/g, '').slice(4, 8)}
@@ -345,14 +345,14 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
           </div>
           <Button
             variant="outline" size="sm"
-            className="w-full border-zinc-700/60 bg-zinc-800/40 text-zinc-400 hover:bg-red-500/10 hover:border-red-500/20 hover:text-red-400 transition-all"
+            className="w-full border-zinc-300 dark:border-zinc-700/60 bg-zinc-100 dark:bg-zinc-800/40 text-zinc-500 dark:text-zinc-400 hover:bg-red-500/10 hover:border-red-500/20 hover:text-red-400 transition-all"
             onClick={handleDisconnect} disabled={isPending}
           >
             <WifiOff className="h-3.5 w-3.5 mr-2" /> Desconectar
           </Button>
           <Button
             variant="outline" size="sm"
-            className="mt-2 w-full border-zinc-800/60 bg-transparent text-zinc-500 hover:bg-rose-500/10 hover:border-rose-500/20 hover:text-rose-400 transition-all"
+            className="mt-2 w-full border-zinc-200 dark:border-zinc-800/60 bg-transparent text-zinc-500 hover:bg-rose-500/10 hover:border-rose-500/20 hover:text-rose-400 transition-all"
             onClick={handleDeleteInstance} disabled={isPending}
           >
             <Trash2 className="h-3.5 w-3.5 mr-2" /> Recriar instância
@@ -370,14 +370,14 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
           <div className="flex gap-2">
             <Button
               variant="outline" size="sm"
-              className="flex-1 border-zinc-700/60 bg-zinc-800/40 text-zinc-300 hover:bg-zinc-700/60"
+              className="flex-1 border-zinc-300 dark:border-zinc-700/60 bg-zinc-100 dark:bg-zinc-800/40 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/60"
               onClick={() => handleBack('qr')} disabled={isPending}
             >
               <QrCode className="h-3.5 w-3.5 mr-1.5" /> QR Code
             </Button>
             <Button
               variant="outline" size="sm"
-              className="flex-1 border-zinc-700/60 bg-zinc-800/40 text-zinc-300 hover:bg-zinc-700/60"
+              className="flex-1 border-zinc-300 dark:border-zinc-700/60 bg-zinc-100 dark:bg-zinc-800/40 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700/60"
               onClick={() => handleBack('phone')} disabled={isPending}
             >
               <Hash className="h-3.5 w-3.5 mr-1.5" /> Por número
@@ -385,7 +385,7 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
           </div>
           <Button
             variant="outline" size="sm"
-            className="mt-3 w-full border-zinc-800/60 bg-transparent text-zinc-500 hover:bg-rose-500/10 hover:border-rose-500/20 hover:text-rose-400 transition-all"
+            className="mt-3 w-full border-zinc-200 dark:border-zinc-800/60 bg-transparent text-zinc-500 hover:bg-rose-500/10 hover:border-rose-500/20 hover:text-rose-400 transition-all"
             onClick={handleDeleteInstance} disabled={isPending}
           >
             <Trash2 className="h-3.5 w-3.5 mr-2" /> Recriar instância

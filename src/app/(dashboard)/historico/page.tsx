@@ -100,16 +100,16 @@ export default async function HistoricoPage() {
   return (
     <div className="space-y-6 max-w-4xl">
       <div>
-        <h1 className="text-xl font-semibold text-white">Histórico de Disparos</h1>
+        <h1 className="text-xl font-semibold text-zinc-900 dark:text-white">Histórico de Disparos</h1>
         <p className="text-sm text-zinc-500 mt-1">
           Todas as ofertas enviadas pelo {BRAND.name}.
         </p>
       </div>
 
       {total === 0 ? (
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 p-10 text-center">
+        <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 p-10 text-center">
           <div className="flex justify-center mb-4">
-            <div className="rounded-full bg-zinc-800/80 p-4">
+            <div className="rounded-full bg-zinc-200/80 dark:bg-zinc-800/80 p-4">
               <Package className="h-7 w-7 text-zinc-600" />
             </div>
           </div>

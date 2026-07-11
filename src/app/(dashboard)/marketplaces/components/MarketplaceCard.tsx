@@ -115,7 +115,7 @@ const MARKETPLACE_META = {
 function StatusBadge({ status }: { status: MarketplaceStatus }) {
   if (!status.last_validated_at) {
     return (
-      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider bg-zinc-800/50 px-2 py-0.5 rounded-full ring-1 ring-zinc-700/50">
+      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider bg-zinc-100 dark:bg-zinc-800/50 px-2 py-0.5 rounded-full ring-1 ring-zinc-300 dark:ring-zinc-700/50">
         <span className="h-1.5 w-1.5 rounded-full bg-zinc-500" />
         Não configurado
       </span>
@@ -188,10 +188,10 @@ export function MarketplaceCard({ status }: { status: MarketplaceStatus }) {
     <>
       <div
         className={cn(
-          'relative flex flex-col rounded-2xl bg-zinc-900/40 backdrop-blur-xl p-6 transition-all duration-300 group overflow-hidden',
+          'relative flex flex-col rounded-2xl bg-zinc-50/80 dark:bg-zinc-900/40 backdrop-blur-xl p-6 transition-all duration-300 group overflow-hidden',
           isConnected 
             ? `border ${meta.border} ${meta.shadow} ${meta.hoverShadow}`
-            : 'border border-zinc-800/80 hover:border-zinc-700 hover:shadow-xl'
+            : 'border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-xl'
         )}
       >
         {/* Background ambient glow if connected */}
@@ -211,7 +211,7 @@ export function MarketplaceCard({ status }: { status: MarketplaceStatus }) {
               <IconProps className="h-6 w-6" strokeWidth={1.5} />
             </div>
             <div className="flex flex-col gap-1 items-start justify-center">
-              <p className="text-lg font-bold text-white tracking-tight">{meta.label}</p>
+              <p className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight">{meta.label}</p>
               <StatusBadge status={status} />
             </div>
           </div>
@@ -219,7 +219,7 @@ export function MarketplaceCard({ status }: { status: MarketplaceStatus }) {
             href={meta.docsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-500 hover:text-white transition-colors bg-zinc-800/50 p-2 rounded-lg ring-1 ring-white/5 hover:bg-zinc-700/50"
+            className="text-zinc-500 hover:text-zinc-800 dark:hover:text-white transition-colors bg-zinc-100 dark:bg-zinc-800/50 p-2 rounded-lg ring-1 ring-zinc-200 dark:ring-white/5 hover:bg-zinc-200 dark:hover:bg-zinc-700/50"
             title={meta.docsLabel}
           >
             <ExternalLink className="h-4 w-4" />
@@ -280,7 +280,7 @@ export function MarketplaceCard({ status }: { status: MarketplaceStatus }) {
             className={cn(
               "w-full rounded-xl transition-all font-semibold shadow-sm h-11",
               isConnected
-                ? "bg-zinc-900/60 border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white"
+                ? "bg-zinc-100 dark:bg-zinc-900/60 border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white"
                 : "bg-indigo-600 border-indigo-500 hover:bg-indigo-500 text-white shadow-[0_4px_14px_0_rgba(79,70,229,0.39)] hover:shadow-[0_6px_20px_rgba(79,70,229,0.23)]"
             )}
             onClick={() => setOpen(true)}

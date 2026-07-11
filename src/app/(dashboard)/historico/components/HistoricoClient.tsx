@@ -90,9 +90,9 @@ export function HistoricoClient({ logs, total, sent, failed }: HistoricoClientPr
     <div className="space-y-4">
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-4">
+        <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 p-4">
           <p className="text-xs text-zinc-500 mb-1">Total</p>
-          <p className="text-2xl font-semibold text-white">{total}</p>
+          <p className="text-2xl font-semibold text-zinc-900 dark:text-white">{total}</p>
           <p className="text-[10px] text-zinc-600 mt-0.5">todos os tempos</p>
         </div>
         <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
@@ -142,7 +142,7 @@ export function HistoricoClient({ logs, total, sent, failed }: HistoricoClientPr
                       : s === 'failed'
                       ? 'bg-red-600/20 text-red-300 border-red-500/30'
                       : 'bg-indigo-600/20 text-indigo-300 border-indigo-500/30'
-                    : 'bg-zinc-800/40 text-zinc-500 border-zinc-700/40 hover:text-zinc-300 hover:border-zinc-600/60'
+                    : 'bg-zinc-100 dark:bg-zinc-800/40 text-zinc-500 border-zinc-200 dark:border-zinc-700/40 hover:text-zinc-700 dark:hover:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-600/60'
                 }`}
               >
                 {labels[s]}
@@ -161,7 +161,7 @@ export function HistoricoClient({ logs, total, sent, failed }: HistoricoClientPr
 
       {/* List */}
       {pageLogs.length === 0 ? (
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 p-10 text-center">
+        <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 p-10 text-center">
           <p className="text-sm text-zinc-500">Nenhum disparo neste período.</p>
         </div>
       ) : (
@@ -178,7 +178,7 @@ export function HistoricoClient({ logs, total, sent, failed }: HistoricoClientPr
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={safePage === 1}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-zinc-700/60 bg-zinc-800/40 text-xs text-zinc-400 hover:text-zinc-100 hover:border-zinc-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/60 bg-zinc-100 dark:bg-zinc-800/40 text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-zinc-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
               <ChevronLeft className="h-3.5 w-3.5" />
               Anterior
@@ -186,7 +186,7 @@ export function HistoricoClient({ logs, total, sent, failed }: HistoricoClientPr
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={safePage === totalPages}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-zinc-700/60 bg-zinc-800/40 text-xs text-zinc-400 hover:text-zinc-100 hover:border-zinc-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/60 bg-zinc-100 dark:bg-zinc-800/40 text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-zinc-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
               Próxima
               <ChevronRight className="h-3.5 w-3.5" />

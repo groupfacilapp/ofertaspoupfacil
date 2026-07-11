@@ -48,7 +48,7 @@ export function GroupsClient({ groups, connectedMarketplaces, hasTelegramConnect
     <div className="space-y-6 max-w-7xl md:px-2 md:py-2">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold text-white tracking-tight">
+          <h1 className="text-3xl font-semibold text-zinc-900 dark:text-white tracking-tight">
             Grupos de Disparo
           </h1>
           <p className="text-sm text-zinc-400 mt-2">
@@ -66,14 +66,14 @@ export function GroupsClient({ groups, connectedMarketplaces, hasTelegramConnect
       </div>
 
       {groups.length === 0 ? (
-        <div className="rounded-2xl border border-zinc-800/60 bg-zinc-900/40 backdrop-blur-xl p-12 text-center shadow-xl overflow-hidden relative">
+        <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50/80 dark:bg-zinc-900/40 backdrop-blur-xl p-12 text-center shadow-xl overflow-hidden relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full blur-[100px] bg-gradient-to-tr from-indigo-500/20 to-violet-500/20 opacity-40" />
           <div className="flex justify-center mb-6 relative z-10">
             <div className="rounded-2xl bg-indigo-500/10 p-5 ring-1 ring-indigo-500/20 shadow-[0_0_30px_rgba(99,102,241,0.15)]">
               <Layers className="h-10 w-10 text-indigo-400" />
             </div>
           </div>
-          <h2 className="text-lg font-bold text-white mb-2 relative z-10 tracking-tight">
+          <h2 className="text-lg font-bold text-zinc-900 dark:text-white mb-2 relative z-10 tracking-tight">
             Nenhum grupo criado ainda
           </h2>
           <p className="text-sm text-zinc-400 max-w-sm mx-auto mb-8 relative z-10 leading-relaxed">

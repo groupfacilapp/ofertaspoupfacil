@@ -188,10 +188,10 @@ function FetchCard({
   const foundToday = initialRule?.products_found_today ?? 0;
 
   return (
-    <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-5 space-y-4">
+    <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 p-5 space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-white">Busca Automatica</p>
+          <p className="text-sm font-medium text-zinc-900 dark:text-white">Busca Automatica</p>
           <p className="text-xs text-zinc-500 mt-0.5">
             Busca novas ofertas no marketplace periodicamente
           </p>
@@ -227,7 +227,7 @@ function FetchCard({
         </div>
       </div>
 
-      <div className="pt-1 border-t border-zinc-800/60 space-y-1">
+      <div className="pt-1 border-t border-zinc-200 dark:border-zinc-800/60 space-y-1">
         <p className="text-xs text-zinc-600">
           Ultima busca:{' '}
           <span className="text-zinc-500">{formatDateTime(lastRun)}</span>
@@ -295,10 +295,10 @@ function DispatchCard({
   const lastRun = initialRule?.last_run_at ?? null;
 
   return (
-    <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/60 p-5 space-y-4">
+    <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 p-5 space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-white">Disparo Automatico</p>
+          <p className="text-sm font-medium text-zinc-900 dark:text-white">Disparo Automatico</p>
           <p className="text-xs text-zinc-500 mt-0.5">
             Envia ofertas pendentes para os grupos selecionados
           </p>
@@ -390,7 +390,7 @@ function DispatchCard({
                     className={`flex items-center gap-2.5 rounded-lg border px-3 py-2 cursor-pointer transition-colors ${
                       checked
                         ? 'border-indigo-500/30 bg-indigo-500/5'
-                        : 'border-zinc-700/50 bg-zinc-800/30 hover:border-zinc-600/60'
+                        : 'border-zinc-300 dark:border-zinc-700/50 bg-zinc-100/50 dark:bg-zinc-800/30 hover:border-zinc-400 dark:hover:border-zinc-600/60'
                     }`}
                   >
                     <input
@@ -415,7 +415,7 @@ function DispatchCard({
         </div>
       </div>
 
-      <div className="pt-1 border-t border-zinc-800/60">
+      <div className="pt-1 border-t border-zinc-200 dark:border-zinc-800/60">
         <p className="text-xs text-zinc-600">
           Ultimo disparo:{' '}
           <span className="text-zinc-500">{formatDateTime(lastRun)}</span>
@@ -446,13 +446,13 @@ function MarketplaceSection({
   const isActive = (fetchRule?.is_active || dispatchRule?.is_active) && isConnected;
 
   return (
-    <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 backdrop-blur-md overflow-hidden shadow-lg">
+    <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/50 backdrop-blur-md overflow-hidden shadow-lg">
       {/* Marketplace header */}
-      <div className="px-5 py-4 border-b border-zinc-800/80 flex items-center justify-between bg-black/20">
+      <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800/80 flex items-center justify-between bg-zinc-50/50 dark:bg-black/20">
         <div className="flex items-center gap-3">
           <div className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
           <div>
-            <p className="text-sm font-semibold text-white">{label}</p>
+            <p className="text-sm font-semibold text-zinc-900 dark:text-white">{label}</p>
           </div>
         </div>
         {isConnected ? (
@@ -461,7 +461,7 @@ function MarketplaceSection({
               Ativo
             </span>
           ) : (
-            <span className="text-xs text-zinc-500 bg-zinc-800/60 border border-zinc-700/40 px-2.5 py-1 rounded-full">
+            <span className="text-xs text-zinc-500 bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-300 dark:border-zinc-700/40 px-2.5 py-1 rounded-full">
               Inativo
             </span>
           )
@@ -498,7 +498,7 @@ function MarketplaceSection({
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
                 Como funciona?
               </summary>
-              <div className="mt-3 space-y-3 pl-4 border-l border-zinc-800/60">
+              <div className="mt-3 space-y-3 pl-4 border-l border-zinc-200 dark:border-zinc-800/60">
                 <p className="text-xs text-zinc-500">
                   <span className="text-zinc-300 font-medium">1. Busca Automatica</span>{' '}
                   — roda no intervalo configurado e salva novas ofertas como pendentes na fila.
@@ -545,7 +545,7 @@ export function AutomacoesClient({
     <div className="max-w-5xl space-y-8 md:px-2 md:py-2">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-semibold text-white tracking-tight">Automações</h1>
+        <h1 className="text-3xl font-semibold text-zinc-900 dark:text-white tracking-tight">Automações</h1>
         <p className="text-sm text-zinc-400 mt-2">
           Configure busca e disparo automático por marketplace. Um marketplace pode alimentar vários grupos simultaneamente.
         </p>

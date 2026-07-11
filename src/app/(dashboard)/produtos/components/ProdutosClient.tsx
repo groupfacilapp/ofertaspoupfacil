@@ -51,11 +51,11 @@ const MARKETPLACE_LABEL: Record<string, string> = {
 };
 
 const MARKETPLACE_COLOR: Record<string, string> = {
-  amazon: 'bg-orange-500/15 text-orange-400 border border-orange-500/20',
-  mercadolivre: 'bg-yellow-500/15 text-yellow-400 border border-yellow-500/20',
-  shopee: 'bg-red-500/15 text-red-400 border border-red-500/20',
-  aliexpress: 'bg-rose-500/15 text-rose-400 border border-rose-500/20',
-  kabum: 'bg-blue-500/15 text-blue-400 border border-blue-500/20',
+  amazon: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border border-orange-500/20 dark:border-orange-500/10',
+  mercadolivre: 'bg-yellow-500/10 text-amber-600 dark:text-yellow-400 border border-yellow-500/20 dark:border-yellow-500/10',
+  shopee: 'bg-red-500/10 text-red-650 dark:text-red-400 border border-red-500/20 dark:border-red-500/10',
+  aliexpress: 'bg-rose-500/10 text-rose-650 dark:text-rose-400 border border-rose-500/20 dark:border-rose-500/10',
+  kabum: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/10',
 };
 
 const ALL_MARKETPLACE_OPTIONS = [

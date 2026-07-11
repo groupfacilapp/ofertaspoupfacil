@@ -824,10 +824,6 @@ function ProductCard({
         >
           {isSelected && <span className="text-white text-[10px] font-bold leading-none">✓</span>}
         </button>
-        {/* Marketplace badge */}
-        <span className={`absolute top-3 left-9 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md shadow-sm ${mpColor}`}>
-          {MARKETPLACE_LABEL[product.marketplace] ?? product.marketplace}
-        </span>
         {/* Actions overlay — visible on hover */}
         <div className="absolute top-3 right-3 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
           <a
@@ -865,6 +861,9 @@ function ProductCard({
 
         {/* Discount + status */}
         <div className="flex items-center flex-wrap gap-1.5 mb-4">
+          <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md ${mpColor}`}>
+            {MARKETPLACE_LABEL[product.marketplace] ?? product.marketplace}
+          </span>
           {product.discount_percent && product.discount_percent > 0 ? (
             <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-md px-1.5 py-0.5 shadow-[0_0_10px_rgba(16,185,129,0.1)]">
               -{product.discount_percent}%

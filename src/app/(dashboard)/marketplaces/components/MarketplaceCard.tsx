@@ -31,6 +31,7 @@ const MARKETPLACE_META = {
     badge: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20 dark:border-orange-500/10 group-hover:bg-orange-500/20',
     docsUrl: 'https://associados.amazon.com.br',
     docsLabel: 'Amazon Associates',
+    bulletColor: '#ff5a00',
   },
   mercadolivre: {
     label: 'Mercado Livre',
@@ -44,6 +45,7 @@ const MARKETPLACE_META = {
     badge: 'bg-amber-500/10 text-amber-600 dark:text-yellow-450 border-amber-500/25 dark:border-yellow-500/10 group-hover:bg-amber-500/20',
     docsUrl: 'https://www.mercadolivre.com.br/afiliados/linkbuilder',
     docsLabel: 'Painel de Afiliados',
+    bulletColor: '#f59e0b',
   },
   shopee: {
     label: 'Shopee',
@@ -57,6 +59,7 @@ const MARKETPLACE_META = {
     badge: 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20 dark:border-rose-500/10 group-hover:bg-rose-500/20',
     docsUrl: 'https://open-api.affiliate.shopee.com.br',
     docsLabel: 'Shopee Affiliate',
+    bulletColor: '#ef4444',
   },
   aliexpress: {
     label: 'AliExpress',
@@ -70,6 +73,7 @@ const MARKETPLACE_META = {
     badge: 'bg-red-500/10 text-red-600 dark:text-red-500 border-red-500/20 dark:border-red-500/10 group-hover:bg-red-500/20',
     docsUrl: 'https://portals.aliexpress.com',
     docsLabel: 'AliExpress Open Platform',
+    bulletColor: '#f43f5e',
   },
   kabum: {
     label: 'KaBuM!',
@@ -83,6 +87,7 @@ const MARKETPLACE_META = {
     badge: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20 dark:border-blue-500/10 group-hover:bg-blue-500/20',
     docsUrl: 'https://www.awin.com/br',
     docsLabel: 'Awin Brasil',
+    bulletColor: '#3b82f6',
   },
   temu: {
     label: 'Temu',
@@ -96,19 +101,21 @@ const MARKETPLACE_META = {
     badge: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20 dark:border-orange-500/10 group-hover:bg-orange-500/20',
     docsUrl: 'https://partner.temu.com',
     docsLabel: 'Temu Partner',
+    bulletColor: '#ea580c',
   },
   shein: {
     label: 'Shein',
     icon: ShoppingBag,
     description: 'Publisher ID + Website ID do CJ Affiliate',
-    color: 'from-pink-500 to-rose-600',
-    border: 'border-pink-500 dark:border-pink-500/50',
-    shadow: 'shadow-[0_0_20px_-5px_rgba(236,72,153,0.25)]',
-    hoverShadow: 'hover:shadow-[0_0_25px_0px_rgba(236,72,153,0.35)]',
-    accent: 'text-pink-600 dark:text-pink-400',
-    badge: 'bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/20 dark:border-pink-500/10 group-hover:bg-pink-500/20',
+    color: 'from-zinc-600 to-zinc-800',
+    border: 'border-zinc-800 dark:border-zinc-700/50',
+    shadow: 'shadow-[0_0_20px_-5px_rgba(0,0,0,0.25)]',
+    hoverShadow: 'hover:shadow-[0_0_25px_0px_rgba(0,0,0,0.35)]',
+    accent: 'text-zinc-900 dark:text-zinc-400',
+    badge: 'bg-zinc-950/10 text-zinc-900 dark:text-zinc-300 border-zinc-900/20 dark:border-zinc-800/10 group-hover:bg-zinc-950/20',
     docsUrl: 'https://members.cj.com',
     docsLabel: 'CJ Affiliate',
+    bulletColor: '#000000',
   },
 } as const;
 
@@ -211,7 +218,10 @@ export function MarketplaceCard({ status }: { status: MarketplaceStatus }) {
               <IconProps className="h-6 w-6" strokeWidth={1.5} />
             </div>
             <div className="flex flex-col gap-1 items-start justify-center">
-              <p className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight">{meta.label}</p>
+              <div className="flex items-center gap-2">
+                <div className="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm" style={{ backgroundColor: meta.bulletColor }} />
+                <p className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight">{meta.label}</p>
+              </div>
               <StatusBadge status={status} />
             </div>
           </div>

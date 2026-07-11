@@ -37,13 +37,13 @@ interface AutomacoesClientProps {
 }
 
 const MARKETPLACES = [
-  { key: 'amazon', label: 'Amazon BR', color: 'orange' },
-  { key: 'mercadolivre', label: 'Mercado Livre', color: 'yellow' },
-  { key: 'shopee', label: 'Shopee', color: 'red' },
-  { key: 'aliexpress', label: 'AliExpress', color: 'rose' },
-  { key: 'kabum', label: 'KaBuM!', color: 'blue' },
-  { key: 'temu', label: 'Temu', color: 'orange' },
-  { key: 'shein', label: 'Shein', color: 'pink' },
+  { key: 'amazon', label: 'Amazon BR', color: '#ff5a00' },
+  { key: 'mercadolivre', label: 'Mercado Livre', color: '#f59e0b' },
+  { key: 'shopee', label: 'Shopee', color: '#ef4444' },
+  { key: 'aliexpress', label: 'AliExpress', color: '#f43f5e' },
+  { key: 'kabum', label: 'KaBuM!', color: '#3b82f6' },
+  { key: 'temu', label: 'Temu', color: '#ea580c' },
+  { key: 'shein', label: 'Shein', color: '#000000' },
 ] as const;
 
 const MARKETPLACE_COLOR_MAP: Record<string, string> = {
@@ -53,7 +53,7 @@ const MARKETPLACE_COLOR_MAP: Record<string, string> = {
   aliexpress: 'bg-rose-500/20 text-rose-400 border-rose-500/30',
   kabum: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
   temu: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-  shein: 'bg-pink-500/20 text-pink-400 border-pink-500/30',
+  shein: 'bg-zinc-950/10 dark:bg-zinc-800/60 text-zinc-900 dark:text-zinc-300 border-zinc-900/20 dark:border-zinc-800/10',
 };
 
 const FETCH_INTERVALS = [
@@ -466,7 +466,7 @@ function MarketplaceSection({
             </span>
           )
         ) : (
-          <span className="text-xs text-zinc-500 bg-zinc-800/60 border border-zinc-700/40 px-2.5 py-1 rounded-full">
+          <span className="text-xs text-zinc-550 dark:text-zinc-500 bg-zinc-100 dark:bg-zinc-800/60 border border-border dark:border-zinc-700/40 px-2.5 py-1 rounded-full">
             Nao conectado
           </span>
         )}
@@ -480,7 +480,7 @@ function MarketplaceSection({
             <span>Marketplace nao conectado.</span>
             <Link
               href="/marketplaces"
-              className="text-indigo-400 hover:text-indigo-300 inline-flex items-center gap-1"
+              className="text-indigo-650 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 inline-flex items-center gap-1 font-semibold"
             >
               Conectar <ExternalLink className="h-3 w-3" />
             </Link>

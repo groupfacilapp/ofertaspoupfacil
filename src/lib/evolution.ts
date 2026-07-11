@@ -62,19 +62,27 @@ export class EvolutionClient implements WhatsAppClient {
   }
 
   async getAllInstances() {
-    const res = await this.req<Array<{ instance: { instanceName: string; state: ConnectionState; owner?: string } }>>('/instance/fetchInstances');
+    const res = await this.req<any[]>('/instance/fetchInstances');
     
+    if (!Array.isArray(res)) return [];
+
     return res.map(row => {
+      if (!row) return null;
+      const inst = row.instance || row;
+      if (!inst) return null;
+
       let phoneNumber = undefined;
-      if (row.instance.owner) {
-        phoneNumber = row.instance.owner.split('@')[0];
+      if (inst.owner) {
+        phoneNumber = inst.owner.split('@')[0];
       }
       return {
-        name: row.instance.instanceName,
-        state: row.instance.state,
+        name: inst.instanceName || inst.name,
+        state: inst.state || inst.status,
         phoneNumber
       };
-    });
+    }).filter((item): item is { name: string; state: string; phoneNumber?: string } => 
+      item !== null && typeof item.name === 'string'
+    );
   }
 
   async deleteInstance(instanceName: string, _providerToken?: string): Promise<void> {

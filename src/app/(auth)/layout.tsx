@@ -1,7 +1,11 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Sun, Moon } from 'lucide-react';
 import { Logo } from '@/components/brand/Logo';
 import { BRAND } from '@/config/brand';
+import { useTheme } from 'next-themes';
 
 const features = [
   'Amazon BR, Mercado Livre, Shopee e AliExpress',
@@ -11,8 +15,27 @@ const features = [
 ];
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <div className="flex min-h-screen bg-zinc-950">
+    <div className="flex min-h-screen bg-white dark:bg-zinc-950 transition-colors duration-200 relative">
+      {/* Floating theme toggle */}
+      {mounted && (
+        <div className="absolute top-5 right-5 z-50">
+          <button
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/30 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all active:scale-95 outline-none"
+            title="Alternar tema"
+          >
+            {theme === 'dark' ? <Sun className="h-4.5 w-4.5 text-orange-400" /> : <Moon className="h-4.5 w-4.5 text-orange-500" />}
+          </button>
+        </div>
+      )}
       {/* Left panel — branding */}
       <div className="hidden lg:flex lg:w-[480px] xl:w-[520px] flex-col relative overflow-hidden bg-[#0a0a14]">
         {/* Background grid */}

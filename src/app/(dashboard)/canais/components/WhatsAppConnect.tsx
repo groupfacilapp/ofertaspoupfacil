@@ -5,6 +5,7 @@ import { Smartphone, CheckCircle2, AlertCircle, RefreshCw, WifiOff, Wifi, QrCode
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { connectWhatsApp, connectByPhone, checkWhatsAppStatus, disconnectWhatsApp, deleteWhatsAppInstance } from '../actions';
+import { cn } from '@/lib/utils';
 
 type Status = 'idle' | 'loading' | 'qr_pending' | 'pairing' | 'connected' | 'error';
 type Method = 'qr' | 'phone';
@@ -156,7 +157,14 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
   }, []);
 
   return (
-    <div className="relative flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50/80 dark:bg-zinc-900/40 backdrop-blur-xl p-6 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700/60 hover:shadow-xl overflow-hidden">
+    <div className={cn(
+      "relative flex flex-col rounded-2xl bg-card dark:bg-zinc-900/40 dark:backdrop-blur-xl p-6 transition-all duration-300 hover:shadow-xl overflow-hidden",
+      status === 'connected'
+        ? "border border-emerald-400 dark:border-emerald-500/30"
+        : status === 'qr_pending' || status === 'pairing'
+        ? "border border-amber-400 dark:border-amber-500/30"
+        : "border border-border dark:border-zinc-800/60 hover:border-zinc-300 dark:hover:border-zinc-700/60"
+    )}>
       {/* Subtle background glow based on status */}
       {status === 'connected' && (
         <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full blur-[80px] bg-gradient-to-tr from-emerald-500/20 to-emerald-600/20 opacity-30" />
@@ -168,7 +176,7 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
       {/* Header */}
       <div className="flex items-start justify-between mb-6 relative z-10">
         <div className="flex gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/20 dark:border-emerald-500/10 text-emerald-600 dark:text-emerald-400">
             <Smartphone className="h-6 w-6" strokeWidth={1.5} />
           </div>
           <div className="flex flex-col gap-1 items-start justify-center">
@@ -276,8 +284,8 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
             />
           </div>
           <div className="text-center">
-            <p className="text-xs font-medium text-zinc-300 mb-1">Escaneie com seu WhatsApp</p>
-            <p className="text-xs text-zinc-600">
+            <p className="text-xs font-semibold text-foreground dark:text-zinc-300 mb-1">Escaneie com seu WhatsApp</p>
+            <p className="text-xs text-zinc-650 dark:text-zinc-400">
               WhatsApp → ⋮ → Dispositivos conectados → Conectar dispositivo
             </p>
           </div>
@@ -308,15 +316,15 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
       {/* PAIRING CODE */}
       {status === 'pairing' && pairingCode && (
         <div className="flex flex-col items-center gap-4 py-2">
-          <div className="rounded-xl border border-zinc-300 dark:border-zinc-700/60 bg-zinc-100/80 dark:bg-zinc-950/80 px-8 py-5 text-center">
-            <p className="text-[10px] text-zinc-500 mb-2 uppercase tracking-widest">Código de pareamento</p>
-            <p className="text-3xl font-mono font-bold tracking-[0.3em] text-zinc-100">
+          <div className="rounded-xl border border-border dark:border-zinc-700/60 bg-zinc-100/40 dark:bg-zinc-950/80 px-8 py-5 text-center">
+            <p className="text-[10px] text-zinc-600 dark:text-zinc-500 mb-2 uppercase tracking-widest">Código de pareamento</p>
+            <p className="text-3xl font-mono font-bold tracking-[0.3em] text-foreground dark:text-zinc-100">
               {pairingCode.replace(/[^a-zA-Z0-9]/g, '').slice(0, 4)}-{pairingCode.replace(/[^a-zA-Z0-9]/g, '').slice(4, 8)}
             </p>
           </div>
           <div className="text-center space-y-1">
-            <p className="text-xs font-medium text-zinc-300">Digite esse código no WhatsApp</p>
-            <p className="text-xs text-zinc-600">
+            <p className="text-xs font-semibold text-foreground dark:text-zinc-300">Digite esse código no WhatsApp</p>
+            <p className="text-xs text-zinc-650 dark:text-zinc-400">
               WhatsApp → ⋮ → Dispositivos conectados → Vincular com número de telefone
             </p>
           </div>
@@ -336,11 +344,11 @@ export function WhatsAppConnect({ initialStatus, initialQrCode, instanceName }: 
       {/* CONNECTED */}
       {status === 'connected' && (
         <>
-          <div className="flex items-center gap-2 mb-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-3 py-2.5">
-            <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+          <div className="flex items-center gap-2 mb-4 rounded-lg bg-emerald-500/10 border border-emerald-450 dark:border-emerald-500/20 px-3 py-2.5">
+            <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <div>
-              <p className="text-xs font-medium text-emerald-400">Conectado com sucesso</p>
-              <p className="text-xs text-zinc-600 mt-0.5 font-mono">{instanceName}</p>
+              <p className="text-xs font-bold text-emerald-600 dark:text-emerald-400">Conectado com sucesso</p>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5 font-mono">{instanceName}</p>
             </div>
           </div>
           <Button

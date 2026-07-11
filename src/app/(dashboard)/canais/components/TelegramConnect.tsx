@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react';
 import { Bot, CheckCircle2, Loader2, X, AlertCircle, ExternalLink } from 'lucide-react';
 import { connectTelegram, disconnectTelegram } from '../actions';
+import { cn } from '@/lib/utils';
 
 interface TelegramConnectProps {
   initialConnected: boolean;
@@ -42,7 +43,12 @@ export function TelegramConnect({ initialConnected, initialBotLabel }: TelegramC
   }
 
   return (
-    <div className="relative flex flex-col rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50/80 dark:bg-zinc-900/40 backdrop-blur-xl p-6 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700/60 hover:shadow-xl overflow-hidden">
+    <div className={cn(
+      "relative flex flex-col rounded-2xl bg-card dark:bg-zinc-900/40 dark:backdrop-blur-xl p-6 transition-all duration-300 hover:shadow-xl overflow-hidden",
+      connected
+        ? "border border-sky-400 dark:border-sky-500/30"
+        : "border border-border dark:border-zinc-800/60 hover:border-zinc-300 dark:hover:border-zinc-700/60"
+    )}>
       {/* Subtle background glow based on status */}
       {connected ? (
         <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full blur-[80px] bg-gradient-to-tr from-sky-500/20 to-sky-600/20 opacity-30" />
@@ -53,14 +59,14 @@ export function TelegramConnect({ initialConnected, initialBotLabel }: TelegramC
       {/* Header */}
       <div className="flex items-start justify-between mb-6 relative z-10">
         <div className="flex gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-500/10 border border-sky-500/20 dark:border-sky-500/10 text-sky-600 dark:text-sky-400">
             <Bot className="h-6 w-6" strokeWidth={1.5} />
           </div>
           <div className="flex flex-col gap-1 items-start justify-center">
             <p className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight">Telegram</p>
             {connected ? (
-              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-sky-500" />
                 Conectado {botLabel && `· ${botLabel}`}
               </span>
             ) : (
@@ -143,7 +149,7 @@ export function TelegramConnect({ initialConnected, initialBotLabel }: TelegramC
           </p>
           <button
             onClick={() => setShowForm(true)}
-            className="w-full rounded-lg border border-sky-500/30 bg-sky-500/10 px-3 py-2 text-xs text-sky-400 hover:bg-sky-500/15 hover:border-sky-500/50 transition-all font-medium"
+            className="w-full rounded-lg border border-sky-500/30 bg-sky-500/10 px-3 py-2 text-xs text-sky-600 dark:text-sky-400 hover:bg-sky-500/15 hover:border-sky-500/50 transition-all font-semibold"
           >
             Conectar bot Telegram
           </button>

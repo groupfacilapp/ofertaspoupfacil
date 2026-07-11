@@ -78,7 +78,7 @@ export default async function CanaisPage() {
       </div>
 
       {/* Safety guide */}
-      <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 backdrop-blur-md p-6 shadow-[0_0_20px_-5px_rgba(245,158,11,0.1)] relative overflow-hidden">
+      <div className="rounded-2xl border border-amber-400 dark:border-amber-500/20 bg-amber-500/5 dark:backdrop-blur-md p-6 shadow-[0_0_20px_-5px_rgba(245,158,11,0.1)] relative overflow-hidden">
         <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-amber-500/10 blur-[40px]" />
         <div className="flex items-center gap-3 mb-4 relative z-10">
           <div className="rounded-lg bg-amber-500/20 p-2">
@@ -93,7 +93,7 @@ export default async function CanaisPage() {
             <span className="h-1.5 w-1.5 rounded-full bg-amber-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
             <span className="leading-relaxed">
               Use um número{' '}
-              <strong className="text-zinc-200">dedicado</strong> para disparos — não
+              <strong className="text-foreground dark:text-zinc-200">dedicado</strong> para disparos — não
               seu WhatsApp pessoal.
             </span>
           </li>
@@ -101,7 +101,7 @@ export default async function CanaisPage() {
             <span className="h-1.5 w-1.5 rounded-full bg-amber-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
             <span className="leading-relaxed">
               Disparos são feitos{' '}
-              <strong className="text-zinc-200">somente em grupos</strong> dos quais seu
+              <strong className="text-foreground dark:text-zinc-200">somente em grupos</strong> dos quais seu
               número já é membro.
             </span>
           </li>
@@ -109,7 +109,7 @@ export default async function CanaisPage() {
             <span className="h-1.5 w-1.5 rounded-full bg-amber-500 mt-2 shrink-0 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
             <span className="leading-relaxed">
               O sistema tem{' '}
-              <strong className="text-zinc-200">rate limiting automático</strong> — respeite
+              <strong className="text-foreground dark:text-zinc-200">rate limiting automático</strong> — respeite
               os limites para evitar banimento.
             </span>
           </li>
@@ -129,17 +129,17 @@ export default async function CanaisPage() {
       </div>
 
       {/* Instance info */}
-      <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 backdrop-blur-md p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-zinc-100 dark:hover:bg-zinc-900/60 hover:border-zinc-300 dark:hover:border-zinc-700/60 transition-colors">
+      <div className="rounded-2xl border border-border dark:border-zinc-800/60 bg-card dark:bg-zinc-900/40 dark:backdrop-blur-md p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-zinc-50 dark:hover:bg-zinc-900/60 hover:border-zinc-300 dark:hover:border-zinc-700/60 transition-colors">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <Info className="h-4 w-4 text-zinc-500 group-hover:text-indigo-400 transition-colors" />
-            <p className="text-sm font-bold text-zinc-400 tracking-wide uppercase group-hover:text-zinc-300 transition-colors">Sua Instância na API</p>
+            <p className="text-sm font-bold text-zinc-500 dark:text-zinc-400 tracking-wide uppercase group-hover:text-zinc-300 transition-colors">Sua Instância na API</p>
           </div>
           <p className="text-xs text-zinc-500">
             Use este ID para identificar sua conexão no painel avançado se necessário.
           </p>
         </div>
-        <div className="bg-zinc-100/80 dark:bg-black/40 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 flex items-center justify-center min-w-[200px]">
+        <div className="bg-zinc-100/80 dark:bg-black/40 border border-border dark:border-zinc-800 rounded-lg px-4 py-3 flex items-center justify-center min-w-[200px]">
           <code className="text-indigo-400 font-mono text-sm tracking-wider font-bold">{instanceName}</code>
         </div>
       </div>

@@ -42,16 +42,18 @@ export function LogoIcon({
 
 export function LogoText({
   size = 'sm',
+  alwaysLight = false,
   className,
 }: {
   size?: LogoSize;
+  alwaysLight?: boolean;
   className?: string;
 }) {
   const s = SIZES[size];
   return (
     <span className={cn('font-bold tracking-tight leading-none', s.text, className)}>
       <span className="text-brand-400">{BRAND.namePart1}</span>
-      <span className="text-foreground">{BRAND.namePart2}</span>
+      <span className={alwaysLight ? 'text-white' : 'text-foreground'}>{BRAND.namePart2}</span>
     </span>
   );
 }
@@ -61,17 +63,19 @@ export function LogoText({
 export function Logo({
   size = 'sm',
   showText = true,
+  alwaysLight = false,
   className,
 }: {
   size?: LogoSize;
   showText?: boolean;
+  alwaysLight?: boolean;
   className?: string;
 }) {
   const s = SIZES[size];
   return (
     <div className={cn('flex items-center', s.gap, className)}>
       <LogoIcon size={size} />
-      {showText && <LogoText size={size} />}
+      {showText && <LogoText size={size} alwaysLight={alwaysLight} />}
     </div>
   );
 }

@@ -38,19 +38,6 @@
   --color-indigo-800: #9a3412;
   --color-indigo-900: #7c2d12;
   --color-indigo-950: #431407;
-
-  /* Map zinc variables dynamically for automatic light/dark adaptivity */
-  --color-zinc-50: var(--zinc-50);
-  --color-zinc-100: var(--zinc-100);
-  --color-zinc-200: var(--zinc-200);
-  --color-zinc-300: var(--zinc-300);
-  --color-zinc-400: var(--zinc-400);
-  --color-zinc-500: var(--zinc-500);
-  --color-zinc-600: var(--zinc-600);
-  --color-zinc-700: var(--zinc-700);
-  --color-zinc-800: var(--zinc-800);
-  --color-zinc-900: var(--zinc-900);
-  --color-zinc-950: var(--zinc-950);
 }
 
 @theme inline {
@@ -97,19 +84,6 @@
 }
 
 :root {
-  --zinc-50: #fafafa;
-  --zinc-100: #f4f4f5;
-  --zinc-205: #e4e4e7;
-  --zinc-200: #e4e4e7;
-  --zinc-300: #d4d4d8;
-  --zinc-400: #52525b; /* zinc-600 */
-  --zinc-500: #3f3f46; /* zinc-700 */
-  --zinc-600: #27272a; /* zinc-800 */
-  --zinc-700: #18181b; /* zinc-900 */
-  --zinc-800: #e4e4e7; /* border */
-  --zinc-900: #f4f4f5; /* card bg */
-  --zinc-950: #ffffff; /* root/sidebar bg */
-
   --background: #ffffff;
   --foreground: #09090b;
   --card: #ffffff;
@@ -145,18 +119,6 @@
 }
 
 .dark {
-  --zinc-50: #09090b;
-  --zinc-100: #18181b;
-  --zinc-200: #27272a;
-  --zinc-300: #3f3f46;
-  --zinc-400: #a1a1aa;
-  --zinc-500: #71717a;
-  --zinc-600: #a1a1aa;
-  --zinc-700: #d4d4d8;
-  --zinc-800: #27272a;
-  --zinc-900: #18181b;
-  --zinc-950: #09090b;
-
   --background: #09090b;
   --foreground: #fafafa;
   --card: #18181b;

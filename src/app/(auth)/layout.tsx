@@ -52,7 +52,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="relative z-10 flex flex-col h-full px-10 py-10">
           {/* Logo */}
           <Link href="/" className="w-fit">
-            <Logo size="sm" />
+            <Logo size="sm" alwaysLight />
           </Link>
 
           {/* Main copy */}

@@ -42,6 +42,9 @@ const MARKETPLACE_COLORS: Record<string, string> = {
   mercadolivre: 'bg-yellow-500/10 text-amber-600 dark:text-yellow-400 border-yellow-500/20 dark:border-yellow-500/10',
   shopee: 'bg-red-500/10 text-red-650 dark:text-red-400 border-red-500/20 dark:border-red-500/10',
   aliexpress: 'bg-rose-500/10 text-rose-650 dark:text-rose-400 border-rose-500/20 dark:border-rose-500/10',
+  kabum: 'bg-blue-500/10 text-blue-650 dark:text-blue-400 border-blue-500/20 dark:border-blue-500/10',
+  temu: 'bg-orange-500/10 text-orange-655 dark:text-orange-400 border-orange-500/20 dark:border-orange-500/10',
+  shein: 'bg-zinc-950/10 dark:bg-zinc-800/60 text-zinc-900 dark:text-zinc-300 border-zinc-950/20 dark:border-zinc-800/10',
 };
 
 const MARKETPLACE_SHORT: Record<string, string> = {
@@ -49,6 +52,9 @@ const MARKETPLACE_SHORT: Record<string, string> = {
   mercadolivre: 'ML',
   shopee: 'SHP',
   aliexpress: 'ALI',
+  kabum: 'KBM',
+  temu: 'TEMU',
+  shein: 'SHN',
 };
 
 export function GroupCard({ group, onEdit }: GroupCardProps) {

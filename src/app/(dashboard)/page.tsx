@@ -31,6 +31,8 @@ const MARKETPLACE_LABELS: Record<string, string> = {
   shopee: 'Shopee',
   aliexpress: 'AliExpress',
   kabum: 'KaBuM!',
+  temu: 'Temu',
+  shein: 'Shein',
 };
 
 const MARKETPLACE_BAR_COLORS: Record<string, string> = {
@@ -39,6 +41,8 @@ const MARKETPLACE_BAR_COLORS: Record<string, string> = {
   shopee: 'bg-red-500',
   aliexpress: 'bg-rose-500',
   kabum: 'bg-blue-500',
+  temu: 'bg-orange-600',
+  shein: 'bg-zinc-800',
 };
 
 const WEEKDAY_LABELS_PT = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
@@ -317,7 +321,9 @@ export default async function DashboardPage() {
                     mp === 'mercadolivre' ? 'bg-gradient-to-r from-yellow-300 to-amber-400 shadow-[0_0_10px_rgba(253,224,71,0.3)]' :
                     mp === 'shopee' ? 'bg-gradient-to-r from-rose-400 to-red-500 shadow-[0_0_10px_rgba(244,63,94,0.3)]' :
                     mp === 'aliexpress' ? 'bg-gradient-to-r from-pink-500 to-rose-600 shadow-[0_0_10px_rgba(236,72,153,0.3)]' :
-                    'bg-gradient-to-r from-blue-400 to-cyan-500 shadow-[0_0_10px_rgba(56,189,248,0.3)]';
+                    mp === 'kabum' ? 'bg-gradient-to-r from-blue-400 to-cyan-500 shadow-[0_0_10px_rgba(56,189,248,0.3)]' :
+                    mp === 'temu' ? 'bg-gradient-to-r from-orange-500 to-red-500 shadow-[0_0_10px_rgba(249,115,22,0.3)]' :
+                    'bg-gradient-to-r from-zinc-600 to-zinc-800 shadow-[0_0_10px_rgba(0,0,0,0.15)]';
 
                   return (
                     <div key={mp} className="space-y-2 group">

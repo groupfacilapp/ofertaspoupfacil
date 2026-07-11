@@ -48,6 +48,8 @@ const MARKETPLACE_LABEL: Record<string, string> = {
   shopee: 'Shopee',
   aliexpress: 'AliExpress',
   kabum: 'KaBuM!',
+  temu: 'Temu',
+  shein: 'Shein',
 };
 
 const MARKETPLACE_COLOR: Record<string, string> = {
@@ -56,6 +58,8 @@ const MARKETPLACE_COLOR: Record<string, string> = {
   shopee: 'bg-red-500/10 text-red-650 dark:text-red-400 border border-red-500/20 dark:border-red-500/10',
   aliexpress: 'bg-rose-500/10 text-rose-650 dark:text-rose-400 border border-rose-500/20 dark:border-rose-500/10',
   kabum: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/10',
+  temu: 'bg-orange-500/10 text-orange-655 dark:text-orange-400 border border-orange-500/20 dark:border-orange-500/10',
+  shein: 'bg-zinc-950/10 dark:bg-zinc-800/60 text-zinc-900 dark:text-zinc-300 border border-zinc-950/20 dark:border-zinc-800/10',
 };
 
 const ALL_MARKETPLACE_OPTIONS = [
@@ -64,6 +68,8 @@ const ALL_MARKETPLACE_OPTIONS = [
   { value: 'shopee', label: 'Shopee' },
   { value: 'aliexpress', label: 'AliExpress' },
   { value: 'kabum', label: 'KaBuM!' },
+  { value: 'temu', label: 'Temu' },
+  { value: 'shein', label: 'Shein' },
 ] as const;
 
 const ML_CATEGORIES = [
@@ -90,6 +96,8 @@ const MP_LABEL: Record<string, string> = {
   shopee: 'Shopee',
   aliexpress: 'AliExpress',
   kabum: 'KaBuM!',
+  temu: 'Temu',
+  shein: 'Shein',
 };
 
 function formatPrice(cents: number): string {

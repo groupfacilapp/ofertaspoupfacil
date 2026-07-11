@@ -18,6 +18,8 @@ import '@/lib/connectors/mercadolivre';
 import '@/lib/connectors/shopee';
 import '@/lib/connectors/aliexpress';
 import '@/lib/connectors/kabum';
+import '@/lib/connectors/temu';
+import '@/lib/connectors/shein';
 
 export async function sendProduct(
   offerId: string,
@@ -272,7 +274,7 @@ export async function clearSentProducts(): Promise<{ deleted: number; error?: st
 
 // ─── Manual product search ────────────────────────────────────────────────────
 
-type SingleMarketplace = 'amazon' | 'mercadolivre' | 'shopee' | 'aliexpress' | 'kabum';
+type SingleMarketplace = 'amazon' | 'mercadolivre' | 'shopee' | 'aliexpress' | 'kabum' | 'temu' | 'shein';
 
 async function fetchAndUpsertOffers(
   userId: string,

@@ -1,7 +1,9 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
+import { useTheme } from 'next-themes';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { LogOut, ChevronDown } from 'lucide-react';
+import { LogOut, ChevronDown, Sun, Moon } from 'lucide-react';
 
 interface TopbarProps {
   userEmail?: string | null;
@@ -19,6 +21,12 @@ interface TopbarProps {
 
 export function Topbar({ userEmail, userDisplayName }: TopbarProps) {
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleLogout = async () => {
     const supabase = createClient();
@@ -36,11 +44,20 @@ export function Topbar({ userEmail, userDisplayName }: TopbarProps) {
     .slice(0, 2);
 
   return (
-    <header className="flex h-14 items-center justify-end border-b border-zinc-800/60 bg-zinc-950 px-5">
+    <header className="flex h-14 items-center justify-end border-b border-zinc-200 dark:border-zinc-800/60 bg-white dark:bg-zinc-950 px-5">
+      {mounted && (
+        <button
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          className="mr-3 flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/30 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all active:scale-95 outline-none"
+          title="Alternar tema"
+        >
+          {theme === 'dark' ? <Sun className="h-4 w-4 text-orange-400" /> : <Moon className="h-4 w-4 text-orange-500" />}
+        </button>
+      )}
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-sm text-zinc-300 hover:bg-zinc-800/60 hover:text-zinc-100 transition-colors outline-none">
+        <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-sm text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900/60 hover:text-zinc-950 dark:hover:text-zinc-100 transition-colors outline-none">
           <Avatar className="h-6 w-6">
-            <AvatarFallback className="bg-indigo-600 text-white text-[10px] font-semibold">
+            <AvatarFallback className="bg-brand-500 text-white text-[10px] font-semibold">
               {initials}
             </AvatarFallback>
           </Avatar>

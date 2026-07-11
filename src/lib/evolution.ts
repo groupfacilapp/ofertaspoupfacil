@@ -48,13 +48,29 @@ export class EvolutionClient implements WhatsAppClient {
     return { instanceName, status: 'disconnected' };
   }
 
-  // providerToken is unused by Evolution (global apikey is used instead)
   async fetchQRCode(instanceName: string, _providerToken?: string): Promise<{ base64: string }> {
-    return this.req(`/instance/connect/${instanceName}`);
+    const res = await this.req<{ base64?: string; code?: string }>(`/instance/connect/${instanceName}`);
+    const qr = res.base64 || res.code || '';
+    return { base64: qr };
   }
 
   async getConnectionState(instanceName: string, _providerToken?: string): Promise<{ instance: { state: ConnectionState } }> {
-    return this.req(`/instance/connectionState/${instanceName}`);
+    const res = await this.req<any>(`/instance/connectionState/${instanceName}`).catch(() => ({}));
+    
+    // Normalise response format
+    const inst = res?.instance || res || {};
+    const rawState = (inst.state || inst.status || '').toLowerCase();
+    
+    let state: ConnectionState = 'close';
+    if (rawState === 'open' || rawState === 'connected') {
+      state = 'open';
+    } else if (rawState === 'connecting' || rawState === 'qr_pending') {
+      state = 'connecting';
+    }
+
+    return {
+      instance: { state }
+    };
   }
 
   async logoutInstance(instanceName: string, _providerToken?: string): Promise<void> {

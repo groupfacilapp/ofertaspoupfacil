@@ -61,7 +61,7 @@ export class EvolutionClient implements WhatsAppClient {
     await this.req(`/instance/logout/${instanceName}`, { method: 'DELETE' });
   }
 
-  async getAllInstances() {
+  async getAllInstances(): Promise<Array<{ name: string; state: ConnectionState; phoneNumber?: string }>> {
     const res = await this.req<any[]>('/instance/fetchInstances');
     
     if (!Array.isArray(res)) return [];
@@ -75,12 +75,22 @@ export class EvolutionClient implements WhatsAppClient {
       if (inst.owner) {
         phoneNumber = inst.owner.split('@')[0];
       }
+
+      // Map raw API state to type-safe ConnectionState
+      const rawState = (inst.state || inst.status || '').toLowerCase();
+      let state: ConnectionState = 'close';
+      if (rawState === 'open' || rawState === 'connected') {
+        state = 'open';
+      } else if (rawState === 'connecting' || rawState === 'qr_pending') {
+        state = 'connecting';
+      }
+
       return {
         name: inst.instanceName || inst.name,
-        state: inst.state || inst.status,
+        state,
         phoneNumber
       };
-    }).filter((item): item is { name: string; state: string; phoneNumber?: string } => 
+    }).filter((item): item is { name: string; state: ConnectionState; phoneNumber?: string } => 
       item !== null && typeof item.name === 'string'
     );
   }

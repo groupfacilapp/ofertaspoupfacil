@@ -25,10 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark">
-      <body
-        className={`${outfitFont.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="pt-BR" className={`dark ${outfitFont.variable} ${geistMono.variable}`}>
+      <body className="antialiased">
         {children}
         <Toaster richColors position="bottom-right" />
       </body>

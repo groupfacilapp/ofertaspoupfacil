@@ -87,20 +87,21 @@ export function parseMercadoLivreHTML(html: string): Array<{
 
     if (!titulo || !href) return;
 
-    // Walk up max 12 levels (increased for search results) to find the card
+    // Walk up to the main card container
     let $card = $title.parent();
-    let foundPrice = false;
-    for (let depth = 0; depth < 12; depth++) {
-      if ($card.find('.andes-money-amount').length > 0) {
-        foundPrice = true;
-        break;
-      }
-      const $parent = $card.parent();
-      if (!$parent.length || $parent.is('body')) break;
-      $card = $parent;
+    while (
+      $card.length > 0 &&
+      !$card.hasClass('poly-card') &&
+      !$card.hasClass('ui-search-result') &&
+      !$card.hasClass('andes-card') &&
+      !$card.is('body')
+    ) {
+      $card = $card.parent();
     }
 
-    if (!foundPrice) return;
+    if (!$card.length || $card.is('body')) {
+      $card = $title.parent();
+    }
 
     // Skip sponsored/tracking URL products — they can't be affiliate-linked
     const isTrackingUrl = href.includes('click1.mercadolivre.com.br') ||
@@ -109,23 +110,13 @@ export function parseMercadoLivreHTML(html: string): Array<{
 
     const link = stripQueryParams(href);
 
-    // Find the price container. It usually exists within the same poly-card structure.
-    const $priceContainer = $title.closest('.poly-card__content, .poly-card, .ui-search-result__content-wrapper').length > 0
-      ? $title.closest('.poly-card__content, .poly-card, .ui-search-result__content-wrapper')
-      : $card;
-
-    // Image is typically in a sibling container (poly-card__portada) or within poly-component__picture
-    const imgEl = $title.closest('.poly-card').find('img.poly-component__picture').first().length > 0
-      ? $title.closest('.poly-card').find('img.poly-component__picture').first()
-      : $priceContainer.find('img.poly-component__picture').first();
-    
-    // ML lazy-loads: real URL is in data-src; src may be a 1x1 placeholder data: URI
+    // Find the image element inside the card container
+    const imgEl = $card.find('img').first();
     const imgSrc = imgEl.attr('data-src') || imgEl.attr('src') || null;
     const imagemClean = imgSrc && !imgSrc.startsWith('data:') ? imgSrc : null;
 
-    // Use sub-elements to build price string — avoids superscript concatenation issue
-    // where .text() returns "1.09499" instead of "1.094,99"
-    const $priceEl = $priceContainer
+    // Find the price container inside the card container
+    const $priceEl = $card
       .find('.andes-money-amount.andes-money-amount--cents-superscript')
       .first();
     
@@ -133,7 +124,7 @@ export function parseMercadoLivreHTML(html: string): Array<{
     const pCents = $priceEl.find('.andes-money-amount__cents').first().text().replace(/\D/g, '').slice(0, 2).padEnd(2, '0');
     const preco_atual = pFraction ? `${pFraction}.${pCents}` : '';
 
-    const $oldPriceEl = $priceContainer
+    const $oldPriceEl = $card
       .find('.andes-money-amount.andes-money-amount--previous')
       .first();
     const oFraction = $oldPriceEl.find('.andes-money-amount__fraction').first().text().replace(/\./g, '').replace(/\D/g, '');
@@ -141,14 +132,14 @@ export function parseMercadoLivreHTML(html: string): Array<{
     const preco_antigo = oFraction ? `${oFraction}.${oCents}` : null;
 
     const desconto =
-      $priceContainer
+      $card
         .find('.andes-money-amount__discount')
         .first()
         .text()
         .trim() || null;
 
     const parcelamento = formatInstallment(
-      $priceContainer.find('.poly-price__installments, .ui-search-item__group__element.ui-search-installments').first().text().trim()
+      $card.find('.poly-price__installments, .ui-search-item__group__element.ui-search-installments').first().text().trim()
     );
 
     if (!preco_atual) return;

@@ -66,13 +66,18 @@ export class EvolutionClient implements WhatsAppClient {
     
     if (!Array.isArray(res)) return [];
 
-    return res.map(row => {
-      if (!row) return null;
+    const instances: Array<{ name: string; state: ConnectionState; phoneNumber?: string }> = [];
+
+    for (const row of res) {
+      if (!row) continue;
       const inst = row.instance || row;
-      if (!inst) return null;
+      if (!inst) continue;
+
+      const name = inst.instanceName || inst.name;
+      if (!name || typeof name !== 'string') continue;
 
       let phoneNumber = undefined;
-      if (inst.owner) {
+      if (inst.owner && typeof inst.owner === 'string') {
         phoneNumber = inst.owner.split('@')[0];
       }
 
@@ -85,14 +90,14 @@ export class EvolutionClient implements WhatsAppClient {
         state = 'connecting';
       }
 
-      return {
-        name: inst.instanceName || inst.name,
+      instances.push({
+        name,
         state,
         phoneNumber
-      };
-    }).filter((item): item is { name: string; state: ConnectionState; phoneNumber?: string } => 
-      item !== null && typeof item.name === 'string'
-    );
+      });
+    }
+
+    return instances;
   }
 
   async deleteInstance(instanceName: string, _providerToken?: string): Promise<void> {

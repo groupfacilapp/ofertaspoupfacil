@@ -86,13 +86,13 @@ function NavLinks({
               'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-150',
               isActive
                 ? 'bg-indigo-600/10 dark:bg-indigo-600/15 text-indigo-600 dark:text-indigo-300 border border-indigo-250 dark:border-indigo-500/20'
-                : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 hover:text-zinc-900 dark:hover:text-zinc-200 border border-transparent'
+                : 'text-zinc-700 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 hover:text-zinc-950 dark:hover:text-zinc-200 border border-transparent'
             )}
           >
             <Icon
               className={cn(
                 'h-4 w-4 shrink-0',
-                isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-zinc-450 dark:text-zinc-500'
+                isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-zinc-500 dark:text-zinc-550'
               )}
             />
             {item.label}
@@ -216,7 +216,7 @@ export function DashboardShell({
             onClick={closeMobile}
             className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800/60 hover:border-indigo-400 dark:hover:border-indigo-500/30 hover:bg-indigo-50/20 dark:hover:bg-indigo-500/5 transition-all group"
           >
-            <span className="text-[11px] text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
+            <span className="text-[11px] text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-800 dark:group-hover:text-zinc-300">
               {planLabel}
             </span>
             <span className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-700 dark:group-hover:text-indigo-350">
@@ -232,11 +232,11 @@ export function DashboardShell({
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-200 truncate">{displayName}</p>
-            {userEmail && <p className="text-[10px] text-zinc-500 dark:text-zinc-650 truncate">{userEmail}</p>}
+            {userEmail && <p className="text-[10px] text-zinc-600 dark:text-zinc-500 truncate">{userEmail}</p>}
           </div>
           <button
             onClick={handleLogout}
-            className="text-zinc-400 dark:text-zinc-700 hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors p-1 rounded"
+            className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors p-1 rounded"
             title="Sair"
           >
             <LogOut className="h-3.5 w-3.5" />
@@ -247,9 +247,9 @@ export function DashboardShell({
   }
 
   return (
-    <div className="flex h-screen bg-zinc-50 dark:bg-[#0a0a0c] p-3 md:p-4 gap-4 transition-colors duration-300">
+    <div className="flex h-screen bg-background p-3 md:p-4 gap-4 transition-colors duration-300">
       {/* Desktop sidebar - Floating Glassmorphic */}
-      <aside className="hidden md:flex w-[260px] flex-col rounded-2xl bg-white/70 dark:bg-zinc-900/40 backdrop-blur-xl border border-zinc-200/80 dark:border-zinc-800/60 h-full shrink-0 shadow-2xl relative overflow-hidden transition-all duration-300">
+      <aside className="hidden md:flex w-[260px] flex-col rounded-2xl bg-card dark:bg-zinc-900/40 dark:backdrop-blur-xl border border-border dark:border-zinc-800/60 h-full shrink-0 shadow-2xl relative overflow-hidden transition-all duration-300">
         {/* Subtle top glow */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
         
@@ -274,7 +274,7 @@ export function DashboardShell({
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={closeMobile}
           />
-          <aside className="absolute left-3 top-3 bottom-3 w-64 bg-white/95 dark:bg-zinc-900/90 backdrop-blur-xl rounded-2xl border border-zinc-200/80 dark:border-zinc-800/60 flex flex-col overflow-hidden shadow-2xl transition-all duration-300">
+          <aside className="absolute left-3 top-3 bottom-3 w-64 bg-card dark:bg-zinc-900/90 dark:backdrop-blur-xl rounded-2xl border border-border dark:border-zinc-800/60 flex flex-col overflow-hidden shadow-2xl transition-all duration-300">
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
             
             {/* Logo + close */}
@@ -298,7 +298,7 @@ export function DashboardShell({
       {/* Main content wrapper */}
       <div className="flex flex-col flex-1 overflow-hidden min-w-0 gap-4">
         {/* Floating Topbar */}
-        <header className="flex h-16 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/60 bg-white/60 dark:bg-zinc-900/30 backdrop-blur-xl items-center justify-between px-5 shrink-0 shadow-lg transition-all duration-300">
+        <header className="flex h-16 rounded-2xl border border-border dark:border-zinc-800/60 bg-card dark:bg-zinc-900/30 dark:backdrop-blur-xl items-center justify-between px-5 shrink-0 shadow-lg transition-all duration-300">
           {/* Mobile: hamburger + logo */}
           <div className="flex items-center gap-4 md:hidden">
             <button
@@ -318,7 +318,7 @@ export function DashboardShell({
           {mounted && (
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="mr-2 flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-white/60 dark:bg-zinc-900/30 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all active:scale-95 outline-none"
+              className="mr-2 flex h-9 w-9 items-center justify-center rounded-xl border border-border dark:border-zinc-800/60 bg-card dark:bg-zinc-900/30 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all active:scale-95 outline-none"
               title="Alternar tema"
             >
               {theme === 'dark' ? (

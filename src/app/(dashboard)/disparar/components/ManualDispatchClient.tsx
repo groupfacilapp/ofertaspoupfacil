@@ -42,10 +42,10 @@ function ProductPreview({ offer }: { offer: NormalizedOffer }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 overflow-hidden">
+    <div className="rounded-xl border border-border bg-card dark:bg-zinc-900/60 overflow-hidden">
       <div className="flex gap-4 p-4">
         {/* Image */}
-        <div className="flex-shrink-0 h-24 w-24 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+        <div className="flex-shrink-0 h-24 w-24 rounded-lg overflow-hidden bg-zinc-50 dark:bg-zinc-800/60 border border-border dark:border-zinc-800 flex items-center justify-center">
           {offer.imageUrl && !imgError ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -61,7 +61,7 @@ function ProductPreview({ offer }: { offer: NormalizedOffer }) {
 
         {/* Info */}
         <div className="flex-1 min-w-0 space-y-1.5">
-          <p className="text-sm font-medium text-zinc-100 leading-snug line-clamp-2">{offer.title}</p>
+          <p className="text-sm font-semibold text-foreground dark:text-zinc-100 leading-snug line-clamp-2">{offer.title}</p>
 
           <div className="flex items-baseline gap-2 flex-wrap">
             <span className="text-xl font-bold text-zinc-900 dark:text-white">R$ {fmt(offer.currentPrice)}</span>

@@ -356,7 +356,7 @@ export function ProdutosClient({
     });
   }
 
-  const selectClass = 'rounded-lg border border-zinc-800 bg-zinc-800/60 px-3 py-2 text-sm text-zinc-100 outline-none focus:border-indigo-500/60 transition-colors';
+  const selectClass = 'rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground outline-none focus:border-indigo-500/60 transition-colors';
 
   return (
     <div className="max-w-7xl space-y-6">
@@ -371,11 +371,11 @@ export function ProdutosClient({
       )}
 
       {/* ── Buscar Produtos ─────────────────────────────────────────── */}
-      <section className="relative overflow-hidden rounded-2xl border border-zinc-800/60 bg-zinc-900/40 backdrop-blur-xl shadow-xl">
-        <div className="px-6 py-5 border-b border-zinc-800/60 flex items-center gap-2 relative z-10 bg-black/20">
+      <section className="relative overflow-hidden rounded-2xl border border-border bg-card dark:bg-zinc-900/40 dark:backdrop-blur-xl shadow-xl">
+        <div className="px-6 py-5 border-b border-border flex items-center gap-2 relative z-10 bg-zinc-100/30 dark:bg-black/20">
           <Search className="h-5 w-5 text-indigo-400" />
-          <h2 className="text-base font-bold text-white tracking-tight">Buscar Produtos</h2>
-          <span className="text-xs font-medium text-zinc-500 ml-2 bg-zinc-800/50 px-2 py-0.5 rounded-full border border-zinc-700/50">busca manual sob demanda</span>
+          <h2 className="text-base font-bold text-foreground dark:text-white tracking-tight">Buscar Produtos</h2>
+          <span className="text-xs font-medium text-muted-foreground ml-2 bg-zinc-100 dark:bg-zinc-800/50 px-2 py-0.5 rounded-full border border-border dark:border-zinc-700/50">busca manual sob demanda</span>
         </div>
         <div className="p-6 space-y-5 relative z-10">
           <div className="flex flex-wrap gap-3 items-end">
@@ -412,7 +412,7 @@ export function ProdutosClient({
                 onChange={(e) => setSearchKeyword(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                 placeholder="Ex: fone bluetooth, smartwatch..."
-                className="w-full rounded-lg border border-zinc-800 bg-zinc-800/60 px-4 py-2 text-sm text-zinc-100 placeholder:text-zinc-600 outline-none focus:border-indigo-500/60 transition-colors"
+                className="w-full rounded-lg border border-border bg-card px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-indigo-500/60 transition-colors"
               />
             </div>
 
@@ -453,7 +453,7 @@ export function ProdutosClient({
                 className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
                   searchQuickFilter === key
                     ? 'bg-indigo-600/20 text-indigo-300 border-indigo-500/30'
-                    : 'bg-zinc-800/40 text-zinc-500 border-zinc-700/40 hover:text-zinc-300 hover:border-zinc-600/60'
+                    : 'bg-zinc-100 dark:bg-zinc-800/40 text-muted-foreground border-border dark:border-zinc-700/40 hover:text-foreground dark:hover:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-600/60'
                 }`}
               >
                 {label}
@@ -468,8 +468,8 @@ export function ProdutosClient({
       </section>
 
       {/* ── Fila de Disparo ─────────────────────────────────────────── */}
-      <section className="relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50/80 dark:bg-zinc-900/40 backdrop-blur-xl shadow-xl">
-        <div className="px-6 py-5 border-b border-zinc-200 dark:border-zinc-800/60 flex items-center justify-between relative z-10 bg-zinc-50/50 dark:bg-black/20">
+      <section className="relative overflow-hidden rounded-2xl border border-border bg-card dark:bg-zinc-900/40 dark:backdrop-blur-xl shadow-xl">
+        <div className="px-6 py-5 border-b border-border flex items-center justify-between relative z-10 bg-zinc-100/30 dark:bg-black/20">
           <div className="flex items-center gap-2">
             <Package className="h-5 w-5 text-indigo-400" />
             <h2 className="text-base font-bold text-zinc-900 dark:text-white tracking-tight">Fila de Disparo</h2>
@@ -505,7 +505,7 @@ export function ProdutosClient({
         <div className="p-6 space-y-6 relative z-10">
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/40 bg-zinc-50 dark:bg-black/20 backdrop-blur-sm p-4 relative overflow-hidden group">
+            <div className="rounded-xl border border-border bg-zinc-100/40 dark:bg-black/20 backdrop-blur-sm p-4 relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
               <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider mb-1 relative z-10">Total na fila</p>
               <p className="text-2xl font-bold text-zinc-900 dark:text-white relative z-10">{currentStats.total}</p>
@@ -536,7 +536,7 @@ export function ProdutosClient({
                   className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
                     statusFilter === key
                       ? 'bg-indigo-600/15 text-indigo-300 border-indigo-500/20'
-                      : 'bg-zinc-100 dark:bg-zinc-800/40 text-zinc-500 border-zinc-200 dark:border-zinc-700/40 hover:text-zinc-700 dark:hover:text-zinc-300'
+                      : 'bg-zinc-100 dark:bg-zinc-800/40 text-muted-foreground border-border dark:border-zinc-700/40 hover:text-foreground dark:hover:text-zinc-300 hover:border-zinc-400'
                   }`}
                 >
                   {label}
@@ -554,7 +554,7 @@ export function ProdutosClient({
                   className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
                     marketplaceFilter === mp
                       ? 'bg-indigo-600/15 text-indigo-300 border-indigo-500/20'
-                      : 'bg-zinc-100 dark:bg-zinc-800/40 text-zinc-500 border-zinc-200 dark:border-zinc-700/40 hover:text-zinc-700 dark:hover:text-zinc-300'
+                      : 'bg-zinc-100 dark:bg-zinc-800/40 text-muted-foreground border-border dark:border-zinc-700/40 hover:text-foreground dark:hover:text-zinc-300 hover:border-zinc-400'
                   }`}
                 >
                   {MARKETPLACE_LABEL[mp] ?? mp}
@@ -801,12 +801,12 @@ function ProductCard({
   const mpColor = MARKETPLACE_COLOR[product.marketplace] ?? 'bg-zinc-100 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/40';
 
   return (
-    <div className={`relative group overflow-hidden rounded-2xl border bg-zinc-50 dark:bg-zinc-900/40 backdrop-blur-xl transition-all duration-300 hover:border-indigo-500/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.1)] flex flex-col ${isSelected ? 'border-indigo-500/50 shadow-[0_0_20px_rgba(99,102,241,0.15)]' : 'border-zinc-200 dark:border-zinc-800/60'}`}>
+    <div className={`relative group overflow-hidden rounded-2xl border bg-card dark:bg-zinc-900/40 dark:backdrop-blur-xl transition-all duration-300 hover:border-indigo-500/40 hover:shadow-[0_0_30px_rgba(99,102,241,0.1)] flex flex-col ${isSelected ? 'border-indigo-500/50 shadow-[0_0_20px_rgba(99,102,241,0.15)]' : 'border-border dark:border-zinc-800/60'}`}>
       {/* Ambient background glow on hover */}
       <div className="absolute -inset-24 rounded-[50%] blur-[80px] bg-gradient-to-tr from-indigo-500/0 to-violet-500/0 opacity-0 group-hover:from-indigo-500/10 group-hover:to-violet-500/10 group-hover:opacity-100 transition-all duration-700 pointer-events-none" />
 
       {/* Image */}
-      <div className="h-44 bg-zinc-100/50 dark:bg-black/30 relative flex items-center justify-center overflow-hidden border-b border-zinc-200 dark:border-zinc-800/60 group-hover:bg-zinc-200/50 dark:group-hover:bg-black/40 transition-colors">
+      <div className="h-44 bg-zinc-50 dark:bg-black/30 relative flex items-center justify-center overflow-hidden border-b border-border dark:border-zinc-800/60 group-hover:bg-zinc-100 dark:group-hover:bg-black/40 transition-colors">
         {product.image_url ? (
           <img src={product.image_url} alt={product.title} className="h-full w-full object-contain p-4 mix-blend-screen" />
         ) : (
@@ -853,7 +853,7 @@ function ProductCard({
 
       {/* Content */}
       <div className="p-4 flex flex-col flex-1 relative z-10">
-        <p className="text-xs font-medium text-zinc-200 line-clamp-2 mb-3 leading-relaxed">{product.title}</p>
+        <p className="text-xs font-semibold text-foreground dark:text-zinc-200 line-clamp-2 mb-3 leading-relaxed">{product.title}</p>
 
         {/* Price */}
         <div className="flex items-baseline gap-2 mb-3">
@@ -958,7 +958,7 @@ function ProductListItem({
   const mpColor = MARKETPLACE_COLOR[product.marketplace] ?? 'bg-zinc-100 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/40';
 
   return (
-    <div className={`flex items-center gap-3 px-4 py-3 transition-colors border-b border-zinc-100 dark:border-zinc-800/40 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/20 ${isSelected ? 'bg-indigo-600/5' : 'bg-zinc-50 dark:bg-zinc-900/20'}`}>
+    <div className={`flex items-center gap-3 px-4 py-3 transition-colors border-b border-border hover:bg-zinc-50/50 dark:hover:bg-zinc-800/20 ${isSelected ? 'bg-indigo-600/5' : 'bg-card'}`}>
       {/* Checkbox */}
       <button
         onClick={onToggleSelect}
@@ -982,7 +982,7 @@ function ProductListItem({
       </div>
 
       {/* Title */}
-      <p className="flex-1 min-w-0 text-xs font-medium text-zinc-200 line-clamp-1">{product.title}</p>
+      <p className="flex-1 min-w-0 text-xs font-semibold text-foreground dark:text-zinc-200 line-clamp-1">{product.title}</p>
 
       {/* Marketplace */}
       <span className={`shrink-0 hidden sm:inline-flex text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${mpColor}`}>

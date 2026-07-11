@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import { Outfit, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { BRAND } from "@/config/brand";
 import { Toaster } from "@/components/ui/sonner";
 
-const interFont = Inter({
-  variable: "--font-inter",
+const outfitFont = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="dark">
       <body
-        className={`${interFont.variable} ${geistMono.variable} antialiased`}
+        className={`${outfitFont.variable} ${geistMono.variable} antialiased`}
       >
         {children}
         <Toaster richColors position="bottom-right" />

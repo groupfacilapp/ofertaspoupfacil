@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
+import { Logo } from '@/components/brand/Logo';
 
 const navItems = [
   { label: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -60,15 +61,7 @@ export function Sidebar({ isAdmin, userDisplayName, userEmail, userPlan = 'free'
     <aside className="hidden md:flex w-60 flex-col bg-zinc-950 border-r border-zinc-800/60 h-screen shrink-0">
       {/* Logo */}
       <div className="flex h-14 items-center px-5 border-b border-zinc-800/60">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-600 shadow-md shadow-indigo-500/30">
-            <Zap className="h-4 w-4 text-white" />
-          </div>
-          <span className="text-base font-bold tracking-tight">
-            <span className="text-indigo-400">Dispara</span>
-            <span className="text-white">Zap</span>
-          </span>
-        </div>
+        <Logo size="sm" />
       </div>
 
       {/* Nav */}

@@ -119,69 +119,26 @@ const MARKETPLACE_META = {
   },
 } as const;
 
+const LOGO_URLS: Record<string, string> = {
+  temu: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/temu.png',
+  shopee: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/shopee.png',
+  shein: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/shein.png',
+  mercadolivre: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/mercadolivre.png',
+  kabum: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/kabum_logo.jfif',
+  amazon: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/amazon.png',
+  aliexpress: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/aliexpress.png',
+};
+
 function MarketplaceLogo({ marketplace, className }: { marketplace: string; className?: string }) {
-  if (marketplace === 'amazon') {
-    return (
-      <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M48.2 24.3c-7 0-12.8 2.2-16 6.3-2 2.6-2.5 5.5-2.5 8.7 0 7.8 5 12.2 12.8 12.2 4.4 0 8.2-1.8 11.2-5v3.8c0 4.3-2.3 6.8-6.5 6.8-3.5 0-6.7-1.7-8.3-4.8l-7.7 4.7c3.3 5.8 9.5 8.8 16 8.8 10 0 16.5-5.5 16.5-16.7v-25c-3.2 3.2-7.5 5.2-12.5 5.2zm-2.3 22.8c-4 0-6.2-2.3-6.2-6 0-3.8 2.2-6.2 6.2-6.2 3.8 0 6.2 2.4 6.2 6.2 0 3.7-2.4 6-6.2 6z" fill="#000"/>
-        <path d="M12 70c20 12 45 15 68 8 3.5-1 6.5 2.5 3.5 5-18 14-49 15-70 1-2.5-1.5-4-5-1.5-14z" fill="#ff9900"/>
-        <path d="M82.8 74.2c-1.2-1.5-4-.8-3.2 1.2.8 2 2.2 5 2.2 7 0 1.2-.8 1.8-2 1.8-2 0-6-3-8.8-5.8-1.5-1.5-3.5.5-2.2 2 4.2 4.2 9.5 7.2 12.5 7.2 3 0 5-2 5-5 0-3-1.8-6.2-3.5-8.4z" fill="#ff9900"/>
-      </svg>
-    );
-  }
-  if (marketplace === 'mercadolivre') {
-    return (
-      <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" fill="#FFE600"/>
-        <path d="M30 52c3-4 8-10 13-10s8 3 10 5l12-10c3-2.5 7 1.5 4 4L57 53c-2 2-6 4-9 1s-6-5-9-5c-2 0-5 3-7 5l-2-2z" fill="#2D3280"/>
-        <path d="M70 48c-3 4-8 10-13 10s-8-3-10-5L35 63c-3 2.5-7-1.5-4-4l12-12c2-2 6-4 9-1s6 5 9 5c2 0 5-3 7-5l2 2z" fill="#2D3280"/>
-      </svg>
-    );
-  }
-  if (marketplace === 'shopee') {
-    return (
-      <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="15" y="25" width="70" height="60" rx="12" fill="#EE4D2D"/>
-        <path d="M38 25c0-10 8-15 12-15s12 5 12 15" stroke="#EE4D2D" strokeWidth="8" fill="none"/>
-        <path d="M50 40c-6 0-10 3-10 7s3 6 8 8c6 2 9 4 9 8s-4 7-9 7-9-3-10-6m2-24l16 16" stroke="#fff" strokeWidth="6" strokeLinecap="round" fill="none"/>
-      </svg>
-    );
-  }
-  if (marketplace === 'aliexpress') {
-    return (
-      <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="15" y="25" width="70" height="60" rx="15" fill="#E62E04"/>
-        <path d="M35 30c0-8 6-12 15-12s15 4 15 12" stroke="#fff" strokeWidth="6" fill="none"/>
-        <ellipse cx="50" cy="55" rx="18" ry="12" fill="#fff"/>
-        <ellipse cx="50" cy="50" rx="18" ry="12" fill="#E62E04"/>
-      </svg>
-    );
-  }
-  if (marketplace === 'kabum') {
-    return (
-      <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="10" y="10" width="80" height="80" rx="16" fill="#0060EE"/>
-        <path d="M58 20L32 54h18l-8 32 30-38H52l6-28z" fill="#FFF"/>
-      </svg>
-    );
-  }
-  if (marketplace === 'temu') {
-    return (
-      <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="10" y="10" width="80" height="80" rx="16" fill="#FF5700"/>
-        <path d="M22 30h16M30 30v40M45 42c0-8 6-12 12-12s12 4 12 12v28H45V42zM75 30v40c0 5-3 8-7 8s-7-3-7-8V30" stroke="#FFF" strokeWidth="7" strokeLinecap="round" fill="none"/>
-      </svg>
-    );
-  }
-  if (marketplace === 'shein') {
-    return (
-      <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="10" y="10" width="80" height="80" rx="16" fill="#000000"/>
-        <path d="M60 32c-3-3-8-4-12-4s-10 2-10 6 3 5 8 7c8 3 14 5 14 12s-6 11-14 11c-9 0-14-4-16-9" stroke="#FFF" strokeWidth="8" strokeLinecap="round" fill="none"/>
-      </svg>
-    );
-  }
-  return null;
+  const url = LOGO_URLS[marketplace];
+  if (!url) return null;
+  return (
+    <img
+      src={url}
+      alt={marketplace}
+      className={cn(className, 'w-full h-full object-contain')}
+    />
+  );
 }
 
 function StatusBadge({ status }: { status: MarketplaceStatus }) {

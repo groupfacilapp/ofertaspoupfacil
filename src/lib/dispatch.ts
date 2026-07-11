@@ -196,10 +196,14 @@ export async function dispatchGroup(
       const mlCreds = loadMarketplaceCredentials(mlConn.encrypted_credentials);
       if (mlCreds.cookie_session) {
         const mlConnector = getConnector('mercadolivre');
+        let successCount = 0;
+        let attemptCount = 0;
         for (const offer of mlNullOffers) {
+          attemptCount++;
           try {
             const link = await mlConnector.generateAffiliateLink(offer.productUrl, mlCreds);
             offer.affiliateLink = link;
+            successCount++;
             const dbId = dbIdMap.get(offer.externalId);
             if (dbId) {
               await supabaseAdmin
@@ -209,6 +213,22 @@ export async function dispatchGroup(
             }
           } catch {
             // Keep null — offer will be excluded from freshFromDB count
+          }
+        }
+
+        // If we attempted to generate links but >80% failed, then it's a real cookie expiration!
+        if (attemptCount >= 3) {
+          const failureRate = (attemptCount - successCount) / attemptCount;
+          if (failureRate >= 0.8) {
+            await supabaseAdmin
+              .from('marketplace_connections')
+              .update({
+                is_valid: false,
+                validation_error: 'Cookie de sessão expirado — links de afiliado não estão sendo gerados. Atualize o cookie em Marketplaces.',
+                updated_at: new Date().toISOString(),
+              })
+              .eq('user_id', group.user_id)
+              .eq('marketplace', 'mercadolivre');
           }
         }
       }
@@ -315,22 +335,8 @@ export async function dispatchGroup(
       }
     }
 
-    // Detect expired ML cookie: if >80% of live-fetched ML offers have no affiliate_link, flag it
-    const mlLive = liveOffers.filter((o) => o.marketplace === 'mercadolivre');
-    if (mlLive.length >= 5) {
-      const mlNullCount = mlLive.filter((o) => o.affiliateLink === null).length;
-      if (mlNullCount / mlLive.length >= 0.8) {
-        await supabaseAdmin
-          .from('marketplace_connections')
-          .update({
-            is_valid: false,
-            validation_error: 'Cookie de sessão expirado — links de afiliado não estão sendo gerados. Atualize o cookie em Marketplaces.',
-            updated_at: new Date().toISOString(),
-          })
-          .eq('user_id', group.user_id)
-          .eq('marketplace', 'mercadolivre');
-      }
-    }
+    // Raw live-fetched offers have no affiliate_link by design. The expired cookie check
+    // is now handled dynamically in the link generation step above to avoid false positives.
 
     // Upsert live-fetched offers to DB (adds new + refreshes affiliate_link/expiry on existing)
     if (liveOffers.length > 0) {

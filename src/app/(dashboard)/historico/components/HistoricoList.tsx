@@ -12,11 +12,11 @@ const MARKETPLACE_LABEL: Record<string, string> = {
 };
 
 const MARKETPLACE_COLOR: Record<string, string> = {
-  amazon: 'bg-orange-500/15 text-orange-400 border-orange-500/20',
-  mercadolivre: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/20',
-  shopee: 'bg-red-500/15 text-red-400 border-red-500/20',
-  aliexpress: 'bg-rose-500/15 text-rose-400 border-rose-500/20',
-  kabum: 'bg-blue-500/15 text-blue-400 border-blue-500/20',
+  amazon: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20 dark:border-orange-500/10',
+  mercadolivre: 'bg-yellow-500/10 text-amber-600 dark:text-yellow-400 border-yellow-500/20 dark:border-yellow-500/10',
+  shopee: 'bg-red-500/10 text-red-650 dark:text-red-400 border-red-500/20 dark:border-red-500/10',
+  aliexpress: 'bg-rose-500/10 text-rose-650 dark:text-rose-400 border-rose-500/20 dark:border-rose-500/10',
+  kabum: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20 dark:border-blue-500/10',
 };
 
 function StatusBadge({ status }: { status: string }) {
@@ -107,16 +107,16 @@ function LogRow({ log }: { log: LogEntry }) {
 
         {/* Title + group */}
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-medium text-zinc-200 truncate">
+          <p className="text-xs font-semibold text-foreground dark:text-zinc-200 truncate">
             {log.offer?.title ?? '—'}
           </p>
-          <p className="text-[10px] text-zinc-600 mt-0.5">{log.group_name ?? '—'}</p>
+          <p className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5">{log.group_name ?? '—'}</p>
         </div>
 
         {/* Price */}
         <div className="shrink-0 text-right hidden sm:block">
           {log.offer?.current_price ? (
-            <p className="text-xs font-semibold text-zinc-100">
+            <p className="text-xs font-bold text-foreground dark:text-zinc-100">
               {formatPrice(log.offer.current_price)}
             </p>
           ) : null}
@@ -148,7 +148,7 @@ function LogRow({ log }: { log: LogEntry }) {
 
       {/* Expanded details */}
       {expanded && (
-        <div className="px-4 pb-4 pt-3 bg-zinc-50/80 dark:bg-zinc-900/40 space-y-3">
+        <div className="px-4 pb-4 pt-3 bg-zinc-100/40 dark:bg-zinc-900/40 space-y-3">
           {/* Actions */}
           <div className="flex items-center gap-2 flex-wrap">
             {link && (
@@ -169,8 +169,8 @@ function LogRow({ log }: { log: LogEntry }) {
           </div>
 
           {/* Message preview */}
-          <div className="rounded-lg border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-950/60 px-4 py-3">
-            <pre className="text-xs text-zinc-300 whitespace-pre-wrap font-sans leading-relaxed">
+          <div className="rounded-lg border border-border dark:border-zinc-800/60 bg-card dark:bg-zinc-950/60 px-4 py-3">
+            <pre className="text-xs text-zinc-750 dark:text-zinc-300 whitespace-pre-wrap font-sans leading-relaxed">
               {log.message}
             </pre>
           </div>
@@ -189,7 +189,7 @@ function LogRow({ log }: { log: LogEntry }) {
 
 export function HistoricoList({ logs }: { logs: LogEntry[] }) {
   return (
-    <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/60 overflow-hidden divide-y divide-zinc-200 dark:divide-zinc-800/40">
+    <div className="rounded-xl border border-border dark:border-zinc-800/60 bg-card dark:bg-zinc-900/60 overflow-hidden divide-y divide-border dark:divide-zinc-800/40">
       {logs.map((log) => (
         <LogRow key={log.id} log={log} />
       ))}

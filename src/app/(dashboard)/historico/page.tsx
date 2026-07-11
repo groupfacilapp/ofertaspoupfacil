@@ -107,14 +107,14 @@ export default async function HistoricoPage() {
       </div>
 
       {total === 0 ? (
-        <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 p-10 text-center">
+        <div className="rounded-xl border border-border dark:border-zinc-800/60 bg-card dark:bg-zinc-900/40 p-10 text-center">
           <div className="flex justify-center mb-4">
-            <div className="rounded-full bg-zinc-200/80 dark:bg-zinc-800/80 p-4">
+            <div className="rounded-full bg-zinc-100 dark:bg-zinc-800/80 p-4">
               <Package className="h-7 w-7 text-zinc-600" />
             </div>
           </div>
-          <p className="text-sm font-medium text-zinc-400 mb-1">Nenhum disparo ainda</p>
-          <p className="text-xs text-zinc-600">
+          <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-400 mb-1">Nenhum disparo ainda</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-600">
             Configure um grupo e faça um disparo manual para começar.
           </p>
         </div>

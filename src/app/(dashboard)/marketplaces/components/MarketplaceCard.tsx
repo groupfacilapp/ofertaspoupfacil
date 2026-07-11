@@ -231,8 +231,17 @@ export function MarketplaceCard({ status }: { status: MarketplaceStatus }) {
         {/* Top row */}
         <div className="flex items-start justify-between mb-5 relative z-10">
           <div className="flex gap-4">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl overflow-hidden ring-1 ring-zinc-200 dark:ring-white/10 bg-white shadow-sm p-1.5">
-              <MarketplaceLogo marketplace={status.marketplace} className="h-full w-full object-contain" />
+            <div className={cn(
+              "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl overflow-hidden ring-1 ring-zinc-200 dark:ring-white/10 bg-white shadow-sm",
+              (status.marketplace === 'mercadolivre' || status.marketplace === 'aliexpress') ? 'p-0' : 'p-1.5'
+            )}>
+              <MarketplaceLogo 
+                marketplace={status.marketplace} 
+                className={cn(
+                  "h-full w-full",
+                  (status.marketplace === 'mercadolivre' || status.marketplace === 'aliexpress') ? 'object-cover' : 'object-contain'
+                )} 
+              />
             </div>
             <div className="flex flex-col gap-1 items-start justify-center">
               <div className="flex items-center gap-2">

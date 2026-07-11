@@ -23,7 +23,7 @@ interface CredentialSheetProps {
 }
 
 const fieldClass =
-  'bg-zinc-800/60 border-zinc-700/60 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-zinc-500 transition-colors';
+  'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-300 dark:border-zinc-700/60 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-zinc-500 transition-colors';
 
 const labelClass = 'text-xs font-medium text-zinc-400 uppercase tracking-wide';
 
@@ -76,7 +76,7 @@ function AmazonFields({
           </GuideStep>
           <GuideStep n={2}>
             No topo da página você verá sua tag — ex:{' '}
-            <span className="font-mono text-zinc-300 bg-zinc-800 px-1 rounded">seunome-20</span>
+            <span className="font-mono text-zinc-600 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 px-1 rounded">seunome-20</span>
           </GuideStep>
           <GuideStep n={3}>
             Se não tiver conta, clique em <span className="text-zinc-300 font-medium">Criar conta</span> e siga o processo de aprovação da Amazon
@@ -148,7 +148,7 @@ function AmazonFields({
 function GuideStep({ n, children }: { n: number; children: React.ReactNode }) {
   return (
     <div className="flex gap-2.5">
-      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-zinc-800 text-[10px] font-bold text-zinc-400 mt-0.5">
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 text-[10px] font-bold text-zinc-500 dark:text-zinc-400 mt-0.5">
         {n}
       </span>
       <p className="text-xs text-zinc-500 leading-relaxed">{children}</p>
@@ -159,7 +159,7 @@ function GuideStep({ n, children }: { n: number; children: React.ReactNode }) {
 function CollapsibleGuide({ title, children }: { title: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-lg border border-zinc-800/60 bg-zinc-900/40 overflow-hidden">
+    <div className="rounded-lg border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -169,7 +169,7 @@ function CollapsibleGuide({ title, children }: { title: string; children: React.
         {open ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
       </button>
       {open && (
-        <div className="px-3.5 pb-3.5 space-y-2 border-t border-zinc-800/60 pt-3">
+        <div className="px-3.5 pb-3.5 space-y-2 border-t border-zinc-200 dark:border-zinc-800/60 pt-3">
           {children}
         </div>
       )}
@@ -754,9 +754,9 @@ export function CredentialSheet({ open, onOpenChange, marketplace }: CredentialS
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full sm:w-[420px] sm:max-w-[420px] overflow-y-auto bg-zinc-950 border-zinc-800/60 flex flex-col gap-0 p-0">
+      <SheetContent className="w-full sm:w-[420px] sm:max-w-[420px] overflow-y-auto bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800/60 flex flex-col gap-0 p-0">
         {/* Header with accent bar */}
-        <div className="relative border-b border-zinc-800/60 px-6 pt-8 pb-5">
+        <div className="relative border-b border-zinc-200 dark:border-zinc-800/60 px-6 pt-8 pb-5">
           <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-current to-transparent opacity-60 ${meta.accent}`} />
           <SheetHeader className="text-left space-y-1">
             <SheetTitle className={`text-base font-semibold ${meta.accent}`}>

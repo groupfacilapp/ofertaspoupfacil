@@ -19,7 +19,7 @@ import type { GroupFormData } from '../actions';
 import { TemplatePreview } from './TemplatePreview';
 
 const fieldClass =
-  'bg-zinc-800/60 border-zinc-700/60 text-zinc-100 placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-zinc-500 transition-colors';
+  'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-300 dark:border-zinc-700/60 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus-visible:ring-0 focus-visible:border-zinc-500 transition-colors';
 const labelClass = 'text-[10px] font-semibold text-zinc-500 uppercase tracking-widest';
 
 const DEFAULT_TEMPLATE = `🔥 *{titulo}*
@@ -90,7 +90,7 @@ interface GroupSheetProps {
 function SectionHeader({ icon: Icon, title }: { icon: React.ElementType; title: string }) {
   return (
     <div className="flex items-center gap-2 mb-3">
-      <div className="flex h-6 w-6 items-center justify-center rounded-md bg-zinc-800/80 border border-zinc-700/40">
+      <div className="flex h-6 w-6 items-center justify-center rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/40">
         <Icon className="h-3 w-3 text-zinc-400" />
       </div>
       <p className={labelClass}>{title}</p>
@@ -296,9 +296,9 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full sm:w-[500px] sm:max-w-[500px] overflow-y-auto bg-zinc-950 border-zinc-800/60 flex flex-col gap-0 p-0">
+      <SheetContent className="w-full sm:w-[500px] sm:max-w-[500px] overflow-y-auto bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800/60 flex flex-col gap-0 p-0">
         {/* Header */}
-        <div className="relative border-b border-zinc-800/60 px-6 pt-8 pb-5">
+        <div className="relative border-b border-zinc-200 dark:border-zinc-800/60 px-6 pt-8 pb-5">
           <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50" />
           <SheetHeader className="text-left space-y-1">
             <SheetTitle className="text-base font-semibold text-indigo-400">
@@ -344,7 +344,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
                       className={`flex items-center gap-2.5 rounded-lg border px-3 py-2.5 text-xs font-medium transition-all ${
                         active
                           ? `${s.border} ${s.bg} ${s.text}`
-                          : 'border-zinc-800/60 bg-zinc-900/30 text-zinc-500 hover:border-zinc-700 hover:text-zinc-400'
+                          : 'border-zinc-200 dark:border-zinc-800/60 bg-zinc-50/50 dark:bg-zinc-900/30 text-zinc-500 hover:border-zinc-300 dark:hover:border-zinc-700 hover:text-zinc-600 dark:hover:text-zinc-400'
                       }`}
                     >
                       <span className={`h-2 w-2 rounded-full shrink-0 ${active ? s.dot : 'bg-zinc-700'}`} />
@@ -366,7 +366,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
                 className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-medium transition-all ${
                   useFilters
                     ? 'border-indigo-500/40 bg-indigo-500/10 text-indigo-400'
-                    : 'border-zinc-700/60 bg-zinc-800/40 text-zinc-500 hover:text-zinc-300'
+                    : 'border-zinc-200 dark:border-zinc-700/60 bg-zinc-50 dark:bg-zinc-800/40 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
                 }`}
               >
                 {useFilters ? (
@@ -378,7 +378,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
             </div>
 
             {useFilters && (
-              <div className="space-y-3 rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4">
+              <div className="space-y-3 rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/30 p-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1.5">
                     <Label className="text-xs text-zinc-500">Desconto mín. (%)</Label>
@@ -445,7 +445,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
             )}
 
             {!useFilters && (
-              <p className="text-xs text-zinc-600 bg-zinc-900/40 border border-zinc-800/60 rounded-lg px-3 py-2.5">
+              <p className="text-xs text-zinc-600 bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/60 rounded-lg px-3 py-2.5">
                 Todas as ofertas disponíveis serão consideradas, sem restrição de desconto, preço ou categoria.
               </p>
             )}
@@ -454,7 +454,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
           {/* Volume */}
           <div>
             <SectionHeader icon={Clock} title="Volume" />
-            <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4">
+            <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/30 p-4">
               <div className="space-y-1.5">
                 <Label className="text-xs text-zinc-500">Máx. ofertas/dia</Label>
                 <Input
@@ -480,7 +480,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
                 {showPreview ? 'Ocultar preview' : 'Ver preview'}
               </button>
             </div>
-            <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4 space-y-3">
+            <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/30 p-4 space-y-3">
               {/* Preset templates */}
               <div className="space-y-1.5">
                 <p className="text-[10px] font-medium text-zinc-500 uppercase tracking-wide">Templates prontos</p>
@@ -507,7 +507,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
                       key={preset.label}
                       type="button"
                       onClick={() => setTemplate(preset.value)}
-                      className="text-left rounded-lg border border-zinc-700/60 bg-zinc-800/40 px-3 py-2 text-xs text-zinc-400 hover:bg-zinc-700/60 hover:text-zinc-200 hover:border-zinc-600 transition-all"
+                      className="text-left rounded-lg border border-zinc-200 dark:border-zinc-700/60 bg-zinc-50 dark:bg-zinc-800/40 px-3 py-2 text-xs text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700/60 hover:text-zinc-700 dark:hover:text-zinc-200 hover:border-zinc-300 dark:hover:border-zinc-600 transition-all"
                     >
                       {preset.label}
                     </button>
@@ -534,15 +534,15 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
                     key={v}
                     type="button"
                     onClick={() => setTemplate((t) => t + v)}
-                    className="rounded px-1.5 py-0.5 text-[10px] font-mono bg-zinc-800 text-zinc-400 border border-zinc-700/60 hover:bg-zinc-700 transition-colors"
+                    className="rounded px-1.5 py-0.5 text-[10px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
                   >
                     {v}
                   </button>
                 ))}
               </div>
               <p className="text-[10px] text-zinc-600 leading-relaxed">
-                Separe variantes com <code className="bg-zinc-800 px-1 rounded">---</code> em linha própria — o sistema escolhe uma aleatoriamente por disparo.{' '}
-                <code className="bg-zinc-800 px-1 rounded">{'{cupom_line}'}</code> aparece só quando houver cupom · <code className="bg-zinc-800 px-1 rounded">{'{parcelamento_line}'}</code> aparece só quando houver parcelamento.
+                Separe variantes com <code className="bg-zinc-100 dark:bg-zinc-800 px-1 rounded">---</code> em linha própria — o sistema escolhe uma aleatoriamente por disparo.{' '}
+                <code className="bg-zinc-100 dark:bg-zinc-800 px-1 rounded">{'{cupom_line}'}</code> aparece só quando houver cupom · <code className="bg-zinc-100 dark:bg-zinc-800 px-1 rounded">{'{parcelamento_line}'}</code> aparece só quando houver parcelamento.
               </p>
               {showPreview && <TemplatePreview template={template} />}
             </div>
@@ -563,7 +563,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
               </button>
             </div>
 
-            <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4 space-y-2">
+            <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/30 p-4 space-y-2">
               {groupsError && (
                 <>
                   <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 px-3 py-2.5 space-y-1">
@@ -580,7 +580,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
                       onChange={(e) => { setWaInviteInput(e.target.value); setWaInviteError(null); }}
                       onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addGroupByInvite())}
                       placeholder="https://chat.whatsapp.com/..."
-                      className="flex-1 rounded-lg border border-zinc-700/60 bg-zinc-800/60 px-3 py-2 text-xs text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/60 transition-colors font-mono"
+                      className="flex-1 rounded-lg border border-zinc-300 dark:border-zinc-700/60 bg-zinc-50 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/60 transition-colors font-mono"
                     />
                     <button
                       type="button"
@@ -617,7 +617,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
                       value={waGroupSearch}
                       onChange={(e) => setWaGroupSearch(e.target.value)}
                       placeholder="Pesquisar grupo..."
-                      className="w-full rounded-lg border border-zinc-700/60 bg-zinc-800/60 pl-8 pr-3 py-2 text-xs text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors"
+                      className="w-full rounded-lg border border-zinc-300 dark:border-zinc-700/60 bg-zinc-50 dark:bg-zinc-800/60 pl-8 pr-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors"
                     />
                   </div>
                   <div className="max-h-48 overflow-y-auto space-y-1 pr-1">
@@ -633,7 +633,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
                             className={`w-full flex items-center justify-between rounded-lg border px-3 py-2 text-xs transition-all ${
                               selected
                                 ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
-                                : 'border-zinc-800/60 bg-zinc-900/40 text-zinc-400 hover:border-zinc-700'
+                                : 'border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700'
                             }`}
                           >
                             <span className="truncate text-left">{g.subject}</span>
@@ -685,7 +685,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
           <div>
             <SectionHeader icon={Bot} title="Grupos / Canais Telegram" />
             {!hasTelegramConnected ? (
-              <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4">
+              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/30 p-4">
                 <p className="text-xs text-zinc-500">
                   Bot Telegram não conectado.{' '}
                   <a href="/canais" className="text-sky-400 hover:text-sky-300 underline">
@@ -702,7 +702,7 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
                     value={tgChatInput}
                     onChange={(e) => { setTgChatInput(e.target.value); setTgValidateError(null); }}
                     placeholder="-100123456789 ou @meucanal"
-                    className="flex-1 rounded-lg border border-zinc-700/60 bg-zinc-800/60 px-3 py-2 text-xs text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-sky-500/60 transition-colors font-mono"
+                    className="flex-1 rounded-lg border border-zinc-300 dark:border-zinc-700/60 bg-zinc-50 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:outline-none focus:border-sky-500/60 transition-colors font-mono"
                   />
                   <button
                     type="button"
@@ -739,9 +739,9 @@ export function GroupSheet({ open, onOpenChange, connectedMarketplaces, hasTeleg
                 <div className="rounded-lg border border-sky-500/10 bg-sky-500/5 p-2.5 space-y-1">
                   <p className="text-[10px] text-sky-400 font-medium">Como adicionar:</p>
                   <ol className="text-[10px] text-zinc-500 leading-relaxed list-decimal list-inside space-y-0.5">
-                    <li>Adicione o bot <code className="bg-zinc-800 px-1 rounded text-zinc-400">@achadinhos_poupofertas_bot</code> ao seu grupo/canal</li>
+                    <li>Adicione o bot <code className="bg-zinc-100 dark:bg-zinc-800 px-1 rounded text-zinc-500 dark:text-zinc-400">@achadinhos_poupofertas_bot</code> ao seu grupo/canal</li>
                     <li>Torne-o administrador do grupo</li>
-                    <li>Cole aqui o ID do <strong className="text-zinc-400">grupo</strong> (ex: <code className="bg-zinc-800 px-1 rounded">-1001234567890</code>), @username de canal público, ou link <code className="bg-zinc-800 px-1 rounded">t.me/username</code></li>
+                    <li>Cole aqui o ID do <strong className="text-zinc-400">grupo</strong> (ex: <code className="bg-zinc-100 dark:bg-zinc-800 px-1 rounded">-1001234567890</code>), @username de canal público, ou link <code className="bg-zinc-100 dark:bg-zinc-800 px-1 rounded">t.me/username</code></li>
                   </ol>
                 </div>
                 {/* Selected Telegram destinations */}

@@ -135,10 +135,10 @@ export function GroupCard({ group, onEdit }: GroupCardProps) {
   return (
     <div
       className={cn(
-        'relative group overflow-hidden rounded-2xl border bg-zinc-900/40 backdrop-blur-xl p-6 transition-all duration-300',
+        'relative group overflow-hidden rounded-2xl border bg-zinc-50/80 dark:bg-zinc-900/40 backdrop-blur-xl p-6 transition-all duration-300',
         optimisticActive 
           ? 'border-indigo-500/30 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] hover:border-indigo-500/50' 
-          : 'border-zinc-800/60 opacity-80 grayscale-[20%] hover:grayscale-0 hover:opacity-100'
+          : 'border-zinc-200 dark:border-zinc-800/60 opacity-80 grayscale-[20%] hover:grayscale-0 hover:opacity-100'
       )}
     >
       {/* Background active glow */}
@@ -157,7 +157,7 @@ export function GroupCard({ group, onEdit }: GroupCardProps) {
                 optimisticActive ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" : "bg-zinc-600"
               )}></span>
             </span>
-            <p className="text-base font-bold text-white tracking-tight truncate">
+            <p className="text-base font-bold text-zinc-900 dark:text-white tracking-tight truncate">
               {group.name}
             </p>
           </div>
@@ -180,7 +180,7 @@ export function GroupCard({ group, onEdit }: GroupCardProps) {
                   'inline-flex items-center gap-1.5 rounded-md px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider border shadow-sm',
                   group.automation_active
                     ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30 shadow-[0_0_10px_rgba(99,102,241,0.2)]'
-                    : 'bg-zinc-700/30 text-zinc-500 border-zinc-700/40'
+                    : 'bg-zinc-100 dark:bg-zinc-700/30 text-zinc-500 border-zinc-200 dark:border-zinc-700/40'
                 )}
                 title={group.automation_active ? 'Automação ativa' : 'Automação pausada'}
               >
@@ -203,7 +203,7 @@ export function GroupCard({ group, onEdit }: GroupCardProps) {
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 ml-3 shrink-0 bg-black/20 rounded-lg p-1 border border-white/5">
+        <div className="flex items-center gap-1.5 ml-3 shrink-0 bg-zinc-100/80 dark:bg-black/20 rounded-lg p-1 border border-zinc-200 dark:border-white/5">
           {/* Toggle pause/play */}
           <button
             onClick={handleToggle}
@@ -229,7 +229,7 @@ export function GroupCard({ group, onEdit }: GroupCardProps) {
           <button
             onClick={onEdit}
             disabled={isBusy}
-            className="rounded-md p-1.5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
+            className="rounded-md p-1.5 text-zinc-400 hover:text-zinc-800 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-all"
             title="Editar configurações"
           >
             <Settings2 className="h-4 w-4" />
@@ -252,14 +252,14 @@ export function GroupCard({ group, onEdit }: GroupCardProps) {
       </div>
 
       {/* Stats row */}
-      <div className="flex items-center gap-4 mb-4 mt-2 relative z-10 bg-black/20 rounded-xl p-3 border border-white/5">
+      <div className="flex items-center gap-4 mb-4 mt-2 relative z-10 bg-zinc-100/80 dark:bg-black/20 rounded-xl p-3 border border-zinc-200/80 dark:border-white/5">
         <div className="flex items-center gap-2">
           <div className="bg-emerald-500/10 p-1.5 rounded-lg border border-emerald-500/20">
             <MessageSquare className="h-3.5 w-3.5 text-emerald-400" />
           </div>
           <div>
             <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">Destinos</p>
-            <p className="text-sm font-semibold text-white leading-none mt-0.5">{group.destinations_count}</p>
+            <p className="text-sm font-semibold text-zinc-900 dark:text-white leading-none mt-0.5">{group.destinations_count}</p>
           </div>
         </div>
         <div className="w-px h-8 bg-white/5 mx-1" />
@@ -269,7 +269,7 @@ export function GroupCard({ group, onEdit }: GroupCardProps) {
           </div>
           <div>
             <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">Desconto Mín.</p>
-            <p className="text-sm font-semibold text-white leading-none mt-0.5">{group.min_discount}%+</p>
+            <p className="text-sm font-semibold text-zinc-900 dark:text-white leading-none mt-0.5">{group.min_discount}%+</p>
           </div>
         </div>
       </div>
@@ -278,12 +278,12 @@ export function GroupCard({ group, onEdit }: GroupCardProps) {
       <div className="mb-5 relative z-10">
         <div className="flex items-center justify-between mb-2">
           <span className="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider">Progresso Diário</span>
-          <span className="text-xs font-bold text-white">
+          <span className="text-xs font-bold text-zinc-900 dark:text-white">
             <span className={cn(dispatchedToday > 0 ? "text-indigo-400" : "text-zinc-500")}>{dispatchedToday}</span>
             <span className="text-zinc-600 font-medium">/{group.daily_limit} enviadas</span>
           </span>
         </div>
-        <div className="h-1.5 rounded-full bg-black/40 border border-white/5 overflow-hidden">
+        <div className="h-1.5 rounded-full bg-zinc-200/80 dark:bg-black/40 border border-zinc-200 dark:border-white/5 overflow-hidden">
           <div
             className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-700 shadow-[0_0_10px_rgba(99,102,241,0.5)]"
             style={{ width: `${progressPct}%` }}
@@ -302,7 +302,7 @@ export function GroupCard({ group, onEdit }: GroupCardProps) {
             <div className="flex gap-2">
               <button
                 onClick={() => setShowDeleteConfirm(false)}
-                className="flex-1 flex items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-semibold text-zinc-400 hover:text-white border border-zinc-700/50 hover:bg-zinc-800 transition-all bg-zinc-900/50"
+                className="flex-1 flex items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white border border-zinc-200 dark:border-zinc-700/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all bg-zinc-50 dark:bg-zinc-900/50"
               >
                 <X className="h-3.5 w-3.5" />
                 Cancelar
@@ -330,7 +330,7 @@ export function GroupCard({ group, onEdit }: GroupCardProps) {
         ) : (
           <Button
             variant="outline"
-            className="w-full h-11 rounded-xl font-semibold border-zinc-700/60 bg-zinc-800/40 text-zinc-300 hover:bg-indigo-600 hover:border-indigo-500 hover:text-white transition-all shadow-sm hover:shadow-[0_4px_14px_0_rgba(79,70,229,0.39)]"
+            className="w-full h-11 rounded-xl font-semibold border-zinc-300 dark:border-zinc-700/60 bg-zinc-100 dark:bg-zinc-800/40 text-zinc-600 dark:text-zinc-300 hover:bg-indigo-600 hover:border-indigo-500 hover:text-white transition-all shadow-sm hover:shadow-[0_4px_14px_0_rgba(79,70,229,0.39)]"
             onClick={handleManualDispatch}
             disabled={isDispatchPending || !optimisticActive || isBusy}
           >

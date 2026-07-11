@@ -47,7 +47,7 @@ export function TemplatePreview({ template }: { template: string }) {
     .filter((v) => v.length > 0);
 
   return (
-    <div className="rounded-xl border border-zinc-700/60 bg-zinc-800/40 p-4 space-y-3">
+    <div className="rounded-xl border border-zinc-200 dark:border-zinc-700/60 bg-zinc-50 dark:bg-zinc-800/40 p-4 space-y-3">
       <div className="flex items-center justify-between">
         <p className="text-[10px] font-medium text-zinc-600 uppercase tracking-wide">
           Preview (dados fictícios)
@@ -67,7 +67,7 @@ export function TemplatePreview({ template }: { template: string }) {
             </p>
           )}
           <div
-            className="text-xs text-zinc-300 leading-relaxed font-sans bg-zinc-900/40 rounded-lg p-3"
+            className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed font-sans bg-zinc-100 dark:bg-zinc-900/40 rounded-lg p-3"
             dangerouslySetInnerHTML={{ __html: renderVariant(variant) }}
           />
         </div>

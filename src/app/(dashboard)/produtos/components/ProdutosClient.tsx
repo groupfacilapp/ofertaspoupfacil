@@ -808,7 +808,7 @@ function ProductCard({
       {/* Image */}
       <div className="h-44 bg-zinc-50 dark:bg-black/30 relative flex items-center justify-center overflow-hidden border-b border-border dark:border-zinc-800/60 group-hover:bg-zinc-100 dark:group-hover:bg-black/40 transition-colors">
         {product.image_url ? (
-          <img src={product.image_url} alt={product.title} className="h-full w-full object-contain p-4 mix-blend-screen" />
+          <img src={product.image_url} alt={product.title} className="h-full w-full object-contain p-4 dark:mix-blend-screen" />
         ) : (
           <Package className="h-10 w-10 text-zinc-700" />
         )}
@@ -975,7 +975,7 @@ function ProductListItem({
       {/* Image */}
       <div className="shrink-0 h-10 w-10 rounded-lg bg-zinc-100/50 dark:bg-black/30 border border-zinc-200 dark:border-zinc-800/60 overflow-hidden flex items-center justify-center">
         {product.image_url ? (
-          <img src={product.image_url} alt={product.title} className="h-full w-full object-contain p-1 mix-blend-screen" />
+          <img src={product.image_url} alt={product.title} className="h-full w-full object-contain p-1 dark:mix-blend-screen" />
         ) : (
           <Package className="h-4 w-4 text-zinc-700" />
         )}

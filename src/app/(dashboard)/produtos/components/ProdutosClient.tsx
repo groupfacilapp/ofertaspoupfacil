@@ -450,9 +450,9 @@ export function ProdutosClient({
               <button
                 key={key}
                 onClick={() => setSearchQuickFilter(key)}
-                className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+                className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
                   searchQuickFilter === key
-                    ? 'bg-indigo-600/20 text-indigo-300 border-indigo-500/30'
+                    ? 'bg-indigo-600/10 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-300 border-indigo-500/30'
                     : 'bg-zinc-100 dark:bg-zinc-800/40 text-muted-foreground border-border dark:border-zinc-700/40 hover:text-foreground dark:hover:text-zinc-300 hover:border-zinc-400 dark:hover:border-zinc-600/60'
                 }`}
               >
@@ -533,9 +533,9 @@ export function ProdutosClient({
                 <button
                   key={key}
                   onClick={() => navigate({ status: key })}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
                     statusFilter === key
-                      ? 'bg-indigo-600/15 text-indigo-300 border-indigo-500/20'
+                      ? 'bg-indigo-600/10 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-300 border-indigo-500/30'
                       : 'bg-zinc-100 dark:bg-zinc-800/40 text-muted-foreground border-border dark:border-zinc-700/40 hover:text-foreground dark:hover:text-zinc-300 hover:border-zinc-400'
                   }`}
                 >
@@ -551,9 +551,9 @@ export function ProdutosClient({
                 <button
                   key={mp}
                   onClick={() => navigate({ mp: marketplaceFilter === mp ? 'all' : mp })}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
                     marketplaceFilter === mp
-                      ? 'bg-indigo-600/15 text-indigo-300 border-indigo-500/20'
+                      ? 'bg-indigo-600/10 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-300 border-indigo-500/30'
                       : 'bg-zinc-100 dark:bg-zinc-800/40 text-muted-foreground border-border dark:border-zinc-700/40 hover:text-foreground dark:hover:text-zinc-300 hover:border-zinc-400'
                   }`}
                 >

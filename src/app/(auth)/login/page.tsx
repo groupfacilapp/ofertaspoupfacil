@@ -377,12 +377,12 @@ export default async function LoginPage({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: Bot,               title: 'Automação 100%',            desc: 'De início ao fim. Você nunca mais vai precisar procurar, criar, copiar ou divulgar.' },
-              { icon: Clock,             title: 'Funciona 24h por dia',      desc: 'Enquanto você dorme ou viaja, o sistema continua trabalhando.' },
-              { icon: DollarSign,        title: 'Mais comissões',            desc: 'Mais cliques, mais vendas e comissões entrando todos os dias.' },
-              { icon: Gem,               title: 'Renda extra (ou principal)', desc: 'Transforme seu tempo livre em dinheiro com um sistema validado.' },
-              { icon: MousePointerClick, title: 'Fácil de usar',             desc: 'Interface simples e intuitiva. Comece em poucos minutos.' },
-              { icon: Headphones,        title: 'Suporte de verdade',        desc: 'Suporte rápido e humanizado sempre que precisar.' },
+              { icon: Bot,               title: 'Teste Grátis de 7 Dias',    desc: 'Crie sua conta e use 100% dos recursos liberados por 7 dias. Sem compromisso e sem precisar de cartão.' },
+              { icon: Clock,             title: 'Automação 24h por dia',     desc: 'Enquanto você dorme ou faz outras tarefas, o sistema continua rodando e disparando.' },
+              { icon: DollarSign,        title: 'Mais comissões',            desc: 'Mais cliques qualificados, mais vendas e suas comissões caindo de forma consistente.' },
+              { icon: Gem,               title: 'Renda extra no piloto',     desc: 'Transforme seu WhatsApp em uma máquina de comissões com um método validado.' },
+              { icon: MousePointerClick, title: 'Fácil de configurar',       desc: 'Tutoriais em vídeo passo a passo ensinando a conectar as redes e os marketplaces em minutos.' },
+              { icon: Headphones,        title: 'Suporte de verdade',        desc: 'Suporte humanizado e ágil no WhatsApp para tirar qualquer dúvida que você tiver.' },
             ].map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
@@ -474,7 +474,7 @@ export default async function LoginPage({
             {[
               { icon: ShieldCheck, title: 'Garantia 7 dias',      desc: 'Devolução total sem perguntas.' },
               { icon: Lock,        title: 'Ambiente seguro',       desc: 'Seus dados sempre protegidos.' },
-              { icon: CreditCard,  title: 'Pagamento seguro',      desc: 'Cartão, Pix e Boleto.' },
+              { icon: CreditCard,  title: 'Pagamento seguro',      desc: 'Apenas Pix e Cartão de Crédito.' },
               { icon: XCircle,     title: 'Cancele quando quiser', desc: 'Sem fidelidade ou multa.' },
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="flex flex-col items-center text-center gap-2 p-4 rounded-xl bg-white border border-zinc-100">
@@ -484,6 +484,65 @@ export default async function LoginPage({
                 <p className="text-xs font-semibold text-zinc-900">{title}</p>
                 <p className="text-[11px] text-zinc-400 leading-snug">{desc}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ SECTION ───────────────────────────────────────────────── */}
+      <section id="faq" className="bg-white py-20 border-t border-zinc-100">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <p className="text-xs font-bold text-brand-500 uppercase tracking-widest mb-3">FAQ</p>
+            <h2 className="text-3xl font-bold text-zinc-900">Perguntas Frequentes</h2>
+            <p className="text-sm text-zinc-500 mt-2">Tudo o que você precisa saber sobre o {BRAND.name}</p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: 'Como funciona o teste gratuito de 7 dias?',
+                a: 'Ao criar sua conta, você ganha acesso completo e irrestrito a todas as automações e recursos do sistema por 7 dias inteiros. Não exigimos cartão de crédito para testar e você pode cancelar quando quiser.',
+              },
+              {
+                q: 'Como configurar a plataforma? Tem algum tutorial?',
+                a: 'Sim! Dentro da plataforma você tem acesso a tutoriais passo a passo em vídeo. Ensinamos de forma muito simples como conectar seus canais (WhatsApp, Telegram) e como sincronizar seus marketplaces favoritos.',
+              },
+              {
+                q: 'Quais são as formas de pagamento aceitas?',
+                a: 'Aceitamos exclusivamente PIX e Cartão de Crédito. A ativação por esses meios de pagamento é instantânea, permitindo que você comece a faturar imediatamente.',
+              },
+              {
+                q: 'Preciso ter experiência prévia com vendas online?',
+                a: 'Não. O sistema foi desenvolvido para ser extremamente intuitivo. Com os nossos tutoriais rápidos em vídeo, qualquer pessoa consegue deixar tudo configurado e funcionando em poucos minutos.',
+              },
+              {
+                q: 'Posso cancelar a minha assinatura quando quiser?',
+                a: 'Com certeza. A assinatura não possui fidelidade ou multas de cancelamento. Você pode solicitar o cancelamento a qualquer momento diretamente pelo seu painel de controle.',
+              },
+            ].map((item, idx) => (
+              <details
+                key={idx}
+                className="group border border-zinc-200 rounded-2xl bg-zinc-50/50 p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer transition-all duration-200 hover:border-zinc-300"
+              >
+                <summary className="flex items-center justify-between gap-1.5 text-zinc-900">
+                  <h3 className="text-sm font-semibold tracking-tight">{item.q}</h3>
+                  <span className="shrink-0 rounded-full bg-white p-1.5 text-zinc-400 group-open:rotate-180 transition-transform duration-200 shadow-sm border border-zinc-200">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-3.5 w-3.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </summary>
+                <p className="mt-3 text-xs leading-relaxed text-zinc-500 border-t border-zinc-200/60 pt-3">
+                  {item.a}
+                </p>
+              </details>
             ))}
           </div>
         </div>

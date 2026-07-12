@@ -8,18 +8,18 @@ import {
   Bot, Clock, DollarSign, Gem, MousePointerClick, Headphones,
   ShieldCheck, Lock, CreditCard, XCircle,
 } from 'lucide-react';
-
-// Logos from project (same URLs used in MarketplaceCard)
-const MARKETPLACE_LOGOS = [
-  { key: 'shopee',        url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/shopee.png',        alt: 'Shopee' },
-  { key: 'amazon',        url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/amazon.png',        alt: 'Amazon BR' },
-  { key: 'mercadolivre',  url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/mercadolivre.png',  alt: 'Mercado Livre' },
-  { key: 'aliexpress',    url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/aliexpress.png',    alt: 'AliExpress' },
-  { key: 'kabum',         url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/kabum_logo.jfif',   alt: 'KaBuM!' },
-];
 import { BRAND } from '@/config/brand';
 import { getActivePlans, type PlanRecord } from '@/lib/plans';
 import { EntrarModal } from './EntrarModal';
+
+// Logos from project (same URLs used in MarketplaceCard)
+const MARKETPLACE_LOGOS = [
+  { key: 'shopee',       url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/shopee.png',       alt: 'Shopee' },
+  { key: 'amazon',       url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/amazon.png',       alt: 'Amazon BR' },
+  { key: 'mercadolivre', url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/mercadolivre.png', alt: 'Mercado Livre' },
+  { key: 'aliexpress',   url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/aliexpress.png',   alt: 'AliExpress' },
+  { key: 'kabum',        url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/kabum_logo.jfif',  alt: 'KaBuM!' },
+];
 
 const PRODUCT_IMAGE =
   'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/fotosite.png';
@@ -117,7 +117,6 @@ export default async function LoginPage() {
 
           {/* Auth buttons */}
           <div className="flex items-center gap-2 shrink-0">
-            {/* "Entrar" — opens modal */}
             <EntrarModal
               triggerLabel="Entrar"
               triggerClassName="hidden sm:flex items-center rounded-lg border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 text-zinc-700 hover:text-zinc-900 text-sm font-semibold px-4 py-2 transition-all"
@@ -126,17 +125,18 @@ export default async function LoginPage() {
               href="/signup"
               className="flex items-center gap-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-4 py-2 transition-all shadow-sm shadow-brand-500/20"
             >
-           {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      {/*
-        Dark background (matching reference image).
-        overflow-hidden clips the screenshot on the right — "breaking out" effect.
-        The image uses a single `style` transform (no conflicting Tailwind transform classes).
-      */}
+              Cadastrar <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* ── HERO (dark bg, image breaking out to the right) ──────────── */}
       <section
         className="relative overflow-hidden bg-zinc-950"
         style={{ minHeight: '640px' }}
       >
-        {/* Subtle dot/grid pattern */}
+        {/* Dot grid */}
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{
@@ -145,7 +145,7 @@ export default async function LoginPage() {
             backgroundSize: '48px 48px',
           }}
         />
-        {/* Ambient glow top-left */}
+        {/* Ambient glow */}
         <div
           className="absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full blur-3xl pointer-events-none"
           style={{ background: 'radial-gradient(circle, rgba(234,88,12,0.15) 0%, transparent 70%)' }}
@@ -155,7 +155,7 @@ export default async function LoginPage() {
           className="relative max-w-7xl mx-auto px-6 flex items-center"
           style={{ minHeight: '640px' }}
         >
-          {/* LEFT — Copy */}
+          {/* LEFT — text content */}
           <div className="w-full lg:max-w-[480px] xl:max-w-[520px] py-20 space-y-7 relative z-10">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold text-brand-400 tracking-wide">
@@ -235,7 +235,7 @@ export default async function LoginPage() {
             </div>
           </div>
 
-          {/* RIGHT — App screenshot, breaking out of the right edge */}
+          {/* RIGHT — app screenshot breaking out of the right edge */}
           <div
             className="hidden lg:block"
             style={{
@@ -243,17 +243,15 @@ export default async function LoginPage() {
               right: 0,
               top: '50%',
               width: '58%',
-              /* Single transform — no Tailwind conflict */
               transform: 'translateY(-50%) rotate(-2deg)',
               transformOrigin: 'center center',
             }}
           >
-            {/* Left-side fade so image blends with dark hero */}
+            {/* Left fade to blend with dark hero */}
             <div
               className="absolute inset-y-0 left-0 w-24 z-10 pointer-events-none"
               style={{ background: 'linear-gradient(to right, #09090b, transparent)' }}
             />
-            {/* Glow underneath */}
             <div className="absolute -inset-6 rounded-3xl blur-2xl bg-brand-500/10 pointer-events-none" />
             <Image
               src={PRODUCT_IMAGE}
@@ -264,11 +262,10 @@ export default async function LoginPage() {
               priority
             />
           </div>
-
         </div>
       </section>
 
-      {/* ── MARKETPLACE STRIP — real logos from project ──────────────── */}
+      {/* ── MARKETPLACE STRIP — real logo images from project ─────────── */}
       <section className="bg-white border-b border-zinc-100 py-8">
         <div className="max-w-5xl mx-auto px-6">
           <p className="text-center text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-6">
@@ -308,22 +305,26 @@ export default async function LoginPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {[
               {
-                icon: Search, label: 'Encontra produtos em alta',
+                icon: Search,
+                label: 'Encontra produtos em alta',
                 desc: 'O sistema rastreia os principais marketplaces e encontra os mais promissores.',
                 color: 'bg-orange-50 border-orange-200 text-orange-600',
               },
               {
-                icon: FileText, label: 'Cria o conteúdo automático',
+                icon: FileText,
+                label: 'Cria o conteúdo automático',
                 desc: 'Legendas, textos e descrições prontas e otimizadas para gerar mais cliques.',
                 color: 'bg-amber-50 border-amber-200 text-amber-600',
               },
               {
-                icon: Link2, label: 'Gera os links de afiliado',
+                icon: Link2,
+                label: 'Gera os links de afiliado',
                 desc: 'Cria seus links de afiliado automaticamente, prontos para converter.',
                 color: 'bg-orange-50 border-orange-200 text-orange-600',
               },
               {
-                icon: Send, label: 'Publica e divulga por você',
+                icon: Send,
+                label: 'Publica e divulga por você',
                 desc: 'Envia nos seus canais automaticamente e mantém tudo funcionando.',
                 color: 'bg-violet-50 border-violet-200 text-violet-600',
               },
@@ -362,12 +363,12 @@ export default async function LoginPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: Bot,              title: 'Automação 100%',          desc: 'De início ao fim. Você nunca mais vai precisar procurar, criar, copiar ou divulgar.' },
-              { icon: Clock,            title: 'Funciona 24h por dia',    desc: 'Enquanto você dorme ou viaja, o sistema continua trabalhando.' },
-              { icon: DollarSign,       title: 'Mais comissões',          desc: 'Mais cliques, mais vendas e comissões entrando todos os dias.' },
-              { icon: Gem,              title: 'Renda extra (ou principal)', desc: 'Transforme seu tempo livre em dinheiro com um sistema validado.' },
-              { icon: MousePointerClick, title: 'Fácil de usar',          desc: 'Interface simples e intuitiva. Comece em poucos minutos.' },
-              { icon: Headphones,       title: 'Suporte de verdade',      desc: 'Suporte rápido e humanizado sempre que precisar.' },
+              { icon: Bot,               title: 'Automação 100%',            desc: 'De início ao fim. Você nunca mais vai precisar procurar, criar, copiar ou divulgar.' },
+              { icon: Clock,             title: 'Funciona 24h por dia',      desc: 'Enquanto você dorme ou viaja, o sistema continua trabalhando.' },
+              { icon: DollarSign,        title: 'Mais comissões',            desc: 'Mais cliques, mais vendas e comissões entrando todos os dias.' },
+              { icon: Gem,               title: 'Renda extra (ou principal)', desc: 'Transforme seu tempo livre em dinheiro com um sistema validado.' },
+              { icon: MousePointerClick, title: 'Fácil de usar',             desc: 'Interface simples e intuitiva. Comece em poucos minutos.' },
+              { icon: Headphones,        title: 'Suporte de verdade',        desc: 'Suporte rápido e humanizado sempre que precisar.' },
             ].map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}

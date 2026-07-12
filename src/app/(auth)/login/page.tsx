@@ -8,6 +8,15 @@ import {
   Bot, Clock, DollarSign, Gem, MousePointerClick, Headphones,
   ShieldCheck, Lock, CreditCard, XCircle,
 } from 'lucide-react';
+
+// Logos from project (same URLs used in MarketplaceCard)
+const MARKETPLACE_LOGOS = [
+  { key: 'shopee',        url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/shopee.png',        alt: 'Shopee' },
+  { key: 'amazon',        url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/amazon.png',        alt: 'Amazon BR' },
+  { key: 'mercadolivre',  url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/mercadolivre.png',  alt: 'Mercado Livre' },
+  { key: 'aliexpress',    url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/aliexpress.png',    alt: 'AliExpress' },
+  { key: 'kabum',         url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/kabum_logo.jfif',   alt: 'KaBuM!' },
+];
 import { BRAND } from '@/config/brand';
 import { getActivePlans, type PlanRecord } from '@/lib/plans';
 import { EntrarModal } from './EntrarModal';
@@ -117,49 +126,52 @@ export default async function LoginPage() {
               href="/signup"
               className="flex items-center gap-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-4 py-2 transition-all shadow-sm shadow-brand-500/20"
             >
-              Cadastrar <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      {/* ── HERO ─────────────────────────────────────────────────────── */}
+           {/* ── HERO ─────────────────────────────────────────────────────────── */}
       {/*
-        overflow-hidden clips the screenshot on the right so it appears
-        to "break out" beyond the section boundary.
+        Dark background (matching reference image).
+        overflow-hidden clips the screenshot on the right — "breaking out" effect.
+        The image uses a single `style` transform (no conflicting Tailwind transform classes).
       */}
-      <section className="relative bg-white overflow-hidden" style={{ minHeight: '620px' }}>
-        {/* Subtle grid */}
+      <section
+        className="relative overflow-hidden bg-zinc-950"
+        style={{ minHeight: '640px' }}
+      >
+        {/* Subtle dot/grid pattern */}
         <div
-          className="absolute inset-0 opacity-[0.018] pointer-events-none"
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{
             backgroundImage:
-              'linear-gradient(#ea580c 1px, transparent 1px), linear-gradient(to right, #ea580c 1px, transparent 1px)',
+              'linear-gradient(#ff5a00 1px, transparent 1px), linear-gradient(to right, #ff5a00 1px, transparent 1px)',
             backgroundSize: '48px 48px',
           }}
         />
-        {/* Gradient glow top-right */}
-        <div className="absolute right-0 top-0 w-[55%] h-full bg-gradient-to-bl from-orange-50/80 via-transparent to-transparent pointer-events-none" />
+        {/* Ambient glow top-left */}
+        <div
+          className="absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(234,88,12,0.15) 0%, transparent 70%)' }}
+        />
 
-        <div className="relative max-w-7xl mx-auto px-6 flex items-center" style={{ minHeight: '620px' }}>
-
-          {/* LEFT — Copy (≈45% of max-width) */}
-          <div className="w-full lg:max-w-[500px] xl:max-w-[540px] py-20 space-y-7 relative z-10">
+        <div
+          className="relative max-w-7xl mx-auto px-6 flex items-center"
+          style={{ minHeight: '640px' }}
+        >
+          {/* LEFT — Copy */}
+          <div className="w-full lg:max-w-[480px] xl:max-w-[520px] py-20 space-y-7 relative z-10">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/25 bg-brand-500/8 px-4 py-1.5 text-xs font-semibold text-brand-600 tracking-wide">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-500 animate-pulse" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold text-brand-400 tracking-wide">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
               Ferramenta de Automação para Afiliados
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl xl:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-zinc-900">
+            <h1 className="text-4xl sm:text-5xl xl:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-white">
               Automação que<br />
               transforma links<br />
-              <span className="text-brand-500">em renda.</span>
+              <span className="text-brand-400">em renda.</span>
             </h1>
 
             {/* Description */}
-            <p className="text-base text-zinc-500 leading-relaxed max-w-md">
+            <p className="text-base text-zinc-400 leading-relaxed max-w-md">
               O {BRAND.name} encontra produtos em alta, cria todo o conteúdo, gera seus links de
               afiliado e divulga nos seus canais por você. Mais resultado, menos esforço.
             </p>
@@ -174,12 +186,12 @@ export default async function LoginPage() {
               ].map(({ icon: Icon, label }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-2 rounded-xl bg-zinc-50 border border-zinc-100 px-3 py-2.5"
+                  className="flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 px-3 py-2.5 backdrop-blur-sm"
                 >
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-brand-500/10">
-                    <Icon className="h-3 w-3 text-brand-600" />
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-brand-500/20">
+                    <Icon className="h-3 w-3 text-brand-400" />
                   </div>
-                  <span className="text-[11px] font-medium text-zinc-600 leading-tight">{label}</span>
+                  <span className="text-[11px] font-medium text-zinc-300 leading-tight">{label}</span>
                 </div>
               ))}
             </div>
@@ -188,14 +200,13 @@ export default async function LoginPage() {
             <div className="flex items-center gap-3 flex-wrap">
               <Link
                 href="/signup"
-                className="flex items-center gap-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm px-7 py-3.5 transition-all shadow-lg shadow-brand-500/25"
+                className="flex items-center gap-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm px-7 py-3.5 transition-all shadow-lg shadow-brand-500/30"
               >
                 QUERO COMEÇAR AGORA <ArrowRight className="h-4 w-4" />
               </Link>
-              {/* Secondary "Entrar" CTA in hero — also opens modal */}
               <EntrarModal
                 triggerLabel="▶ Ver demonstração"
-                triggerClassName="flex items-center gap-2 rounded-xl border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 text-zinc-600 text-sm font-medium px-5 py-3.5 transition-all"
+                triggerClassName="flex items-center gap-2 rounded-xl border border-white/20 hover:border-white/30 hover:bg-white/5 text-zinc-400 hover:text-white text-sm font-medium px-5 py-3.5 transition-all"
               />
             </div>
 
@@ -211,70 +222,71 @@ export default async function LoginPage() {
                 ].map(({ bg, i }, idx) => (
                   <div
                     key={idx}
-                    className={`h-8 w-8 rounded-full ${bg} border-2 border-white flex items-center justify-center text-[10px] font-bold text-white`}
+                    className={`h-8 w-8 rounded-full ${bg} border-2 border-zinc-950 flex items-center justify-center text-[10px] font-bold text-white`}
                   >
                     {i}
                   </div>
                 ))}
               </div>
               <div>
-                <p className="text-sm font-semibold text-zinc-900">+2.500 usuários</p>
-                <p className="text-xs text-zinc-400">estão lucrando com o {BRAND.name}</p>
+                <p className="text-sm font-semibold text-white">+2.500 usuários</p>
+                <p className="text-xs text-zinc-500">estão lucrando com o {BRAND.name}</p>
               </div>
             </div>
           </div>
 
-          {/* RIGHT — App screenshot "breaking out" of the page ─────────── */}
-          {/*
-            The image container is absolutely positioned to start at ~45% from left.
-            It extends BEYOND the right edge of the viewport (intentional).
-            The section has overflow-hidden so it clips naturally.
-          */}
-          <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[58%] xl:w-[56%] pointer-events-none">
-            {/* Glow behind image */}
-            <div className="absolute inset-0 left-[-80px] bg-gradient-to-r from-white via-transparent to-transparent z-10 pointer-events-none" />
-
+          {/* RIGHT — App screenshot, breaking out of the right edge */}
+          <div
+            className="hidden lg:block"
+            style={{
+              position: 'absolute',
+              right: 0,
+              top: '50%',
+              width: '58%',
+              /* Single transform — no Tailwind conflict */
+              transform: 'translateY(-50%) rotate(-2deg)',
+              transformOrigin: 'center center',
+            }}
+          >
+            {/* Left-side fade so image blends with dark hero */}
             <div
-              className="absolute right-[-6%] top-1/2 -translate-y-1/2 w-[110%]"
-              style={{ transform: 'translateY(-50%) rotate(-1.5deg) perspective(1200px) rotateY(4deg)' }}
-            >
-              {/* Subtle shadow underneath */}
-              <div className="absolute -inset-4 bg-gradient-to-b from-brand-500/5 to-orange-500/10 rounded-3xl blur-2xl" />
-              <Image
-                src={PRODUCT_IMAGE}
-                alt={`Dashboard do ${BRAND.name} — automação de ofertas para WhatsApp`}
-                width={960}
-                height={620}
-                className="relative rounded-2xl shadow-2xl shadow-zinc-400/30 border border-zinc-100/60 w-full h-auto object-cover object-left-top"
-                priority
-              />
-            </div>
+              className="absolute inset-y-0 left-0 w-24 z-10 pointer-events-none"
+              style={{ background: 'linear-gradient(to right, #09090b, transparent)' }}
+            />
+            {/* Glow underneath */}
+            <div className="absolute -inset-6 rounded-3xl blur-2xl bg-brand-500/10 pointer-events-none" />
+            <Image
+              src={PRODUCT_IMAGE}
+              alt={`Dashboard do ${BRAND.name} — automação de ofertas para WhatsApp`}
+              width={960}
+              height={620}
+              className="relative rounded-2xl shadow-2xl shadow-black/50 border border-white/10 w-full h-auto object-cover object-left-top"
+              priority
+            />
           </div>
 
         </div>
       </section>
 
-      {/* ── MARKETPLACE STRIP ────────────────────────────────────────── */}
-      <section className="bg-zinc-50 border-y border-zinc-100 py-7">
+      {/* ── MARKETPLACE STRIP — real logos from project ──────────────── */}
+      <section className="bg-white border-b border-zinc-100 py-8">
         <div className="max-w-5xl mx-auto px-6">
-          <p className="text-center text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-5">
+          <p className="text-center text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-6">
             Compatível com os principais marketplaces
           </p>
-          <div className="flex items-center justify-center gap-3 flex-wrap">
-            {[
-              { label: 'Shopee',        color: 'text-red-600',    bg: 'bg-red-50 border-red-200' },
-              { label: 'amazon',        color: 'text-orange-600', bg: 'bg-orange-50 border-orange-200' },
-              { label: 'Mercado Livre', color: 'text-yellow-600', bg: 'bg-yellow-50 border-yellow-200' },
-              { label: 'AliExpress',    color: 'text-rose-600',   bg: 'bg-rose-50 border-rose-200' },
-              { label: 'KaBuM!',        color: 'text-blue-600',   bg: 'bg-blue-50 border-blue-200' },
-            ].map((m) => (
-              <span
-                key={m.label}
-                className={`inline-flex items-center gap-2 rounded-full border px-5 py-2 text-sm font-semibold ${m.color} ${m.bg}`}
+          <div className="flex items-center justify-center gap-8 flex-wrap">
+            {MARKETPLACE_LOGOS.map((m) => (
+              <div
+                key={m.key}
+                className="flex items-center justify-center h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-200"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-current" />
-                {m.label}
-              </span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={m.url}
+                  alt={m.alt}
+                  className="h-full w-auto max-w-[120px] object-contain"
+                />
+              </div>
             ))}
           </div>
         </div>

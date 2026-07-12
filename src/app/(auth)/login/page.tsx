@@ -6,7 +6,7 @@ import {
   Zap, ArrowRight, CheckCircle2, Star,
   Search, FileText, Link2, Send,
   Bot, Clock, DollarSign, Gem, MousePointerClick, Headphones,
-  ShieldCheck, Lock, CreditCard, XCircle,
+  ShieldCheck, Lock, CreditCard, XCircle, Wallet,
 } from 'lucide-react';
 import { BRAND } from '@/config/brand';
 import { LoginForm } from '@/components/auth/login-form';
@@ -324,9 +324,9 @@ export default async function LoginPage({
       {/* ── COMO FUNCIONA ─────────────────────────────────────────────── */}
       <section id="como-funciona" className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <p className="text-xs font-bold text-brand-500 uppercase tracking-widest mb-3">COMO FUNCIONA</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900">
               Você relaxa, o <span className="text-brand-500">{BRAND.name}</span> trabalha.
             </h2>
             <p className="text-sm text-zinc-500 mt-3 max-w-md mx-auto">
@@ -334,44 +334,65 @@ export default async function LoginPage({
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 relative">
             {[
               {
+                step: 1,
                 icon: Search,
                 label: 'Encontra produtos em alta',
-                desc: 'O sistema rastreia os principais marketplaces e encontra os mais promissores.',
-                color: 'bg-orange-50 border-orange-200 text-orange-600',
+                desc: 'O sistema monitora os principais marketplaces e encontra os produtos mais promissores.',
+                circleBg: 'bg-orange-50 border-orange-200 text-brand-500',
+                badgeBg: 'bg-brand-500',
               },
               {
+                step: 2,
                 icon: FileText,
                 label: 'Cria o conteúdo automático',
-                desc: 'Legendas, textos e descrições prontas e otimizadas para gerar mais cliques.',
-                color: 'bg-amber-50 border-amber-200 text-amber-600',
+                desc: 'Legendas, textos e descrições prontos e otimizados para gerar desejo e cliques.',
+                circleBg: 'bg-amber-50 border-amber-200 text-amber-500',
+                badgeBg: 'bg-amber-500',
               },
               {
+                step: 3,
                 icon: Link2,
                 label: 'Gera os links de afiliado',
-                desc: 'Cria seus links de afiliado automaticamente, prontos para converter.',
-                color: 'bg-orange-50 border-orange-200 text-orange-600',
+                desc: 'Cria seus links de afiliado com rastreamento e pronto para converter.',
+                circleBg: 'bg-emerald-50 border-emerald-200 text-emerald-500',
+                badgeBg: 'bg-emerald-500',
               },
               {
+                step: 4,
                 icon: Send,
                 label: 'Publica e divulga por você',
-                desc: 'Envia nos seus canais automaticamente e mantém tudo funcionando.',
-                color: 'bg-violet-50 border-violet-200 text-violet-600',
+                desc: 'Distribui automaticamente nos seus canais e mantém tudo trabalhando por você.',
+                circleBg: 'bg-violet-50 border-violet-200 text-violet-500',
+                badgeBg: 'bg-violet-500',
               },
-            ].map(({ icon: Icon, label, desc, color }, i) => (
-              <div key={label} className="relative">
+            ].map(({ step, icon: Icon, label, desc, circleBg, badgeBg }, i) => (
+              <div key={label} className="relative flex flex-col items-center text-center space-y-4">
+                {/* Arrow (Desktop) */}
                 {i < 3 && (
-                  <span className="hidden md:block absolute top-10 right-0 translate-x-1/2 z-10 text-zinc-300 text-2xl font-light select-none">
+                  <span className="hidden md:block absolute top-10 right-[-15%] translate-x-1/2 z-10 text-zinc-300 text-xl font-light select-none">
                     →
                   </span>
                 )}
-                <div className="rounded-2xl border border-zinc-100 bg-white shadow-sm hover:shadow-md p-6 text-center space-y-4 h-full transition-shadow">
-                  <div className={`mx-auto flex h-12 w-12 items-center justify-center rounded-xl border ${color}`}>
-                    <Icon className="h-5 w-5" />
+                
+                {/* Icon Circle with Number Badge */}
+                <div className="relative">
+                  {/* Step number badge on top */}
+                  <span className={`absolute -top-1 left-1/2 -translate-x-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white shadow-sm ${badgeBg}`}>
+                    {step}
+                  </span>
+                  
+                  {/* Main Circle */}
+                  <div className={`flex h-20 w-20 items-center justify-center rounded-full border shadow-sm ${circleBg}`}>
+                    <Icon className="h-8 w-8" />
                   </div>
-                  <h3 className="text-sm font-bold text-zinc-900 leading-snug">{label}</h3>
+                </div>
+
+                {/* Text Content */}
+                <div className="space-y-1.5 max-w-[220px]">
+                  <h3 className="text-sm font-bold text-zinc-900 tracking-tight">{label}</h3>
                   <p className="text-xs text-zinc-500 leading-relaxed">{desc}</p>
                 </div>
               </div>
@@ -380,39 +401,78 @@ export default async function LoginPage({
         </div>
       </section>
 
-      {/* ── FEATURES ──────────────────────────────────────────────────── */}
-      <section className="bg-zinc-50 border-y border-zinc-100 py-20">
+      {/* ── FEATURES (dark box card) ─────────────────────────────────── */}
+      <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <p className="text-xs font-bold text-brand-500 uppercase tracking-widest mb-3">FUNCIONALIDADES</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900">
-              Mais resultado. <span className="text-brand-500">Menos esforço.</span>
-            </h2>
-            <p className="text-sm text-zinc-500 mt-3">
-              Tudo que você precisa para viver de renda com afiliados, em um só lugar.
-            </p>
-          </div>
+          <div className="relative rounded-[2.5rem] bg-zinc-950 text-white p-8 sm:p-12 md:p-16 overflow-hidden border border-zinc-900 shadow-2xl">
+            {/* Glow effect on the top-right corner */}
+            <div className="absolute -top-32 -right-32 w-85 h-85 rounded-full bg-brand-500/10 blur-[80px] pointer-events-none" />
+            
+            <div className="relative z-10 text-center mb-12 space-y-3">
+              <p className="text-xs font-bold text-brand-500 uppercase tracking-widest">
+                POR QUE USAR O {BRAND.name.toUpperCase()}?
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                Mais resultado. <span className="text-brand-500">Menos esforço.</span>
+              </h2>
+              <p className="text-sm text-zinc-400 max-w-md mx-auto">
+                Tudo que você precisa para viver de renda com afiliados, em um só lugar.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { icon: Bot,               title: 'Teste Grátis de 7 Dias',    desc: 'Crie sua conta e use 100% dos recursos liberados por 7 dias. Sem compromisso e sem precisar de cartão.' },
-              { icon: Clock,             title: 'Automação 24h por dia',     desc: 'Enquanto você dorme ou faz outras tarefas, o sistema continua rodando e disparando.' },
-              { icon: DollarSign,        title: 'Mais comissões',            desc: 'Mais cliques qualificados, mais vendas e suas comissões caindo de forma consistente.' },
-              { icon: Gem,               title: 'Renda extra no piloto',     desc: 'Transforme seu WhatsApp em uma máquina de comissões com um método validado.' },
-              { icon: MousePointerClick, title: 'Fácil de configurar',       desc: 'Tutoriais em vídeo passo a passo ensinando a conectar as redes e os marketplaces em minutos.' },
-              { icon: Headphones,        title: 'Suporte de verdade',        desc: 'Suporte humanizado e ágil no WhatsApp para tirar qualquer dúvida que você tiver.' },
-            ].map(({ icon: Icon, title, desc }) => (
-              <div
-                key={title}
-                className="rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md p-6 space-y-3 transition-all hover:-translate-y-0.5"
-              >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-500/10 border border-brand-500/20">
-                  <Icon className="h-5 w-5 text-brand-600" />
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {[
+                {
+                  icon: Bot,
+                  title: 'Automação 100%',
+                  desc: 'Do início ao fim. Você não precisa procurar, criar, copiar ou divulgar.',
+                  iconColor: 'text-brand-500 bg-brand-500/10 border-brand-500/20',
+                },
+                {
+                  icon: Clock,
+                  title: 'Funciona 24h por dia',
+                  desc: 'Mesmo enquanto você dorme, o sistema continua trabalhando.',
+                  iconColor: 'text-orange-500 bg-orange-500/10 border-orange-500/20',
+                },
+                {
+                  icon: DollarSign,
+                  title: 'Mais comissões',
+                  desc: 'Mais cliques, mais vendas e comissões entrando todos os dias.',
+                  iconColor: 'text-yellow-500 bg-yellow-500/10 border-yellow-500/20',
+                },
+                {
+                  icon: Wallet,
+                  title: 'Renda extra (ou principal)',
+                  desc: 'Transforme seu tempo livre em dinheiro com um sistema validado.',
+                  iconColor: 'text-orange-500 bg-orange-500/10 border-orange-500/20',
+                },
+                {
+                  icon: CheckCircle2,
+                  title: 'Fácil de usar',
+                  desc: 'Interface simples e intuitiva. Comece em poucos minutos.',
+                  iconColor: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
+                },
+                {
+                  icon: Headphones,
+                  title: 'Suporte de verdade',
+                  desc: 'Suporte rápido e humanizado sempre que precisar.',
+                  iconColor: 'text-yellow-500 bg-yellow-500/10 border-yellow-500/20',
+                },
+              ].map(({ icon: Icon, title, desc, iconColor }) => (
+                <div
+                  key={title}
+                  className="flex items-start gap-4 rounded-2xl border border-zinc-900 bg-zinc-900/30 p-5 backdrop-blur-sm transition-all hover:bg-zinc-900/50 hover:border-zinc-800"
+                >
+                  <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${iconColor}`}>
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-sm font-bold text-white tracking-tight">{title}</h3>
+                    <p className="text-[11px] leading-relaxed text-zinc-400">{desc}</p>
+                  </div>
                 </div>
-                <h3 className="text-sm font-bold text-zinc-900">{title}</h3>
-                <p className="text-xs text-zinc-500 leading-relaxed">{desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

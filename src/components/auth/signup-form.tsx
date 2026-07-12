@@ -35,7 +35,7 @@ export function SignupForm() {
           <p className="text-sm text-zinc-500 mt-2 leading-relaxed">{success}</p>
         </div>
         <Link
-          href="/login"
+          href="/login?auth=true"
           className="inline-block text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
         >
           Voltar para o login
@@ -130,7 +130,7 @@ export function SignupForm() {
 
       <p className="mt-6 text-center text-sm text-zinc-500">
         Já tem conta?{' '}
-        <Link href="/login" className="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">
+        <Link href="/login?auth=true" className="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">
           Entrar
         </Link>
       </p>

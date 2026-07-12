@@ -82,7 +82,16 @@ function PlanCard({ plano }: { plano: PlanRecord }) {
   );
 }
 
-export default async function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ auth?: string }>;
+}) {
+  const params = await searchParams;
+  if (params.auth === 'true') {
+    return <LoginForm />;
+  }
+
   let mensalPlans: PlanRecord[] = [];
   try {
     const all = await getActivePlans();
@@ -118,12 +127,12 @@ export default async function LoginPage() {
 
           {/* Auth buttons */}
           <div className="flex items-center gap-2 shrink-0">
-            <a
-              href="#entrar"
+            <Link
+              href="/login?auth=true"
               className="hidden sm:flex items-center rounded-lg border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 text-zinc-700 hover:text-zinc-900 text-sm font-semibold px-4 py-2 transition-all"
             >
               Entrar
-            </a>
+            </Link>
             <Link
               href="/signup"
               className="flex items-center gap-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-4 py-2 transition-all shadow-sm shadow-brand-500/20"
@@ -207,12 +216,12 @@ export default async function LoginPage() {
               >
                 QUERO COMEÇAR AGORA <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
-                href="#entrar"
+              <Link
+                href="/login?auth=true"
                 className="flex items-center gap-2 rounded-xl border border-white/20 hover:border-white/30 hover:bg-white/5 text-zinc-400 hover:text-white text-sm font-medium px-5 py-3.5 transition-all"
               >
                 ▶ Já tenho conta
-              </a>
+              </Link>
             </div>
 
             {/* Social proof */}
@@ -497,35 +506,17 @@ export default async function LoginPage() {
             >
               Criar conta grátis <ArrowRight className="h-4 w-4" />
             </Link>
-            <a
-              href="#entrar"
+            <Link
+              href="/login?auth=true"
               className="text-sm text-zinc-500 hover:text-zinc-800 transition-colors font-medium"
             >
               Já tenho conta →
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ── LOGIN FORM ────────────────────────────────────────────────── */}
-      <section id="entrar" className="bg-zinc-50 border-t border-zinc-100 py-20 scroll-mt-16">
-        <div className="max-w-md mx-auto px-6">
-          <div className="text-center mb-8">
-            <p className="text-xs font-bold text-brand-500 uppercase tracking-widest mb-3">ACESSO</p>
-            <h2 className="text-2xl font-bold text-zinc-900">Bem-vindo de volta</h2>
-            <p className="text-sm text-zinc-500 mt-2">Entre na sua conta para continuar</p>
-          </div>
-          <div className="rounded-2xl border border-zinc-100 bg-white shadow-xl shadow-zinc-100/80 p-8">
-            <LoginForm />
-          </div>
-          <p className="text-center text-sm text-zinc-400 mt-6">
-            Não tem conta?{' '}
-            <Link href="/signup" className="text-brand-500 hover:text-brand-600 font-semibold transition-colors">
-              Criar conta grátis
-            </Link>
-          </p>
-        </div>
-      </section>
+
 
       {/* ── FOOTER ────────────────────────────────────────────────────── */}
       <footer className="bg-zinc-900 text-white">
@@ -543,6 +534,7 @@ export default async function LoginPage() {
             &copy; {new Date().getFullYear()} {BRAND.name}. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-4 text-xs text-zinc-500">
+            <Link href="/login?auth=true" className="hover:text-zinc-300 transition-colors">Entrar</Link>
             <Link href="/signup" className="hover:text-zinc-300 transition-colors">Cadastrar</Link>
           </div>
         </div>

@@ -18,6 +18,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: BRAND.name,
   description: BRAND.description,
+  icons: {
+    icon: '/brand/logo-icon.svg',
+    shortcut: '/brand/logo-icon.svg',
+    apple: '/brand/logo-icon.svg',
+  }
 };
 
 export default function RootLayout({

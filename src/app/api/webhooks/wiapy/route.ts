@@ -102,12 +102,30 @@ export async function POST(req: NextRequest) {
       .eq('email', buyerEmail.toLowerCase().trim())
       .single();
 
-    if (userError || !userData) {
-      console.error(`[wiapy/webhook] Usuário com e-mail "${buyerEmail}" não encontrado no banco de dados.`);
-      return NextResponse.json({ received: true, error: 'User not found' }, { status: 200 }); // retorna 200 para a Wiapy não reenviar
-    }
+    let userId = userData?.id;
 
-    const userId = userData.id;
+    if (userError || !userData) {
+      console.log(`[wiapy/webhook] Usuário "${buyerEmail}" não encontrado. Criando pré-cadastro via convite...`);
+      
+      // Cria o pré-cadastro enviando convite para o usuário definir a própria senha
+      const { data: inviteData, error: inviteError } = await supabaseAdmin.auth.admin.inviteUserByEmail(
+        buyerEmail.toLowerCase().trim(),
+        {
+          redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://ofertaspoupfacil.vercel.app'}/login?auth=true`,
+          data: {
+            display_name: body.customer?.name || 'Cliente',
+          }
+        }
+      );
+
+      if (inviteError || !inviteData?.user) {
+        console.error('[wiapy/webhook] Erro ao criar pré-cadastro/convite:', inviteError);
+        return NextResponse.json({ error: 'Failed to create user invite' }, { status: 500 });
+      }
+
+      userId = inviteData.user.id;
+      console.log(`[wiapy/webhook] Pré-cadastro criado com sucesso para "${buyerEmail}". User ID: ${userId}`);
+    }
 
     // 2. Atribui o plano ao usuário usando o helper existente
     await setUserPlan(userId, planSlug);

@@ -391,9 +391,9 @@ export default async function LoginPage({
                 </div>
 
                 {/* Text Content */}
-                <div className="space-y-1.5 max-w-[220px]">
-                  <h3 className="text-sm font-bold text-zinc-900 tracking-tight">{label}</h3>
-                  <p className="text-xs text-zinc-500 leading-relaxed">{desc}</p>
+                <div className="space-y-2 max-w-[240px]">
+                  <h3 className="text-base font-bold text-zinc-900 tracking-tight">{label}</h3>
+                  <p className="text-sm text-zinc-500 leading-relaxed font-medium">{desc}</p>
                 </div>
               </div>
             ))}
@@ -412,10 +412,10 @@ export default async function LoginPage({
               <p className="text-xs font-bold text-brand-500 uppercase tracking-widest">
                 POR QUE USAR O {BRAND.name.toUpperCase()}?
               </p>
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
                 Mais resultado. <span className="text-brand-500">Menos esforço.</span>
               </h2>
-              <p className="text-sm text-zinc-400 max-w-md mx-auto">
+              <p className="text-base text-zinc-300 max-w-lg mx-auto leading-relaxed">
                 Tudo que você precisa para viver de renda com afiliados, em um só lugar.
               </p>
             </div>
@@ -466,9 +466,9 @@ export default async function LoginPage({
                   <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${iconColor}`}>
                     <Icon className="h-5 w-5" />
                   </div>
-                  <div className="space-y-1">
-                    <h3 className="text-sm font-bold text-white tracking-tight">{title}</h3>
-                    <p className="text-[11px] leading-relaxed text-zinc-400">{desc}</p>
+                  <div className="space-y-1.5">
+                    <h3 className="text-base font-bold text-white tracking-tight">{title}</h3>
+                    <p className="text-sm leading-relaxed text-zinc-400 font-medium">{desc}</p>
                   </div>
                 </div>
               ))}

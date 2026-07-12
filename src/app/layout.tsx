@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   title: BRAND.name,
   description: BRAND.description,
   icons: {
-    icon: '/brand/logo-icon.svg',
-    shortcut: '/brand/logo-icon.svg',
-    apple: '/brand/logo-icon.svg',
+    icon: '/brand/logo-icon.svg?v=3',
+    shortcut: '/brand/logo-icon.svg?v=3',
+    apple: '/brand/logo-icon.svg?v=3',
   }
 };
 

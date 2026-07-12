@@ -12,6 +12,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/favicon.ico',
+        destination: '/brand/logo-icon.svg',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

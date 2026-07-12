@@ -164,11 +164,11 @@ export default async function LoginPage({
         />
 
         <div
-          className="relative max-w-7xl mx-auto px-6 flex items-center"
+          className="relative max-w-7xl mx-auto px-6 py-12 lg:py-0 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
           style={{ minHeight: '640px' }}
         >
           {/* LEFT — text content */}
-          <div className="w-full lg:max-w-[480px] xl:max-w-[520px] py-20 space-y-7 relative z-10">
+          <div className="w-full lg:col-span-6 xl:col-span-5 py-6 lg:py-20 space-y-7 relative z-10">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold text-brand-400 tracking-wide">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
@@ -249,32 +249,50 @@ export default async function LoginPage({
             </div>
           </div>
 
-          {/* RIGHT — app screenshot breaking out of the right edge */}
-          <div
-            className="hidden lg:block"
-            style={{
-              position: 'absolute',
-              right: 0,
-              top: '50%',
-              width: '58%',
-              transform: 'translateY(-50%) rotate(-2deg)',
-              transformOrigin: 'center center',
-            }}
-          >
-            {/* Left fade to blend with dark hero */}
+          {/* RIGHT — app screenshot (responsive) */}
+          <div className="w-full lg:col-span-6 xl:col-span-7 relative z-10 flex justify-center lg:block">
+            {/* Mobile View */}
+            <div className="block lg:hidden w-full max-w-[520px]">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-900/50 p-1.5 shadow-2xl">
+                <Image
+                  src={PRODUCT_IMAGE}
+                  alt={`Dashboard do ${BRAND.name}`}
+                  width={520}
+                  height={330}
+                  className="rounded-xl w-full h-auto object-cover"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Desktop View (breakout effect) */}
             <div
-              className="absolute inset-y-0 left-0 w-24 z-10 pointer-events-none"
-              style={{ background: 'linear-gradient(to right, #09090b, transparent)' }}
-            />
-            <div className="absolute -inset-6 rounded-3xl blur-2xl bg-brand-500/10 pointer-events-none" />
-            <Image
-              src={PRODUCT_IMAGE}
-              alt={`Dashboard do ${BRAND.name} — automação de ofertas para WhatsApp`}
-              width={960}
-              height={620}
-              className="relative rounded-2xl shadow-2xl shadow-black/50 border border-white/10 w-full h-auto object-cover object-left-top"
-              priority
-            />
+              className="hidden lg:block"
+              style={{
+                position: 'absolute',
+                right: '-4%',
+                top: '50%',
+                width: '115%',
+                maxWidth: '860px',
+                transform: 'translateY(-50%) rotate(-2deg)',
+                transformOrigin: 'center center',
+              }}
+            >
+              {/* Left fade to blend with dark hero */}
+              <div
+                className="absolute inset-y-0 left-0 w-24 z-10 pointer-events-none"
+                style={{ background: 'linear-gradient(to right, #09090b, transparent)' }}
+              />
+              <div className="absolute -inset-6 rounded-3xl blur-2xl bg-brand-500/10 pointer-events-none" />
+              <Image
+                src={PRODUCT_IMAGE}
+                alt={`Dashboard do ${BRAND.name} — automação de ofertas para WhatsApp`}
+                width={960}
+                height={620}
+                className="relative rounded-2xl shadow-2xl shadow-black/50 border border-white/10 w-full h-auto object-cover object-left-top"
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>

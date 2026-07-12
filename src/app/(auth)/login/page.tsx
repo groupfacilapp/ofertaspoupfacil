@@ -9,8 +9,9 @@ import {
   ShieldCheck, Lock, CreditCard, XCircle,
 } from 'lucide-react';
 import { BRAND } from '@/config/brand';
+import { LoginForm } from '@/components/auth/login-form';
 import { getActivePlans, type PlanRecord } from '@/lib/plans';
-import { EntrarModal } from './EntrarModal';
+
 
 // Logos from project (same URLs used in MarketplaceCard)
 const MARKETPLACE_LOGOS = [
@@ -117,10 +118,12 @@ export default async function LoginPage() {
 
           {/* Auth buttons */}
           <div className="flex items-center gap-2 shrink-0">
-            <EntrarModal
-              triggerLabel="Entrar"
-              triggerClassName="hidden sm:flex items-center rounded-lg border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 text-zinc-700 hover:text-zinc-900 text-sm font-semibold px-4 py-2 transition-all"
-            />
+            <a
+              href="#entrar"
+              className="hidden sm:flex items-center rounded-lg border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 text-zinc-700 hover:text-zinc-900 text-sm font-semibold px-4 py-2 transition-all"
+            >
+              Entrar
+            </a>
             <Link
               href="/signup"
               className="flex items-center gap-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-4 py-2 transition-all shadow-sm shadow-brand-500/20"
@@ -204,10 +207,12 @@ export default async function LoginPage() {
               >
                 QUERO COMEÇAR AGORA <ArrowRight className="h-4 w-4" />
               </Link>
-              <EntrarModal
-                triggerLabel="▶ Ver demonstração"
-                triggerClassName="flex items-center gap-2 rounded-xl border border-white/20 hover:border-white/30 hover:bg-white/5 text-zinc-400 hover:text-white text-sm font-medium px-5 py-3.5 transition-all"
-              />
+              <a
+                href="#entrar"
+                className="flex items-center gap-2 rounded-xl border border-white/20 hover:border-white/30 hover:bg-white/5 text-zinc-400 hover:text-white text-sm font-medium px-5 py-3.5 transition-all"
+              >
+                ▶ Já tenho conta
+              </a>
             </div>
 
             {/* Social proof */}
@@ -275,7 +280,7 @@ export default async function LoginPage() {
             {MARKETPLACE_LOGOS.map((m) => (
               <div
                 key={m.key}
-                className="flex items-center justify-center h-10 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-200"
+                className="flex items-center justify-center h-10 transition-all duration-200"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -492,11 +497,33 @@ export default async function LoginPage() {
             >
               Criar conta grátis <ArrowRight className="h-4 w-4" />
             </Link>
-            <EntrarModal
-              triggerLabel="Já tenho conta →"
-              triggerClassName="text-sm text-zinc-500 hover:text-zinc-800 transition-colors font-medium"
-            />
+            <a
+              href="#entrar"
+              className="text-sm text-zinc-500 hover:text-zinc-800 transition-colors font-medium"
+            >
+              Já tenho conta →
+            </a>
           </div>
+        </div>
+      </section>
+
+      {/* ── LOGIN FORM ────────────────────────────────────────────────── */}
+      <section id="entrar" className="bg-zinc-50 border-t border-zinc-100 py-20 scroll-mt-16">
+        <div className="max-w-md mx-auto px-6">
+          <div className="text-center mb-8">
+            <p className="text-xs font-bold text-brand-500 uppercase tracking-widest mb-3">ACESSO</p>
+            <h2 className="text-2xl font-bold text-zinc-900">Bem-vindo de volta</h2>
+            <p className="text-sm text-zinc-500 mt-2">Entre na sua conta para continuar</p>
+          </div>
+          <div className="rounded-2xl border border-zinc-100 bg-white shadow-xl shadow-zinc-100/80 p-8">
+            <LoginForm />
+          </div>
+          <p className="text-center text-sm text-zinc-400 mt-6">
+            Não tem conta?{' '}
+            <Link href="/signup" className="text-brand-500 hover:text-brand-600 font-semibold transition-colors">
+              Criar conta grátis
+            </Link>
+          </p>
         </div>
       </section>
 

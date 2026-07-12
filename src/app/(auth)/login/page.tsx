@@ -143,24 +143,24 @@ export default async function LoginPage({
         </div>
       </nav>
 
-      {/* ── HERO (dark bg, image breaking out to the right) ──────────── */}
+      {/* ── HERO (dominant white theme, image breaking out to the right) ── */}
       <section
-        className="relative overflow-hidden bg-zinc-950"
+        className="relative overflow-hidden bg-white border-b border-zinc-100"
         style={{ minHeight: '640px' }}
       >
-        {/* Dot grid */}
+        {/* Subtle grid pattern */}
         <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          className="absolute inset-0 opacity-[0.015] pointer-events-none"
           style={{
             backgroundImage:
-              'linear-gradient(#ff5a00 1px, transparent 1px), linear-gradient(to right, #ff5a00 1px, transparent 1px)',
+              'linear-gradient(#ea580c 1px, transparent 1px), linear-gradient(to right, #ea580c 1px, transparent 1px)',
             backgroundSize: '48px 48px',
           }}
         />
-        {/* Ambient glow */}
+        {/* Ambient glow top-left */}
         <div
           className="absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(234,88,12,0.15) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, rgba(234,88,12,0.06) 0%, transparent 70%)' }}
         />
 
         <div
@@ -170,26 +170,26 @@ export default async function LoginPage({
           {/* LEFT — text content */}
           <div className="w-full lg:col-span-6 xl:col-span-5 py-6 lg:py-20 space-y-7 relative z-10">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold text-brand-400 tracking-wide">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/5 px-4 py-1.5 text-xs font-semibold text-brand-600 tracking-wide">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-500 animate-pulse" />
               Ferramenta de Automação para Afiliados
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl xl:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-white">
+            <h1 className="text-4xl sm:text-5xl xl:text-[3.25rem] font-extrabold tracking-tight leading-[1.1] text-zinc-900">
               Automação que<br />
               transforma links<br />
-              <span className="text-brand-400">em renda.</span>
+              <span className="text-brand-500">em renda.</span>
             </h1>
 
             {/* Description */}
-            <p className="text-base text-zinc-400 leading-relaxed max-w-md">
+            <p className="text-base text-zinc-500 leading-relaxed max-w-md">
               O {BRAND.name} encontra produtos em alta, cria todo o conteúdo, gera seus links de
               afiliado e divulga nos seus canais por você. Mais resultado, menos esforço.
             </p>
 
-            {/* Mini feature grid */}
-            <div className="grid grid-cols-2 gap-2.5 max-w-sm">
+            {/* Mini feature 4-column layout (vertical style like 'como funciona') */}
+            <div className="grid grid-cols-4 gap-2.5 max-w-md">
               {[
                 { icon: Search,   label: 'Encontra produtos em alta' },
                 { icon: FileText, label: 'Cria conteúdo automático' },
@@ -198,29 +198,43 @@ export default async function LoginPage({
               ].map(({ icon: Icon, label }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 px-3 py-2.5 backdrop-blur-sm"
+                  className="flex flex-col items-center text-center space-y-2"
                 >
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-brand-500/20">
-                    <Icon className="h-3 w-3 text-brand-400" />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white border border-zinc-150 shadow-sm text-brand-500">
+                    <Icon className="h-5 w-5" />
                   </div>
-                  <span className="text-[11px] font-medium text-zinc-300 leading-tight">{label}</span>
+                  <span className="text-[10px] font-semibold text-zinc-500 leading-tight">{label}</span>
                 </div>
               ))}
             </div>
 
             {/* CTAs */}
-            <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-3.5 flex-wrap">
               <Link
                 href="/signup"
-                className="flex items-center gap-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm px-7 py-3.5 transition-all shadow-lg shadow-brand-500/30"
+                className="flex items-center gap-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm px-7 py-3.5 transition-all shadow-lg shadow-brand-500/25"
               >
                 QUERO COMEÇAR AGORA <ArrowRight className="h-4 w-4" />
               </Link>
+              {/* Secondary CTA: Ver demonstração pointing to login page */}
               <Link
                 href="/login?auth=true"
-                className="flex items-center gap-2 rounded-xl border border-white/20 hover:border-white/30 hover:bg-white/5 text-zinc-400 hover:text-white text-sm font-medium px-5 py-3.5 transition-all"
+                className="flex items-center gap-2 rounded-xl border border-zinc-200 hover:border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-700 text-sm font-bold px-5 py-3.5 transition-all shadow-sm"
               >
-                ▶ Já tenho conta
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4 text-zinc-500"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <polygon points="10 8 16 12 10 16 10 8" />
+                </svg>
+                Ver demonstração
               </Link>
             </div>
 
@@ -236,15 +250,15 @@ export default async function LoginPage({
                 ].map(({ bg, i }, idx) => (
                   <div
                     key={idx}
-                    className={`h-8 w-8 rounded-full ${bg} border-2 border-zinc-950 flex items-center justify-center text-[10px] font-bold text-white`}
+                    className={`h-8 w-8 rounded-full ${bg} border-2 border-white flex items-center justify-center text-[10px] font-bold text-white`}
                   >
                     {i}
                   </div>
                 ))}
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">+2.500 usuários</p>
-                <p className="text-xs text-zinc-500">estão lucrando com o {BRAND.name}</p>
+                <p className="text-sm font-bold text-zinc-800">+2.500 usuários</p>
+                <p className="text-xs text-zinc-400">estão lucrando com o {BRAND.name}</p>
               </div>
             </div>
           </div>
@@ -253,7 +267,7 @@ export default async function LoginPage({
           <div className="w-full lg:col-span-6 xl:col-span-7 relative z-10 flex justify-center lg:block">
             {/* Mobile View */}
             <div className="block lg:hidden w-full max-w-[520px]">
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-900/50 p-1.5 shadow-2xl">
+              <div className="relative rounded-2xl overflow-hidden border border-zinc-150 bg-white p-1.5 shadow-xl">
                 <Image
                   src={PRODUCT_IMAGE}
                   alt={`Dashboard do ${BRAND.name}`}
@@ -278,18 +292,18 @@ export default async function LoginPage({
                 transformOrigin: 'center center',
               }}
             >
-              {/* Left fade to blend with dark hero */}
+              {/* White fade to blend image smoothly on the left */}
               <div
                 className="absolute inset-y-0 left-0 w-24 z-10 pointer-events-none"
-                style={{ background: 'linear-gradient(to right, #09090b, transparent)' }}
+                style={{ background: 'linear-gradient(to right, #ffffff, transparent)' }}
               />
-              <div className="absolute -inset-6 rounded-3xl blur-2xl bg-brand-500/10 pointer-events-none" />
+              <div className="absolute -inset-6 rounded-3xl blur-2xl bg-brand-500/5 pointer-events-none" />
               <Image
                 src={PRODUCT_IMAGE}
                 alt={`Dashboard do ${BRAND.name} — automação de ofertas para WhatsApp`}
                 width={960}
                 height={620}
-                className="relative rounded-2xl shadow-2xl shadow-black/50 border border-white/10 w-full h-auto object-cover object-left-top"
+                className="relative rounded-2xl shadow-2xl shadow-zinc-350 border border-zinc-200/60 w-full h-auto object-cover object-left-top"
                 priority
               />
             </div>

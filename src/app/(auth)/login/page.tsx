@@ -642,35 +642,6 @@ export default async function LoginPage({
         </div>
       </section>
 
-      {/* ── CTA FINAL ─────────────────────────────────────────────────── */}
-      <section className="bg-white py-20">
-        <div className="max-w-2xl mx-auto px-6 text-center space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 leading-tight">
-            Pronto para colocar<br />
-            <span className="text-brand-500">suas comissões no automático?</span>
-          </h2>
-          <p className="text-sm text-zinc-500">
-            Junte-se aos afiliados que já automatizaram seus disparos. Comece grátis hoje.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="/signup"
-              className="flex items-center gap-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-base px-8 py-4 transition-all shadow-lg shadow-brand-500/25"
-            >
-              Criar conta grátis <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/login?auth=true"
-              className="text-sm text-zinc-500 hover:text-zinc-800 transition-colors font-medium"
-            >
-              Já tenho conta →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-
-
       {/* ── FOOTER ────────────────────────────────────────────────────── */}
       <footer className="bg-zinc-900 text-white">
         <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -686,10 +657,6 @@ export default async function LoginPage({
           <p className="text-xs text-zinc-500">
             &copy; {new Date().getFullYear()} {BRAND.name}. Todos os direitos reservados.
           </p>
-          <div className="flex items-center gap-4 text-xs text-zinc-500">
-            <Link href="/login?auth=true" className="hover:text-zinc-300 transition-colors">Entrar</Link>
-            <Link href="/signup" className="hover:text-zinc-300 transition-colors">Cadastrar</Link>
-          </div>
         </div>
       </footer>
 

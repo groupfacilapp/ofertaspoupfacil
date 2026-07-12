@@ -60,6 +60,7 @@ export function parseMercadoLivreHTML(html: string): Array<{
   preco_antigo: string | null;
   desconto: string | null;
   parcelamento: string;
+  cupom: string | null;
 }> {
   const $ = cheerio.load(html);
   // /ofertas page wraps items in div.items-with-smart-groups.
@@ -76,6 +77,7 @@ export function parseMercadoLivreHTML(html: string): Array<{
     preco_antigo: string | null;
     desconto: string | null;
     parcelamento: string;
+    cupom: string | null;
   }> = [];
 
   // Iterate over each title link and walk up the DOM to find its product card.
@@ -142,9 +144,25 @@ export function parseMercadoLivreHTML(html: string): Array<{
       $card.find('.poly-price__installments, .ui-search-item__group__element.ui-search-installments').first().text().trim()
     );
 
+    // Find coupon text (case-insensitive search for elements containing 'cupom')
+    let cupom: string | null = null;
+    const $couponEl = $card.find('span, div, p').filter((_idx, el) => {
+      const text = $(el).text();
+      return text.toLowerCase().includes('cupom');
+    }).first();
+
+    if ($couponEl.length > 0) {
+      const rawText = $couponEl.text().trim();
+      if (rawText.includes(':')) {
+        cupom = rawText.split(':').slice(1).join(':').trim();
+      } else {
+        cupom = rawText.replace(/^[Cc]upom\s*/i, '').trim();
+      }
+    }
+
     if (!preco_atual) return;
 
-    results.push({ titulo, imagem: imagemClean, link, preco_atual, preco_antigo, desconto, parcelamento });
+    results.push({ titulo, imagem: imagemClean, link, preco_atual, preco_antigo, desconto, parcelamento, cupom });
   });
 
   return results;
@@ -266,7 +284,7 @@ export class MercadoLivreConnector implements MarketplaceConnector {
         installments: p.parcelamento || null,
         category: null,
         sales: null,
-        couponCode: null,
+        couponCode: p.cupom,
       });
     }
 

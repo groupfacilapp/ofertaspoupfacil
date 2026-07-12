@@ -30,10 +30,11 @@ function stripQueryParams(url: string): string {
 export function parseMercadoLivreHTML(html: string): Array<{
   titulo: string; imagem: string | null; link: string;
   preco_atual: string; preco_antigo: string | null; desconto: string | null; parcelamento: string;
+  cupom: string | null;
 }> {
   const $ = cheerio.load(html);
-  const results: Array<{ titulo: string; imagem: string | null; link: string; preco_atual: string; preco_antigo: string | null; desconto: string | null; parcelamento: string }> = [];
-
+  const results: Array<{ titulo: string; imagem: string | null; link: string; preco_atual: string; preco_antigo: string | null; desconto: string | null; parcelamento: string; cupom: string | null }> = [];
+  
   // Try multiple selectors in order of preference (ML changes class names periodically)
   let titleEls = $('a.poly-component__title');
   if (titleEls.length === 0) titleEls = $('[class*="poly-component__title"]');
@@ -96,8 +97,24 @@ export function parseMercadoLivreHTML(html: string): Array<{
     const desconto = $priceContainer.find('.andes-money-amount__discount').first().text().trim() || null;
     const parcelamento = formatInstallment($priceContainer.find('.poly-price__installments, .ui-search-item__group__element.ui-search-installments').first().text().trim());
 
+    // Find coupon text (case-insensitive search for elements containing 'cupom')
+    let cupom: string | null = null;
+    const $couponEl = $priceContainer.find('span, div, p').filter((_idx: number, el: any) => {
+      const text = $(el).text();
+      return text.toLowerCase().includes('cupom');
+    }).first();
+
+    if ($couponEl.length > 0) {
+      const rawText = $couponEl.text().trim();
+      if (rawText.includes(':')) {
+        cupom = rawText.split(':').slice(1).join(':').trim();
+      } else {
+        cupom = rawText.replace(/^[Cc]upom\s*/i, '').trim();
+      }
+    }
+
     if (!preco_atual) return;
-    results.push({ titulo, imagem: imagemClean, link, preco_atual, preco_antigo, desconto, parcelamento });
+    results.push({ titulo, imagem: imagemClean, link, preco_atual, preco_antigo, desconto, parcelamento, cupom });
   });
 
   return results;
@@ -171,7 +188,7 @@ export class MercadoLivreConnector implements MarketplaceConnector {
       const mlbIndex = pathParts.findIndex((part) => /^MLB\d+$/.test(part));
       const externalId = mlbIndex !== -1 ? pathParts[mlbIndex] : pathParts[pathParts.length - 1]?.split('?')[0] || p.link;
 
-      offers.push({ externalId, marketplace: 'mercadolivre', title: p.titulo, currentPrice, originalPrice, discountPercent, imageUrl: p.imagem ?? '', productUrl: p.link, affiliateLink: null, condition: null, installments: p.parcelamento || null, category: null, sales: null, couponCode: null });
+      offers.push({ externalId, marketplace: 'mercadolivre', title: p.titulo, currentPrice, originalPrice, discountPercent, imageUrl: p.imagem ?? '', productUrl: p.link, affiliateLink: null, condition: null, installments: p.parcelamento || null, category: null, sales: null, couponCode: p.cupom });
     }
     return offers;
   }

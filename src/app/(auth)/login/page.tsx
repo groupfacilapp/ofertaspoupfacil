@@ -548,19 +548,21 @@ export default async function LoginPage({
           </div>
 
           {/* Guarantee badges */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-12 border-t border-zinc-200">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-12 border-t border-zinc-200">
             {[
               { icon: ShieldCheck, title: 'Garantia 7 dias',      desc: 'Devolução total sem perguntas.' },
               { icon: Lock,        title: 'Ambiente seguro',       desc: 'Seus dados sempre protegidos.' },
               { icon: CreditCard,  title: 'Pagamento seguro',      desc: 'Apenas Pix e Cartão de Crédito.' },
               { icon: XCircle,     title: 'Cancele quando quiser', desc: 'Sem fidelidade ou multa.' },
             ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="flex flex-col items-center text-center gap-2 p-4 rounded-xl bg-white border border-zinc-100">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-500/10">
-                  <Icon className="h-4.5 w-4.5 text-brand-600" />
+              <div key={title} className="flex flex-col items-center text-center gap-3 p-5 rounded-2xl bg-white border border-zinc-100 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-500/10 border border-brand-500/20">
+                  <Icon className="h-5.5 w-5.5 text-brand-600" />
                 </div>
-                <p className="text-xs font-semibold text-zinc-900">{title}</p>
-                <p className="text-[11px] text-zinc-400 leading-snug">{desc}</p>
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-zinc-900 tracking-tight">{title}</h3>
+                  <p className="text-xs text-zinc-500 leading-relaxed font-medium">{desc}</p>
+                </div>
               </div>
             ))}
           </div>

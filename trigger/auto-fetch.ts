@@ -140,7 +140,7 @@ export const autoFetchTask = task({
           installments: o.installments ?? null,
           category: o.category ?? null,
           fetched_at: new Date().toISOString(),
-          expires_at: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString(),
+          expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
         })),
         { onConflict: 'user_id,marketplace,external_id' }
       );

@@ -264,7 +264,7 @@ export async function dispatchGroup(
     }
 
     if (liveOffers.length > 0) {
-      const expiresAt = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString();
+      const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
       const { data: savedOffers } = await supabaseAdmin
         .from('offers')
         .upsert(

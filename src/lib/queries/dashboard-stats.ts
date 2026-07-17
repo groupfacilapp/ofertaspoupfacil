@@ -28,7 +28,7 @@ export async function getDashboardStats(userId: string): Promise<DashboardStats>
     // Total produtos: apenas offers vivos (não expirados)
     supabaseAdmin
       .from('offers')
-      .select('*', { count: 'exact', head: true })
+      .select('id')
       .eq('user_id', userId)
       .gt('expires_at', new Date().toISOString()),
     // Logs de hoje para enviados/falhas
@@ -46,7 +46,8 @@ export async function getDashboardStats(userId: string): Promise<DashboardStats>
       .in('status', ['sent', 'delivered', 'read']),
   ]);
 
-  const totalProducts = aliveOffersResult.count ?? 0;
+  const aliveOffers = aliveOffersResult.data ?? [];
+  const totalProducts = aliveOffers.length;
   const logs = todayLogsResult.data ?? [];
 
   const sentOfferIds = new Set<string>();
@@ -64,8 +65,8 @@ export async function getDashboardStats(userId: string): Promise<DashboardStats>
 
   const sentToday = sentOfferIds.size;
   const successCount = sentToday;
-  const dispatched7dIds = new Set((dispatched7dResult.data ?? []).map((l) => l.offer_id));
-  const pending = Math.max(0, totalProducts - dispatched7dIds.size);
+  const dispatched7dIds = new Set((dispatched7dResult.data ?? []).map((l) => l.offer_id).filter(Boolean));
+  const pending = aliveOffers.filter(o => !dispatched7dIds.has(o.id)).length;
 
   return { totalProducts, messagesDispatched, sentToday, pending, successCount, failedCount };
 }

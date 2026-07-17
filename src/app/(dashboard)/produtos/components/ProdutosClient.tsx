@@ -5,7 +5,7 @@ import { Package, Loader2, ExternalLink, Trash2, Search, RefreshCw, Send, X, Eye
 import { toast } from 'sonner';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { sendProduct, clearSentProducts, searchProducts, removeProduct, removeProducts } from '../actions';
+import { sendProduct, clearSentProducts, searchProducts, removeProduct, removeProducts, clearAllQueueProducts } from '../actions';
 
 interface ProductItem {
   id: string;
@@ -282,6 +282,32 @@ export function ProdutosClient({
     }
   }
 
+  async function handleClearAll() {
+    if (clearing || products.length === 0) return;
+    const confirmClear = window.confirm("Tem certeza que deseja limpar toda a fila de produtos?");
+    if (!confirmClear) return;
+    
+    setClearing(true);
+    try {
+      const result = await clearAllQueueProducts();
+      if (result.error) {
+        toast.error(result.error);
+      } else {
+        setProducts([]);
+        setCurrentStats((prev) => ({
+          ...prev,
+          total: 0,
+          sentToday: 0,
+        }));
+        toast.success(result.deleted > 0 ? `${result.deleted} produto(s) removido(s) da fila` : 'A fila já está vazia');
+      }
+    } catch {
+      toast.error('Erro ao limpar a fila de produtos');
+    } finally {
+      setClearing(false);
+    }
+  }
+
   function handleToggleSelect(id: string) {
     setSelectedIds((prev) => {
       const next = new Set(prev);
@@ -506,6 +532,13 @@ export function ProdutosClient({
               className="text-xs font-semibold text-zinc-400 hover:text-rose-400 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5 bg-zinc-800/50 hover:bg-rose-500/10 border border-zinc-700/50 hover:border-rose-500/30 px-3 py-1.5 rounded-lg"
             >
               {clearing ? <><Loader2 className="h-3.5 w-3.5 animate-spin" />Limpando...</> : 'Limpar enviados'}
+            </button>
+            <button
+              onClick={handleClearAll}
+              disabled={clearing || products.length === 0}
+              className="text-xs font-semibold text-zinc-400 hover:text-rose-400 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5 bg-zinc-800/50 hover:bg-rose-500/10 border border-zinc-700/50 hover:border-rose-500/30 px-3 py-1.5 rounded-lg"
+            >
+              {clearing ? <><Loader2 className="h-3.5 w-3.5 animate-spin" />Limpando...</> : 'Limpar toda fila'}
             </button>
           </div>
         </div>

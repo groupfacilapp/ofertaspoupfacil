@@ -482,3 +482,34 @@ export async function removeProducts(
   revalidatePath('/produtos');
   return { success: true, removed: data?.length ?? 0 };
 }
+
+// ─── Clear all active products from queue ────────────────────────────────────
+
+export async function clearAllQueueProducts(): Promise<{ deleted: number; error?: string }> {
+  try {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return { deleted: 0, error: 'Não autenticado' };
+
+    const pastTimestamp = new Date(Date.now() - 1000).toISOString();
+    const now = new Date().toISOString();
+
+    const { data: updated, error: updateError } = await supabaseAdmin
+      .from('offers')
+      .update({ expires_at: pastTimestamp } as any)
+      .eq('user_id', user.id)
+      .or(`expires_at.is.null,expires_at.gt.${now}`)
+      .select('id');
+
+    if (updateError) {
+      console.error('[clearAllQueueProducts] Error updating offers:', updateError);
+      return { deleted: 0, error: `Erro ao atualizar produtos: ${updateError.message}` };
+    }
+
+    revalidatePath('/produtos');
+    return { deleted: updated?.length ?? 0 };
+  } catch (err) {
+    console.error('[clearAllQueueProducts] Unexpected error:', err);
+    return { deleted: 0, error: `Erro inesperado: ${err instanceof Error ? err.message : String(err)}` };
+  }
+}

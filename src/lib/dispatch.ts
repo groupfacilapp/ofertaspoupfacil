@@ -28,7 +28,25 @@ function matchesWord(title: string, kw: string): boolean {
   const normalizedTitle = title.replace(/-/g, ' ');
   const normalizedKw = kw.replace(/-/g, ' ');
   const escaped = normalizedKw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`\\b${escaped}\\b`).test(normalizedTitle);
+  
+  // 1. Exact whole word match
+  if (new RegExp(`\\b${escaped}\\b`, 'i').test(normalizedTitle)) return true;
+
+  // 2. Portuguese plural/singular handling for keywords longer than 3 characters
+  if (normalizedKw.length > 3) {
+    if (normalizedKw.endsWith('s')) {
+      // Remove trailing 's' to match singular form (e.g. "livros" matches "livro")
+      const singular = normalizedKw.slice(0, -1);
+      const escSingular = singular.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      if (new RegExp(`\\b${escSingular}\\b`, 'i').test(normalizedTitle)) return true;
+    } else {
+      // Add 's' to match plural form (e.g. "livro" matches "livros")
+      const plural = normalizedKw + 's';
+      const escPlural = plural.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      if (new RegExp(`\\b${escPlural}\\b`, 'i').test(normalizedTitle)) return true;
+    }
+  }
+  return false;
 }
 
 export interface DispatchGroupConfig {

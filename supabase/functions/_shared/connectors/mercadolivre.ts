@@ -34,7 +34,7 @@ export function parseMercadoLivreHTML(html: string): Array<{
 }> {
   const $ = cheerio.load(html);
   const results: Array<{ titulo: string; imagem: string | null; link: string; preco_atual: string; preco_antigo: string | null; desconto: string | null; parcelamento: string; cupom: string | null }> = [];
-  
+
   // Try multiple selectors in order of preference (ML changes class names periodically)
   let titleEls = $('a.poly-component__title');
   if (titleEls.length === 0) titleEls = $('[class*="poly-component__title"]');

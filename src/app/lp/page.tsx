@@ -230,16 +230,16 @@ export default async function LandingPage() {
               <span className="text-white">Zap</span>
             </span>
           </Link>
-          <div className="flex items-center gap-3">
-            <Link href="/login" className="text-sm text-zinc-400 hover:text-white transition-colors hidden sm:block">
+          <div className="flex items-center gap-1.5 sm:gap-3">
+            <Link href="/login" className="text-xs sm:text-sm text-zinc-400 hover:text-white transition-colors px-1 sm:px-2 py-1.5 sm:py-2">
               Entrar
             </Link>
             <Link
               href="/signup"
-              className="flex items-center gap-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-4 py-2 transition-colors"
+              className="flex items-center gap-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold px-2.5 sm:px-4 py-1.5 sm:py-2 transition-colors"
             >
               Testar grátis
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
             </Link>
           </div>
         </div>
@@ -267,15 +267,23 @@ export default async function LandingPage() {
             e o {BRAND.name} busca, filtra e dispara as melhores ofertas automaticamente — 24 horas por dia.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="/signup"
-              className="flex items-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-base px-8 py-4 transition-all shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30"
-            >
-              Começar grátis por 7 dias
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <span className="text-sm text-zinc-600">Sem cartão de crédito</span>
+          <div className="space-y-3">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+              <Link
+                href="/signup"
+                className="flex items-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-base px-8 py-4 transition-all shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 w-full sm:w-auto justify-center"
+              >
+                Começar grátis por 7 dias
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a
+                href="#demonstracao"
+                className="flex items-center gap-2 rounded-xl border border-zinc-700 hover:border-zinc-650 bg-zinc-900/50 hover:bg-zinc-800 text-zinc-300 hover:text-white font-semibold text-base px-8 py-4 transition-all shadow-sm w-full sm:w-auto justify-center"
+              >
+                Ver demonstração
+              </a>
+            </div>
+            <p className="text-xs text-zinc-500">Sem cartão de crédito</p>
           </div>
 
           {/* Social proof strip */}
@@ -340,6 +348,32 @@ export default async function LandingPage() {
                 <p className="text-sm text-zinc-500 leading-relaxed">{s.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SEÇÃO DO VÍDEO (DEMONSTRAÇÃO) ─────────────────────────────── */}
+      <section id="demonstracao" className="relative py-24 bg-zinc-900/50 overflow-hidden border-y border-zinc-800/60">
+        <Glow className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-600/10" />
+        <div className="relative max-w-4xl mx-auto px-5 text-center">
+          <div className="mb-10 space-y-3">
+            <p className="text-xs font-semibold text-indigo-400 uppercase tracking-widest">Demonstração</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white">
+              Veja o <span className="text-indigo-400">{BRAND.name}</span> em ação
+            </h2>
+            <p className="text-sm text-zinc-500 max-w-md mx-auto">
+              Assista ao vídeo abaixo e entenda como funciona nossa ferramenta para automatizar seus disparos de ofertas.
+            </p>
+          </div>
+          <div className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-2xl border border-zinc-800 bg-black">
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/X0l11DeclFo"
+              title="Demonstração do DisparaZap"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
           </div>
         </div>
       </section>

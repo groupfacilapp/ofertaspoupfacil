@@ -9,7 +9,7 @@ export class EvolutionClient implements WhatsAppClient {
   constructor(
     private readonly baseUrl: string,
     private readonly apiKey: string
-  ) {}
+  ) { }
 
   private get url(): string {
     return this.baseUrl.replace(/\/$/, '');
@@ -56,11 +56,11 @@ export class EvolutionClient implements WhatsAppClient {
 
   async getConnectionState(instanceName: string, _providerToken?: string): Promise<{ instance: { state: ConnectionState } }> {
     const res = await this.req<any>(`/instance/connectionState/${instanceName}`).catch(() => ({}));
-    
+
     // Normalise response format
     const inst = res?.instance || res || {};
     const rawState = (inst.state || inst.status || '').toLowerCase();
-    
+
     let state: ConnectionState = 'close';
     if (rawState === 'open' || rawState === 'connected') {
       state = 'open';
@@ -79,7 +79,7 @@ export class EvolutionClient implements WhatsAppClient {
 
   async getAllInstances(): Promise<Array<{ name: string; state: ConnectionState; phoneNumber?: string }>> {
     const res = await this.req<any[]>('/instance/fetchInstances');
-    
+
     if (!Array.isArray(res)) return [];
 
     const instances: Array<{ name: string; state: ConnectionState; phoneNumber?: string }> = [];

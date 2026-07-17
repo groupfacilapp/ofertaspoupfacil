@@ -126,18 +126,18 @@ export default async function LoginPage({
           </div>
 
           {/* Auth buttons */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <Link
               href="/login?auth=true"
-              className="hidden sm:flex items-center rounded-lg border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 text-zinc-700 hover:text-zinc-900 text-sm font-semibold px-4 py-2 transition-all"
+              className="flex items-center rounded-lg border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 text-zinc-700 hover:text-zinc-900 text-xs sm:text-sm font-semibold px-2.5 sm:px-4 py-1.5 sm:py-2 transition-all"
             >
               Entrar
             </Link>
             <Link
               href="/signup"
-              className="flex items-center gap-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-4 py-2 transition-all shadow-sm shadow-brand-500/20"
+              className="flex items-center gap-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-xs sm:text-sm font-semibold px-2.5 sm:px-4 py-1.5 sm:py-2 transition-all shadow-sm shadow-brand-500/20"
             >
-              Cadastrar <ArrowRight className="h-3.5 w-3.5" />
+              Cadastrar <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
             </Link>
           </div>
         </div>
@@ -216,9 +216,9 @@ export default async function LoginPage({
               >
                 QUERO COMEÇAR AGORA <ArrowRight className="h-4 w-4" />
               </Link>
-              {/* Secondary CTA: Ver demonstração pointing to login page */}
-              <Link
-                href="/login?auth=true"
+              {/* Secondary CTA: Ver demonstração pointing to the video section */}
+              <a
+                href="#demonstracao"
                 className="flex items-center gap-2 rounded-xl border border-zinc-200 hover:border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-700 text-sm font-bold px-5 py-3.5 transition-all shadow-sm"
               >
                 <svg
@@ -235,7 +235,7 @@ export default async function LoginPage({
                   <polygon points="10 8 16 12 10 16 10 8" />
                 </svg>
                 Ver demonstração
-              </Link>
+              </a>
             </div>
 
             {/* Social proof */}
@@ -411,6 +411,31 @@ export default async function LoginPage({
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SEÇÃO DO VÍDEO (DEMONSTRAÇÃO) ─────────────────────────────── */}
+      <section id="demonstracao" className="bg-zinc-50 py-20 border-y border-zinc-100">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="mb-10 space-y-3">
+            <p className="text-xs font-bold text-brand-500 uppercase tracking-widest">DEMONSTRAÇÃO</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900">
+              Veja o <span className="text-brand-500">{BRAND.name}</span> em ação
+            </h2>
+            <p className="text-sm text-zinc-500 max-w-md mx-auto">
+              Assista ao vídeo abaixo e entenda como funciona nossa ferramenta para automatizar seus disparos de ofertas.
+            </p>
+          </div>
+          <div className="relative aspect-video w-full rounded-2xl overflow-hidden shadow-2xl border border-zinc-200 bg-black">
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/X0l11DeclFo"
+              title="Demonstração do DisparaZap"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
           </div>
         </div>
       </section>

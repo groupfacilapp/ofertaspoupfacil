@@ -192,7 +192,7 @@ function MercadoLivreFields({
             Tag de afiliado <span className="text-yellow-400">*</span>
           </Label>
           <a
-            href="https://www.mercadolivre.com.br/afiliados/perfil"
+            href="https://www.mercadolivre.com.br/afiliados/adminlabel#hub"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 text-[10px] text-zinc-600 hover:text-yellow-400 transition-colors"
@@ -212,12 +212,12 @@ function MercadoLivreFields({
           <GuideStep n={1}>
             Acesse{' '}
             <a
-              href="https://www.mercadolivre.com.br/afiliados/perfil"
+              href="https://www.mercadolivre.com.br/afiliados/adminlabel#hub"
               target="_blank"
               rel="noopener noreferrer"
               className="text-yellow-400/80 hover:text-yellow-400 underline"
             >
-              mercadolivre.com.br/afiliados/perfil
+              mercadolivre.com.br/afiliados/adminlabel#hub
             </a>
           </GuideStep>
           <GuideStep n={2}>
@@ -299,7 +299,7 @@ function ShopeeFields({
             AppID <span className="text-red-400">*</span>
           </Label>
           <a
-            href="https://affiliate.shopee.com.br"
+            href="https://affiliate.shopee.com.br/open_api"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 text-[10px] text-zinc-600 hover:text-red-400 transition-colors"
@@ -318,8 +318,8 @@ function ShopeeFields({
         <CollapsibleGuide title="Onde encontrar meu AppID e Secret?">
           <GuideStep n={1}>
             Acesse{' '}
-            <a href="https://affiliate.shopee.com.br" target="_blank" rel="noopener noreferrer" className="text-red-400/80 hover:text-red-400 underline">
-              affiliate.shopee.com.br
+            <a href="https://affiliate.shopee.com.br/open_api" target="_blank" rel="noopener noreferrer" className="text-red-400/80 hover:text-red-400 underline">
+              affiliate.shopee.com.br/open_api
             </a>{' '}
             e faça login com sua conta de afiliado
           </GuideStep>
@@ -687,7 +687,7 @@ const SHEET_META: Record<string, { title: string; subtitle: string; accent: stri
     title: 'Shopee Affiliate',
     subtitle: 'API de Afiliados da Shopee',
     accent: 'text-red-400',
-    docsUrl: 'https://affiliate.shopee.com.br',
+    docsUrl: 'https://affiliate.shopee.com.br/open_api',
   },
   aliexpress: {
     title: 'AliExpress Portals',

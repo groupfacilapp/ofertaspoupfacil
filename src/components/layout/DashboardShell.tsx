@@ -24,6 +24,7 @@ import {
   Send,
   Sun,
   Moon,
+  PlayCircle,
 } from 'lucide-react';
 import { Logo } from '@/components/brand/Logo';
 import { BRAND } from '@/config/brand';
@@ -47,6 +48,7 @@ const navItems = [
   { label: 'Automacoes', href: '/automacoes', icon: SlidersHorizontal },
   { label: 'Disparar', href: '/disparar', icon: Send },
   { label: 'Histórico', href: '/historico', icon: History },
+  { label: 'Tutoriais', href: '/tutoriais', icon: PlayCircle },
   { label: 'Configurações', href: '/configuracoes', icon: Settings },
 ];
 

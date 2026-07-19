@@ -13,7 +13,6 @@ import {
   PlayCircle,
   HelpCircle,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 interface Tutorial {
@@ -33,7 +32,7 @@ const TUTORIALS_DATA: Tutorial[] = [
     marketplace: 'mercadolivre',
     title: 'Integração Completa do Mercado Livre',
     description: 'Aprenda a conectar sua conta do Mercado Livre, configurar o cookie de sessão do painel de afiliados e ativar a busca automatizada de ofertas.',
-    duration: '6 min',
+    duration: '5:36',
     level: 'Iniciante',
     youtubeId: 'QpEqpbm7xuk',
   },
@@ -42,7 +41,7 @@ const TUTORIALS_DATA: Tutorial[] = [
     marketplace: 'amazon',
     title: 'Configurando Tag de Afiliado da Amazon BR',
     description: 'Como obter sua tag de associado Amazon, extrair os cookies SiteStripe necessários para converter links automaticamente de forma confiável.',
-    duration: '8 min',
+    duration: '2:36',
     level: 'Iniciante',
     youtubeId: '7wPgUmsv2iY',
   },
@@ -51,7 +50,7 @@ const TUTORIALS_DATA: Tutorial[] = [
     marketplace: 'kabum',
     title: 'Rastreamento com Publisher ID KaBuM!',
     description: 'Guia definitivo para obter seu ID de afiliado KaBuM! dentro da rede Awin e vinculá-lo ao painel para monitorar cliques e comissões.',
-    duration: '4 min',
+    duration: '2:08',
     level: 'Iniciante',
     youtubeId: '36ynuDMMmwY',
   },
@@ -60,7 +59,7 @@ const TUTORIALS_DATA: Tutorial[] = [
     marketplace: 'shopee',
     title: 'Integração de API de Afiliados Shopee',
     description: 'Passo a passo para gerar suas chaves de API (AppID e Secret Key) no console de desenvolvedor da Shopee para sincronização em tempo real.',
-    duration: '9 min',
+    duration: '4:59',
     level: 'Intermediário',
     youtubeId: 'QFV_u9Ng-lA',
   },
@@ -301,27 +300,27 @@ export default function TutoriaisPage() {
 
                   {/* Botão de Ação */}
                   <div className="pt-4 sm:pt-5 mt-auto">
-                    <Button
+                    <button
                       onClick={() => setSelectedTutorial(tutorial)}
                       className={cn(
-                        'w-full rounded-xl font-bold transition-all duration-300 text-xs shadow-sm py-4.5 sm:py-5 cursor-pointer',
+                        'w-full rounded-xl font-bold transition-all duration-300 text-xs shadow-sm py-3 cursor-pointer flex items-center justify-center active:scale-98 border border-transparent',
                         hasVideo
-                          ? 'bg-indigo-650 hover:bg-indigo-500 text-white shadow-indigo-650/10 hover:shadow-lg'
-                          : 'bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-250 dark:border-zinc-800 text-zinc-650 dark:text-zinc-350 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white'
+                          ? 'bg-indigo-600 hover:bg-indigo-550 text-white shadow-indigo-600/10 hover:shadow-lg'
+                          : 'bg-zinc-100 dark:bg-zinc-900/60 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-350 hover:bg-zinc-200 dark:hover:bg-zinc-800/80 hover:text-zinc-900 dark:hover:text-white'
                       )}
                     >
                       {hasVideo ? (
                         <>
-                          <PlayCircle className="h-4 w-4 mr-2" />
+                          <PlayCircle className="h-4 w-4 mr-2 shrink-0" />
                           Assistir Tutorial
                         </>
                       ) : (
                         <>
-                          <Sparkles className="h-4 w-4 mr-2 text-zinc-450 dark:text-zinc-400 animate-pulse" />
+                          <Sparkles className="h-4 w-4 mr-2 text-zinc-450 dark:text-zinc-400 animate-pulse shrink-0" />
                           Vídeo em Produção (Em Breve)
                         </>
                       )}
-                    </Button>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -340,16 +339,15 @@ export default function TutoriaisPage() {
               Tente redefinir seus filtros ou pesquise por outros termos.
             </p>
           </div>
-          <Button
-            variant="outline"
-            className="rounded-xl text-xs font-semibold cursor-pointer"
+          <button
+            className="rounded-xl text-xs font-semibold px-4 py-2 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all cursor-pointer active:scale-98"
             onClick={() => {
               setSearchQuery('');
               setSelectedCategory('all');
             }}
           >
             Limpar Filtros
-          </Button>
+          </button>
         </div>
       )}
 
@@ -422,13 +420,12 @@ export default function TutoriaisPage() {
                     </p>
                   </div>
                   <div className="pt-2">
-                    <Button
-                      variant="outline"
-                      className="rounded-xl text-xs font-semibold px-5 cursor-pointer"
+                    <button
+                      className="rounded-xl text-xs font-semibold px-5 py-2 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-350 hover:bg-zinc-50 dark:hover:bg-zinc-800/80 transition-all cursor-pointer active:scale-98"
                       onClick={() => setSelectedTutorial(null)}
                     >
                       Entendi, aguardar
-                    </Button>
+                    </button>
                   </div>
                 </div>
               )}

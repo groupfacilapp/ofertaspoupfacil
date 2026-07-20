@@ -71,6 +71,9 @@ const DISPATCH_INTERVALS = [
   { value: 15, label: 'A cada 15 min' },
   { value: 20, label: 'A cada 20 min' },
   { value: 30, label: 'A cada 30 min' },
+  { value: 60, label: 'A cada 1h' },
+  { value: 120, label: 'A cada 2h' },
+  { value: 180, label: 'A cada 3h' },
 ];
 
 function formatHour(h: number): string {

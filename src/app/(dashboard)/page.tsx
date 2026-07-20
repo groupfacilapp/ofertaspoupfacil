@@ -100,8 +100,13 @@ export default async function DashboardPage() {
 
   // --- Products per marketplace ---
   const marketplaceCounts: Record<string, number> = Object.fromEntries(
-    marketplaceBreakdown.map(({ marketplace, count }) => [marketplace, count])
+    Object.keys(MARKETPLACE_LABELS).map((mp) => [mp, 0])
   );
+  marketplaceBreakdown.forEach(({ marketplace, count }) => {
+    if (marketplace in marketplaceCounts) {
+      marketplaceCounts[marketplace] = count;
+    }
+  });
   const totalOffers = dashStats.totalProducts;
   const maxMarketplaceCount = Math.max(...Object.values(marketplaceCounts), 1);
 
@@ -312,7 +317,9 @@ export default async function DashboardPage() {
               </div>
             ) : (
               <div className="space-y-5">
-                {(Object.keys(marketplaceCounts) as string[]).map((mp) => {
+                {Object.keys(MARKETPLACE_LABELS)
+                  .sort((a, b) => (marketplaceCounts[b] ?? 0) - (marketplaceCounts[a] ?? 0))
+                  .map((mp) => {
                   const count = marketplaceCounts[mp] ?? 0;
                   const pct = count > 0 ? Math.max(4, Math.round((count / maxMarketplaceCount) * 100)) : 0;
                   // Map specific tailwind gradient classes for a better look

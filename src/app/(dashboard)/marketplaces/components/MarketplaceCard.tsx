@@ -120,13 +120,13 @@ const MARKETPLACE_META = {
 } as const;
 
 const LOGO_URLS: Record<string, string> = {
-  temu: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/temu.png',
-  shopee: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/shopee.png',
-  shein: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/shein.png',
-  mercadolivre: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/mercadolivre.png',
-  kabum: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/kabum_logo.jfif',
-  amazon: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/amazon.png',
-  aliexpress: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/aliexpress.png',
+  temu: '/imagens/temu.png',
+  shopee: '/imagens/shopee.png',
+  shein: '/imagens/shein.png',
+  mercadolivre: '/imagens/mercadolivre.png',
+  kabum: '/imagens/kabum_logo.jfif',
+  amazon: '/imagens/amazon.png',
+  aliexpress: '/imagens/aliexpress.png',
 };
 
 function MarketplaceLogo({ marketplace, className }: { marketplace: string; className?: string }) {

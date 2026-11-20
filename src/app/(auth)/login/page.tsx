@@ -15,15 +15,15 @@ import { getActivePlans, type PlanRecord } from '@/lib/plans';
 
 // Logos from project (same URLs used in MarketplaceCard)
 const MARKETPLACE_LOGOS = [
-  { key: 'shopee',       url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/shopee.png',       alt: 'Shopee' },
-  { key: 'amazon',       url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/amazon.png',       alt: 'Amazon BR' },
-  { key: 'mercadolivre', url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/mercadolivre.png', alt: 'Mercado Livre' },
-  { key: 'aliexpress',   url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/aliexpress.png',   alt: 'AliExpress' },
-  { key: 'kabum',        url: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/kabum_logo.jfif',  alt: 'KaBuM!' },
+  { key: 'shopee',       url: '/imagens/shopee.png',       alt: 'Shopee' },
+  { key: 'amazon',       url: '/imagens/amazon.png',       alt: 'Amazon BR' },
+  { key: 'mercadolivre', url: '/imagens/mercadolivre.png', alt: 'Mercado Livre' },
+  { key: 'aliexpress',   url: '/imagens/aliexpress.png',   alt: 'AliExpress' },
+  { key: 'kabum',        url: '/imagens/kabum_logo.jfif',  alt: 'KaBuM!' },
 ];
 
 const PRODUCT_IMAGE =
-  'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/fotosite.png';
+  '/imagens/fotosite.png';
 
 function formatPrice(v: number) {
   return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });

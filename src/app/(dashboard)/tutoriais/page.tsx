@@ -68,7 +68,7 @@ const TUTORIALS_DATA: Tutorial[] = [
 const MARKETPLACE_META = {
   mercadolivre: {
     label: 'Mercado Livre',
-    logo: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/mercadolivre.png',
+    logo: '/imagens/mercadolivre.png',
     color: 'from-amber-400 to-yellow-500',
     hoverBorder: 'hover:border-amber-450 dark:hover:border-yellow-500/50',
     shadow: 'shadow-[0_0_20px_-5px_rgba(245,158,11,0.15)] hover:shadow-[0_0_25px_0px_rgba(245,158,11,0.25)]',
@@ -78,7 +78,7 @@ const MARKETPLACE_META = {
   },
   amazon: {
     label: 'Amazon BR',
-    logo: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/amazon.png',
+    logo: '/imagens/amazon.png',
     color: 'from-orange-400 to-orange-600',
     hoverBorder: 'hover:border-orange-500 dark:hover:border-orange-500/50',
     shadow: 'shadow-[0_0_20px_-5px_rgba(249,115,22,0.15)] hover:shadow-[0_0_25px_0px_rgba(249,115,22,0.25)]',
@@ -88,7 +88,7 @@ const MARKETPLACE_META = {
   },
   kabum: {
     label: 'KaBuM!',
-    logo: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/kabum_logo.jfif',
+    logo: '/imagens/kabum_logo.jfif',
     color: 'from-blue-400 to-indigo-600',
     hoverBorder: 'hover:border-blue-500 dark:hover:border-blue-500/50',
     shadow: 'shadow-[0_0_20px_-5px_rgba(59,130,246,0.15)] hover:shadow-[0_0_25px_0px_rgba(59,130,246,0.25)]',
@@ -98,7 +98,7 @@ const MARKETPLACE_META = {
   },
   shopee: {
     label: 'Shopee',
-    logo: 'https://udlmqdwtisolgutzdylw.supabase.co/storage/v1/object/public/imagens/shopee.png',
+    logo: '/imagens/shopee.png',
     color: 'from-rose-500 to-red-655',
     hoverBorder: 'hover:border-rose-500 dark:hover:border-rose-500/50',
     shadow: 'shadow-[0_0_20px_-5px_rgba(244,63,94,0.15)] hover:shadow-[0_0_25px_0px_rgba(244,63,94,0.25)]',

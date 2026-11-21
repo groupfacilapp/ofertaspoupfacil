@@ -6,5 +6,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|api/webhooks).*)'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|imagens/|brand/|api/webhooks|.*\\.(?:svg|png|jpg|jpeg|gif|webp|jfif|ico)$).*)',
+  ],
 };

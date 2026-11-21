@@ -42,6 +42,8 @@ export async function updateSession(request: NextRequest) {
     pathname.startsWith('/update-password') ||
     pathname.startsWith('/auth') ||
     pathname.startsWith('/lp') ||
+    pathname.startsWith('/imagens') ||
+    pathname.startsWith('/brand') ||
     pathname.startsWith('/api/cron');
 
   // Redirect unauthenticated users to login (except public pages)
